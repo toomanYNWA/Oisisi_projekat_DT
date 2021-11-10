@@ -13,13 +13,13 @@ public abstract class User {
 	private Gender gender;
 	private String phone;
 	private String email;
-	private String address;
+	private Address address;
 	
 	public User() {
 		
 	}
 	
-	public User(String name, String surname, Date dateofbirth,  Gender gender, String phone, String email, String address) {
+	public User(String name, String surname, Date dateofbirth,  Gender gender, String phone, String email, Address address) {
 		this();
 		this.name = name;
 		this.surname = surname;
@@ -89,11 +89,11 @@ public abstract class User {
 		this.email = email;
 	}
 
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
