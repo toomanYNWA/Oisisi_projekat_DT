@@ -23,7 +23,7 @@ public class Student extends User{
 	
 	public Student(String nuIndex, int year, int currentYear,Status status, float averageGrade, List<Subject> passed,
 			List<Subject> notPassed, String name, String surname, Date dateofbirth, Gender gender, String phone, String email,
-			String address) {
+			Address address) {
 		super(name, surname, dateofbirth, gender, phone, email, address);
 		
 		this.nuIndex = nuIndex;

@@ -14,18 +14,18 @@ public class Subject {
 	private int subjectYear;
 	private int espb;
 	private Semestar semestar;
-	private List<Student> studentsPassed = new ArrayList<Student>();
-	private List<Student> studentsNotPassed = new ArrayList<Student>();
+	private List<String> indexPassed = new ArrayList<String>();
+	private List<String> indexNotPassed = new ArrayList<String>();
 	
-	public Subject(int subjectID, String subjectName,Semestar semestar, int subjectYear, int espb, List<Student> studentsPassed,
-			List<Student> studentsNotPassed) {
+	public Subject(int subjectID, String subjectName,Semestar semestar, int subjectYear, int espb, List<String> studentsPassed,
+			List<String> studentsNotPassed) {
 		this.subjectID = subjectID;
 		this.subjectName = subjectName;
 		this.semestar = semestar;
 		this.subjectYear = subjectYear;
 		this.espb = espb;
-		this.studentsPassed = studentsPassed;
-		this.studentsNotPassed = studentsNotPassed;
+		this.indexPassed = studentsPassed;
+		this.indexNotPassed = studentsNotPassed;
 	}
 	
 	public Subject(Subject s) {
@@ -34,8 +34,8 @@ public class Subject {
 		this.semestar = s.semestar;
 		this.subjectYear = s.subjectYear;
 		this.espb = s.espb;
-		this.studentsPassed = s.studentsPassed;
-		this.studentsNotPassed = s.studentsNotPassed;
+		this.indexPassed = s.indexPassed;
+		this.indexNotPassed = s.indexNotPassed;
 	}
 	public int getSubjectID() {
 		return subjectID;
@@ -77,27 +77,27 @@ public class Subject {
 		this.espb = espb;
 	}
 
-	public List<Student> getStudentsPassed() {
-		return studentsPassed;
+	public List<String> getStudentsPassed() {
+		return indexPassed;
 	}
 
-	public void setStudentsPassed(List<Student> studentsPassed) {
-		this.studentsPassed = studentsPassed;
+	public void setStudentsPassed(List<String> indexPassed) {
+		this.indexPassed = indexPassed;
 	}
 
-	public List<Student> getStudentsNotPassed() {
-		return studentsNotPassed;
+	public List<String> getStudentsNotPassed() {
+		return indexNotPassed;
 	}
 
-	public void setStudentsNotPassed(List<Student> studentsNotPassed) {
-		this.studentsNotPassed = studentsNotPassed;
+	public void setStudentsNotPassed(List<String> indexNotPassed) {
+		this.indexNotPassed = indexNotPassed;
 	}
 
 	@Override
 	public String toString() {
 		return "Subject [subjectID=" + subjectID + ", subjectName=" + subjectName + ", subjectYear=" + subjectYear
-				+ ", espb=" + espb + ", semestar=" + semestar + ", studentsPassed=" + studentsPassed
-				+ ", studentsNotPassed=" + studentsNotPassed + "]";
+				+ ", espb=" + espb + ", semestar=" + semestar + ", studentsPassed=" + indexPassed
+				+ ", studentsNotPassed=" + indexNotPassed + "]";
 	}
 
 	
