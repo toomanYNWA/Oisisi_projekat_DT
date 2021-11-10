@@ -14,20 +14,20 @@ public class Student extends User{
 		S
 	}
 	private String nuIndex;
-	private int	year;
+	private int	yearOfEnrollment;
 	private int currentYear;
 	private float averageGrade;
 	private Status status;
 	private List<Subject> passed = new ArrayList<Subject>();
 	private List<Subject> notPassed = new ArrayList<Subject>();
 	
-	public Student(String nuIndex, int year, int currentYear,Status status, float averageGrade, List<Subject> passed,
+	public Student(String nuIndex, int yearOfEnrollment, int currentYear,Status status, float averageGrade, List<Subject> passed,
 			List<Subject> notPassed, String name, String surname, Date dateofbirth, Gender gender, String phone, String email,
 			Address address) {
 		super(name, surname, dateofbirth, gender, phone, email, address);
 		
 		this.nuIndex = nuIndex;
-		this.year = year;
+		this.yearOfEnrollment = yearOfEnrollment;
 		this.currentYear = currentYear;
 		this.status = status;
 		this.averageGrade = averageGrade;
@@ -38,7 +38,7 @@ public class Student extends User{
 	public Student(Student s) {
 		super(s);
 		this.nuIndex = s.nuIndex;
-		this.year = s.year;
+		this.yearOfEnrollment = s.yearOfEnrollment;
 		this.currentYear = s.currentYear;
 		this.status = s.status;
 		this.averageGrade = s.averageGrade;
@@ -55,11 +55,11 @@ public class Student extends User{
 	}
 
 	public int getYear() {
-		return year;
+		return yearOfEnrollment;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public void setYear(int yearOfEnrollment) {
+		this.yearOfEnrollment = yearOfEnrollment;
 	}
 
 	public int getCurrentYear() {
@@ -104,7 +104,7 @@ public class Student extends User{
 
 	@Override
 	public String toString() {
-		return "Student [nuIndex=" + nuIndex + ", year=" + year + ", currentYear=" + currentYear + ", averageGrade="
+		return "Student [nuIndex=" + nuIndex + ", year=" + yearOfEnrollment + ", currentYear=" + currentYear + ", averageGrade="
 				+ averageGrade + ", status=" + status + ", passed=" + passed + ", notPassed=" + notPassed + "]";
 	}
 	

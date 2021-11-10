@@ -15,6 +15,12 @@ public class Cathedra {
 		this.cathedraChief = cathedraChief;
 		this.profesori = profesori;
 	}
+	public Cathedra(Cathedra c) {
+		this.cathedraID = c.cathedraID;
+		this.cathedraName = c.cathedraName;
+		this.cathedraChief = c.cathedraChief;
+		this.profesori = c.profesori;
+	}
 
 	public String getCathedraID() {
 		return cathedraID;
