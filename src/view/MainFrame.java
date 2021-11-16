@@ -31,7 +31,9 @@ public class MainFrame extends JFrame {
 		contentPane.setBackground(Color.WHITE);
 		setContentPane(contentPane);
 		
+		MenuBar menuBar = new MenuBar();
 		
+		setJMenuBar(menuBar);
 		
 	}
 	
