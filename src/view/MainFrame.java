@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
 		
 		MenuBar menuBar = new MenuBar();
 		
-		setJMenuBar(menuBar);
+		this.setJMenuBar(menuBar);
 		
 	}
 	
