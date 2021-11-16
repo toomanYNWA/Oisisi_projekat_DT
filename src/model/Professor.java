@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Professor extends User {
 		super();
 	}
 
-	public Professor(String name, String surname, Date dateofbirth, Gender gender, String phone, String email,
+	public Professor(String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,
 			Address address, String officeAdress, String id, int yearsOfTrail, Title title, List<Subject> subjects ) {
 		super(name, surname, dateofbirth, gender, phone, email, address);
 		this.officeAdress = officeAdress;

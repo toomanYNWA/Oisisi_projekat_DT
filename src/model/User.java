@@ -1,6 +1,7 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public abstract class User {
 	public enum Gender {
@@ -9,7 +10,7 @@ public abstract class User {
 	}
 	private String name;
 	private String surname;
-	private Date dateofbirth;
+	private LocalDate dateofbirth;
 	private Gender gender;
 	private String phone;
 	private String email;
@@ -19,7 +20,7 @@ public abstract class User {
 		
 	}
 	
-	public User(String name, String surname, Date dateofbirth,  Gender gender, String phone, String email, Address address) {
+	public User(String name, String surname, LocalDate dateofbirth,  Gender gender, String phone, String email, Address address) {
 		this();
 		this.name = name;
 		this.surname = surname;
@@ -57,11 +58,11 @@ public abstract class User {
 		this.surname = surname;
 	}
 
-	public Date getDateofbirth() {
+	public LocalDate getDateofbirth() {
 		return dateofbirth;
 	}
 
-	public void setDateofbirth(Date dateofbirth) {
+	public void setDateofbirth(LocalDate dateofbirth) {
 		this.dateofbirth = dateofbirth;
 	}
 

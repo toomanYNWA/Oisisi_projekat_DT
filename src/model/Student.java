@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Student extends User{
 	private List<Subject> notPassed = new ArrayList<Subject>();
 	
 	public Student(String nuIndex, int yearOfEnrollment, int currentYear,Status status, float averageGrade, List<Subject> passed,
-			List<Subject> notPassed, String name, String surname, Date dateofbirth, Gender gender, String phone, String email,
+			List<Subject> notPassed, String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,
 			Address address) {
 		super(name, surname, dateofbirth, gender, phone, email, address);
 		
