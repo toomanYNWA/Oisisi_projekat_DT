@@ -34,7 +34,7 @@ public class MainFrame extends JFrame {
 		
 		MenuBar menuBar = new MenuBar();
 		setJMenuBar(menuBar);
-		
+
 		ToolBar toolBar = new ToolBar();
 		add(toolBar, BorderLayout.NORTH);
 		
