@@ -12,7 +12,7 @@ public class Professor extends User {
 	   PROFESSOR
 		
 	}
-	private String officeAdress;
+	private Address officeAdress;
 	private String id;
 	private int yearsOfTrail;
 	private Title title;
@@ -23,7 +23,7 @@ public class Professor extends User {
 	}
 
 	public Professor(String name, String surname, Date dateofbirth, Gender gender, String phone, String email,
-			Address address, String officeAdress, String id, int yearsOfTrail, Title title, List<Subject> subjects ) {
+			Address address, Address officeAdress, String id, int yearsOfTrail, Title title, List<Subject> subjects ) {
 		super(name, surname, dateofbirth, gender, phone, email, address);
 		this.officeAdress = officeAdress;
 		this.id = id;
@@ -41,11 +41,11 @@ public class Professor extends User {
 		this.subjects=p.subjects; 
 	}
 
-	public String getOfficeAdress() {
+	public Address getOfficeAdress() {
 		return officeAdress;
 	}
 
-	public void setOfficeAdress(String officeAdress) {
+	public void setOfficeAdress(Address officeAdress) {
 		this.officeAdress = officeAdress;
 	}
 

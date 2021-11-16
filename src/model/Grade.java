@@ -5,22 +5,15 @@ import java.util.Date;
 import java.util.List;
 
 public class Grade {
-	public enum Value{
-		SIX,
-		SEVEN,
-		EIGHT,
-		NINE,
-		TEN
-		
-	}
+	
 	private List<String> indexPassed = new ArrayList<String>();
 	private Subject subject;
-	private Value value;
+	private int value;
 	private Date dateofExam;
 	
 	public Grade() {}
 	
-	public Grade(List<String> indexPassed, Subject subject, Value value, Date dateofExam) {
+	public Grade(List<String> indexPassed, Subject subject, int value, Date dateofExam) {
 		super();
 		this.indexPassed = indexPassed;
 		this.subject = subject;
@@ -54,11 +47,13 @@ public class Grade {
 	public void setDateofExam(Date dateofExam) {
 		this.dateofExam = dateofExam;
 	}
-	public Value getValue() {
+	public int getValue() {
 		return value;
 	}
-	public void setValue(Value value) {
-		this.value = value;
+	public void setValue(int value) {
+		if(value<6 || value>10)
+			System.out.println("Wrong value.");
+			else this.value = value;
 	}
 	
 	
