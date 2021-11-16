@@ -1,8 +1,8 @@
 package model;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Student extends User{
@@ -19,11 +19,11 @@ public class Student extends User{
 	private int currentYear;
 	private float averageGrade;
 	private Status status;
-	private List<Subject> passed = new ArrayList<Subject>();
-	private List<Subject> notPassed = new ArrayList<Subject>();
+	private ArrayList<Subject> passed;
+	private ArrayList<Subject> notPassed ;
 	
-	public Student(String nuIndex, int yearOfEnrollment, int currentYear,Status status, float averageGrade, List<Subject> passed,
-			List<Subject> notPassed, String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,
+	public Student(String nuIndex, int yearOfEnrollment, int currentYear,Status status, float averageGrade, ArrayList<Subject> passed,
+			ArrayList<Subject> notPassed, String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,
 			Address address) {
 		super(name, surname, dateofbirth, gender, phone, email, address);
 		
@@ -83,7 +83,7 @@ public class Student extends User{
 		return passed;
 	}
 
-	public void setPassed(List<Subject> passed) {
+	public void setPassed(ArrayList<Subject> passed) {
 		this.passed = passed;
 	}
 
@@ -91,7 +91,7 @@ public class Student extends User{
 		return notPassed;
 	}
 
-	public void setNotPassed(List<Subject> notPassed) {
+	public void setNotPassed(ArrayList<Subject> notPassed) {
 		this.notPassed = notPassed;
 	}
 

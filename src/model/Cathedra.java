@@ -6,9 +6,9 @@ public class Cathedra {
 	private String cathedraID;
 	private String cathedraName;
 	private String cathedraChief;
-	private List<String> profesori = new ArrayList<String>();
+	private ArrayList<String> profesori ;
 	
-	public Cathedra(String cathedraID, String cathedraName, String cathedraChief, List<String> profesori) {
+	public Cathedra(String cathedraID, String cathedraName, String cathedraChief, ArrayList<String> profesori) {
 		super();
 		this.cathedraID = cathedraID;
 		this.cathedraName = cathedraName;
@@ -50,7 +50,7 @@ public class Cathedra {
 		return profesori;
 	}
 
-	public void setProfesori(List<String> profesori) {
+	public void setProfesori(ArrayList<String> profesori) {
 		this.profesori = profesori;
 	}
 

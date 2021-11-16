@@ -14,11 +14,11 @@ public class Subject {
 	private int subjectYear;
 	private int espb;
 	private Semestar semestar;
-	private List<String> indexPassed = new ArrayList<String>();
-	private List<String> indexNotPassed = new ArrayList<String>();
+	private ArrayList<String> indexPassed ;
+	private ArrayList<String> indexNotPassed ;
 	
-	public Subject(int subjectID, String subjectName,Semestar semestar, int subjectYear, int espb, List<String> studentsPassed,
-			List<String> studentsNotPassed) {
+	public Subject(int subjectID, String subjectName,Semestar semestar, int subjectYear, int espb, ArrayList<String> studentsPassed,
+			ArrayList<String> studentsNotPassed) {
 		this.subjectID = subjectID;
 		this.subjectName = subjectName;
 		this.semestar = semestar;
@@ -81,15 +81,15 @@ public class Subject {
 		return indexPassed;
 	}
 
-	public void setStudentsPassed(List<String> indexPassed) {
+	public void setStudentsPassed(ArrayList<String> indexPassed) {
 		this.indexPassed = indexPassed;
 	}
 
-	public List<String> getStudentsNotPassed() {
+	public ArrayList<String> getStudentsNotPassed() {
 		return indexNotPassed;
 	}
 
-	public void setStudentsNotPassed(List<String> indexNotPassed) {
+	public void setStudentsNotPassed(ArrayList<String> indexNotPassed) {
 		this.indexNotPassed = indexNotPassed;
 	}
 

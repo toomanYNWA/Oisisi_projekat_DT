@@ -1,19 +1,20 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Grade {
 	
-	private List<String> indexPassed = new ArrayList<String>();
+	private ArrayList<String> indexPassed ;
 	private Subject subject;
 	private int value;
-	private Date dateofExam;
+	private LocalDate dateofExam;
 	
 	public Grade() {}
 	
-	public Grade(List<String> indexPassed, Subject subject, int value, Date dateofExam) {
+	public Grade(ArrayList<String> indexPassed, Subject subject, int value, LocalDate dateofExam) {
 		super();
 		this.indexPassed = indexPassed;
 		this.subject = subject;
@@ -31,7 +32,7 @@ public class Grade {
 	public List<String> getIndexPassed() {
 		return indexPassed;
 	}
-	public void setIndexPassed(List<String> indexPassed) {
+	public void setIndexPassed(ArrayList<String> indexPassed) {
 		this.indexPassed = indexPassed;
 	}
 	public Subject getSubject() {
@@ -41,10 +42,10 @@ public class Grade {
 		this.subject = subject;
 	}
 	
-	public Date getDateofExam() {
+	public LocalDate getDateofExam() {
 		return dateofExam;
 	}
-	public void setDateofExam(Date dateofExam) {
+	public void setDateofExam(LocalDate dateofExam) {
 		this.dateofExam = dateofExam;
 	}
 	public int getValue() {

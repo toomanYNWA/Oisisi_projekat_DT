@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
+
 
 
 
@@ -18,7 +18,7 @@ public class Professor extends User {
 	private String id;
 	private int yearsOfTrail;
 	private Title title;
-	private List<Subject> subjects= new ArrayList<Subject>();
+	private ArrayList<Subject> subjects;
 	
 	public Professor() {
 		super();
@@ -26,7 +26,7 @@ public class Professor extends User {
 
 
 	public Professor(String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,
-			Address address, Address officeAdress, String id, int yearsOfTrail, Title title, List<Subject> subjects ) {
+			Address address, Address officeAdress, String id, int yearsOfTrail, Title title, ArrayList<Subject> subjects ) {
 
 		super(name, surname, dateofbirth, gender, phone, email, address);
 		this.officeAdress = officeAdress;
