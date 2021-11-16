@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -27,13 +28,20 @@ public class MainFrame extends JFrame {
 		
 		setTitle("Studentska služba");
 		
-		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
-		setContentPane(contentPane);
+		//contentPane = new JPanel();
+		//contentPane.setBackground(Color.WHITE);
+		//setContentPane(contentPane);
 		
 		MenuBar menuBar = new MenuBar();
-		
 		setJMenuBar(menuBar);
+		
+		ToolBar toolBar = new ToolBar();
+		add(toolBar, BorderLayout.NORTH);
+		
+		StatusBar statusBar = new StatusBar();
+		//add(statusBar, BorderLayout.SOUTH);
+		
+		
 		
 	}
 	
