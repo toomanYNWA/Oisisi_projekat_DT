@@ -29,9 +29,10 @@ public class MenuBar extends JMenuBar {
 			save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 			save.setIcon(new ImageIcon("icons/diskette.png"));
 			file.add(save);
-			JMenuItem open = new JMenuItem("Open");
-			open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+			JMenu open = new JMenu("Open");
+			//open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 			open.setIcon(new ImageIcon("icons/share.png"));
+			
 			file.add(open);
 			JMenuItem close = new JMenuItem("Close");
 			close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
