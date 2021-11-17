@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -13,6 +11,11 @@ import javax.swing.SwingConstants;
 
 public class ToolBar extends JToolBar{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ToolBar() {
 		
 		super(SwingConstants.HORIZONTAL);
@@ -38,13 +41,13 @@ public class ToolBar extends JToolBar{
 		
 		addSeparator();
 		
-		
+		add(Box.createHorizontalGlue());
 		
 		JTextField search = new JTextField();
-		search.setPreferredSize(new Dimension(170,35));
+		search.setPreferredSize(new Dimension(170,30));
+		search.setMaximumSize(search.getPreferredSize());
 		add(search);
 		
-		add(Box.createHorizontalGlue());
 		
 		JButton btnSearch = new JButton();
 		btnSearch.setToolTipText("Search");
