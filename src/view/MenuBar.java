@@ -30,10 +30,21 @@ public class MenuBar extends JMenuBar {
 			save.setIcon(new ImageIcon("icons/diskette.png"));
 			file.add(save);
 			JMenu open = new JMenu("Open");
-			//open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 			open.setIcon(new ImageIcon("icons/share.png"));
+			JMenuItem students = new JMenuItem("Students");
+			open.add(students);
+			JMenuItem professor = new JMenuItem("Professors");
 			
+			open.add(professor);
+			JMenuItem sub = new JMenuItem("Subjects");
+			open.add(sub);
+			JMenuItem cat = new JMenuItem("Cathedra");
+			open.add(cat);
+			professor.setIcon(new ImageIcon("icons/female.png"));
+			students.setIcon(new ImageIcon("icons/reading.png"));
 			file.add(open);
+			cat.setIcon(new ImageIcon("icons/chairman.png"));
+			sub.setIcon(new ImageIcon("icons/book.png"));
 			JMenuItem close = new JMenuItem("Close");
 			close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.CTRL_MASK));
 			close.setIcon(new ImageIcon("icons/cross.png"));
