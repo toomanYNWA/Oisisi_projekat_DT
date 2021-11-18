@@ -6,20 +6,20 @@ public class Cathedra {
 	private String cathedraID;
 	private String cathedraName;
 	private String cathedraChief;
-	private ArrayList<String> profesori ;
+	private ArrayList<Professor> professors ;
 	
-	public Cathedra(String cathedraID, String cathedraName, String cathedraChief, ArrayList<String> profesori) {
+	public Cathedra(String cathedraID, String cathedraName, String cathedraChief, ArrayList<Professor> profesori) {
 		super();
 		this.cathedraID = cathedraID;
 		this.cathedraName = cathedraName;
 		this.cathedraChief = cathedraChief;
-		this.profesori = profesori;
+		this.professors = professors;
 	}
 	public Cathedra(Cathedra c) {
 		this.cathedraID = c.cathedraID;
 		this.cathedraName = c.cathedraName;
 		this.cathedraChief = c.cathedraChief;
-		this.profesori = c.profesori;
+		this.professors = c.professors;
 	}
 
 	public String getCathedraID() {
@@ -46,18 +46,18 @@ public class Cathedra {
 		this.cathedraChief = cathedraChief;
 	}
 
-	public List<String> getProfesori() {
-		return profesori;
+	public List<Professor> getProfesori() {
+		return professors;
 	}
 
 	public void setProfesori(ArrayList<String> profesori) {
-		this.profesori = profesori;
+		this.professors = professors;
 	}
 
 	@Override
 	public String toString() {
 		return "Cathedra [cathedraID=" + cathedraID + ", cathedraName=" + cathedraName + ", cathedraChief="
-				+ cathedraChief + ", profesori=" + profesori + "]";
+				+ cathedraChief + ", profesori=" + professors + "]";
 	}
 	
 	
