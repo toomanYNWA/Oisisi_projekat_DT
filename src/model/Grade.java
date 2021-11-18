@@ -1,40 +1,47 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 
 public class Grade {
 	
-	private ArrayList<String> indexPassed ;
+	private Student studentPassed ;
 	private Subject subject;
 	private int value;
 	private LocalDate dateofExam;
 	
-	public Grade() {}
 	
-	public Grade(ArrayList<String> indexPassed, Subject subject, int value, LocalDate dateofExam) {
+	public Grade(Student studentPassed, Subject subject, int value, LocalDate dateofExam) {
 		super();
-		this.indexPassed = indexPassed;
+		this.studentPassed = studentPassed;
 		this.subject = subject;
+		if(value<6 || value>10) {
+			throw new IllegalArgumentException("Grade can only be in 6-10 range.");
+		}
 		this.value = value;
 		this.dateofExam = dateofExam;
 	}
     
 	public Grade(Grade g) {
 		super();
-		this.indexPassed = g.indexPassed;
+		this.studentPassed = g.studentPassed;
 		this.subject = g.subject;
+		if(g.value<6 || g.value>10) {
+			throw new IllegalArgumentException("Grade can only be in 6-10 range.");
+		}
 		this.value = g.value;
 		this.dateofExam = g.dateofExam;
 	}
-	public List<String> getIndexPassed() {
-		return indexPassed;
+
+	
+	public Student getStudentPassed() {
+		return studentPassed;
 	}
-	public void setIndexPassed(ArrayList<String> indexPassed) {
-		this.indexPassed = indexPassed;
+
+	public void setStudentPassed(Student studentPassed) {
+		this.studentPassed = studentPassed;
 	}
+
 	public Subject getSubject() {
 		return subject;
 	}
@@ -52,9 +59,10 @@ public class Grade {
 		return value;
 	}
 	public void setValue(int value) {
-		if(value<6 || value>10)
-			System.out.println("Wrong value.");
-			else this.value = value;
+		if(value<6 || value>10) {
+			throw new IllegalArgumentException("Grade can only be in 6-10 range.");
+		}
+		 this.value = value;
 	}
 	
 	

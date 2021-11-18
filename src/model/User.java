@@ -16,12 +16,9 @@ public abstract class User {
 	private String email;
 	private Address address;
 	
-	public User() {
-		
-	}
+	
 	
 	public User(String name, String surname, LocalDate dateofbirth,  Gender gender, String phone, String email, Address address) {
-		this();
 		this.name = name;
 		this.surname = surname;
 		this.dateofbirth = dateofbirth;
@@ -32,7 +29,6 @@ public abstract class User {
 	}
 
 	public User(User u) {
-		this();
 		this.name = u.name;
 		this.surname = u.surname;
 		this.dateofbirth = u.dateofbirth;

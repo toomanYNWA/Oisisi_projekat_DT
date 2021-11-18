@@ -6,7 +6,6 @@ public class Address {
 	private String city;
 	private String state;
 	
-	public Address() {};
 	
 	public Address(String street, String number, String city, String state) {
 		super();

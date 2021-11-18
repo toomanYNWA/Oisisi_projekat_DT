@@ -20,10 +20,6 @@ public class Professor extends User {
 	private Title title;
 	private ArrayList<Subject> subjects;
 	
-	public Professor() {
-		super();
-	}
-
 
 	public Professor(String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,
 			Address address, Address officeAdress, String id, int yearsOfTrail, Title title, ArrayList<Subject> subjects ) {
