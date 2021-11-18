@@ -8,7 +8,7 @@ public class Cathedra {
 	private String cathedraChief;
 	private ArrayList<Professor> professors ;
 	
-	public Cathedra(String cathedraID, String cathedraName, String cathedraChief, ArrayList<Professor> profesori) {
+	public Cathedra(String cathedraID, String cathedraName, String cathedraChief, ArrayList<Professor> professors) {
 		super();
 		this.cathedraID = cathedraID;
 		this.cathedraName = cathedraName;
@@ -46,18 +46,18 @@ public class Cathedra {
 		this.cathedraChief = cathedraChief;
 	}
 
-	public List<Professor> getProfesori() {
+	public List<Professor> getProfessors() {
 		return professors;
 	}
 
-	public void setProfesori(ArrayList<String> profesori) {
+	public void setProfessors(ArrayList<Professor> professors) {
 		this.professors = professors;
 	}
 
 	@Override
 	public String toString() {
 		return "Cathedra [cathedraID=" + cathedraID + ", cathedraName=" + cathedraName + ", cathedraChief="
-				+ cathedraChief + ", profesori=" + professors + "]";
+				+ cathedraChief + ", professors=" + professors + "]";
 	}
 	
 	
