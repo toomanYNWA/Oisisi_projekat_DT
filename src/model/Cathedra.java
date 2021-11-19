@@ -5,10 +5,10 @@ public class Cathedra {
 
 	private String cathedraID;
 	private String cathedraName;
-	private String cathedraChief;
+	private Professor cathedraChief;
 	private ArrayList<Professor> professors ;
 	
-	public Cathedra(String cathedraID, String cathedraName, String cathedraChief, ArrayList<Professor> professors) {
+	public Cathedra(String cathedraID, String cathedraName, Professor cathedraChief, ArrayList<Professor> professors) {
 		super();
 		this.cathedraID = cathedraID;
 		this.cathedraName = cathedraName;
@@ -38,11 +38,11 @@ public class Cathedra {
 		this.cathedraName = cathedraName;
 	}
 
-	public String getCathedraChief() {
+	public Professor getCathedraChief() {
 		return cathedraChief;
 	}
 
-	public void setCathedraChief(String cathedraChief) {
+	public void setCathedraChief(Professor cathedraChief) {
 		this.cathedraChief = cathedraChief;
 	}
 

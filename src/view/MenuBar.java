@@ -30,6 +30,7 @@ public class MenuBar extends JMenuBar {
 			save.setIcon(new ImageIcon("icons/diskette.png"));
 			file.add(save);
 			JMenu open = new JMenu("Open");
+			open.setMnemonic(KeyEvent.VK_O);
 			open.setIcon(new ImageIcon("icons/share.png"));
 			JMenuItem students = new JMenuItem("Students");
 			open.add(students);
@@ -67,6 +68,12 @@ public class MenuBar extends JMenuBar {
 			about.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 			about.setIcon(new ImageIcon("icons/info.png"));
 			help.add(about);
+			
+			students.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, ActionEvent.CTRL_MASK));
+			professor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+			sub.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
+			cat.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, ActionEvent.CTRL_MASK));
+			
 			
 			
 			add(file);
