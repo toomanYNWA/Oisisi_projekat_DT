@@ -19,9 +19,7 @@ public class Student extends User{
 	private ArrayList<Subject> passed;
 	private ArrayList<Subject> notPassed ;
 	
-	public Student(String nuIndex, int yearOfEnrollment, int currentYear,Status status, float averageGrade, ArrayList<Subject> passed,
-			ArrayList<Subject> notPassed, String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,
-			Address address) {
+	public Student(String nuIndex, int yearOfEnrollment, int currentYear,Status status, float averageGrade, ArrayList<Subject> passed,ArrayList<Subject> notPassed, String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,	Address address) {
 		super(name, surname, dateofbirth, gender, phone, email, address);
 		
 		this.nuIndex = nuIndex;
@@ -44,6 +42,8 @@ public class Student extends User{
 		this.notPassed = s.notPassed;
 	}
 	
+	
+
 	public String getNuIndex() {
 		return nuIndex;
 	}
