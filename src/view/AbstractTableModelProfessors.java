@@ -2,24 +2,26 @@ package view;
 
 import javax.swing.table.AbstractTableModel;
 
-/*public class AbstractTableModelProfessors extends AbstractTableModel{
+import model.ProfessorsDatabase;
+
+public class AbstractTableModelProfessors extends AbstractTableModel{
 	@Override
 	public int getRowCount() {
-		return BazaProfesora.getInstance().getProfesori().size();
+		return ProfessorsDatabase.getInstance().getProfesori().size();
 	}
 
 	@Override
 	public int getColumnCount() {
-		return BazaProfesora.getInstance().getColumnCount();
+		return ProfessorsDatabase.getInstance().getColumnCount();
 	}
 	@Override
 	public String getColumnName(int column) {
-		return BazaProfesora.getInstance().getColumnName(column);
+		return ProfessorsDatabase.getInstance().getColumnName(column);
 	}
 	
 	@Override
 	public Object getValueAt(int row, int col) {
-		return BazaProfesora.getInstance().getValueAt(row, col);
+		return ProfessorsDatabase.getInstance().getValueAt(row, col);
 	}
 
-} */
+} 

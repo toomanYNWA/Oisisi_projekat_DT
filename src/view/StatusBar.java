@@ -7,14 +7,18 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
+
 import javax.swing.BorderFactory;
+
 import javax.swing.JLabel;
 
 
 
 public class StatusBar extends JMenuBar {
-		
+	 
 	public StatusBar() {
 	JPanel statusBL = new JPanel();
 	statusBL.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -36,5 +40,6 @@ public class StatusBar extends JMenuBar {
 	
 	
 	add(statusBD);
+	
 	}
 }

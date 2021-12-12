@@ -9,11 +9,12 @@ import javax.swing.table.TableCellRenderer;
 
 public class ProfessorsJTable extends JTable {
 	
+	
 	public ProfessorsJTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		//this.setModel(new AbstractTableModelProfessors());
+		this.setModel(new AbstractTableModelProfessors());
 	}
 	
 	@Override
