@@ -1,13 +1,14 @@
 package view;
 
 import javax.swing.JPanel;
-//import javax.swing.JScrollPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 
 public class TabbedPane extends JTabbedPane {
 	public TabbedPane() {
 		
-		JPanel studentPanel=new JPanel();
+		JPanel studentPanel=new StudentsTablePanel();
 		JPanel professorPanel=new JPanel();
 		JPanel subjectPanel=new JPanel();
 		
@@ -17,12 +18,14 @@ public class TabbedPane extends JTabbedPane {
 		//tabelaProfesori=ProfesoriJTable.getInstance();
 		//JScrollPane profesoriPane=new JScrollPane(tabelaProfesori);
 
-		//tabelaStudenti=StudentiJTable.getInstance();
-		//JScrollPane studentiPane=new JScrollPane(tabelaStudenti);
+//		tabelaStudenti=StudentsJTable.getInstance();
+//		JScrollPane studentiPane=new JScrollPane(tabelaStudenti);
 		
 		
 		add("Studenti", studentPanel);
 		add("Profesori", professorPanel);
 		add("Predmeti", subjectPanel);
+		
+
 	}
 }
