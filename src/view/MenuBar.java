@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
@@ -80,7 +81,52 @@ public class MenuBar extends JMenuBar {
 			add(edit);
 			add(help);
 			
+			new1.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(TabbedPane.position==1) {
+					AddProfessorDialog addP = new AddProfessorDialog();
+					addP.setVisible(true);
+					}}
+				
+			});
 			
+			edit2.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(TabbedPane.position==1) {
+					EditProfessorDialog editP = new EditProfessorDialog();
+					editP.setVisible(true);
+					}}
+				
+			});
 			
+			delete.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(TabbedPane.position==1) {
+					DeleteProfessorDialog deleteP = new DeleteProfessorDialog();
+					deleteP.setVisible(true);
+					}}
+				
+			});
+			/*new1.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					if(TabbedPane.getInstance().getSelectedIndex() == 0) {
+						//AddStudentDialog addS = new AddStudentDialog();
+						//addP.setVisible(true);
+					}else if(TabbedPane.getInstance().getSelectedIndex() == 1) {
+						AddProfessorDialog addP = new AddProfessorDialog();
+						addP.setVisible(true);
+					}else if(TabbedPane.getInstance().getSelectedIndex() == 2) {
+						//AddSubjectDialog addSub = new AddSubjectDialog();
+						//addP.setVisible(true);
+					} 
+					
+				}
+			}); 
+			*/
 		}
 }

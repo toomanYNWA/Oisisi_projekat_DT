@@ -1,10 +1,13 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -21,16 +24,34 @@ public class ToolBar extends JToolBar{
 		super(SwingConstants.HORIZONTAL);
 		
 		JButton btnCreate = new JButton();
-		btnCreate.setToolTipText("Create");
+		btnCreate.setToolTipText("Add new");
 		btnCreate.setIcon(new ImageIcon("icons/pluss.png"));
 		add(btnCreate);
-		
+		//btnCreate.addMouseListener(new AddProfessorListener());
+		btnCreate.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(TabbedPane.position==1) {
+				AddProfessorDialog addP = new AddProfessorDialog();
+				addP.setVisible(true);
+				}}
+			
+		});
 		addSeparator();
 		
 		JButton btnOpen = new JButton();
 		btnOpen.setToolTipText("Open");
 		btnOpen.setIcon(new ImageIcon("icons/edit.png"));
 		add(btnOpen);
+		btnOpen.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(TabbedPane.position==1) {
+				EditProfessorDialog editP = new EditProfessorDialog();
+				editP.setVisible(true);
+				}}
+			
+		});
 		
 		addSeparator();
 		
@@ -38,6 +59,15 @@ public class ToolBar extends JToolBar{
 		btnDelete.setToolTipText("Delete");
 		btnDelete.setIcon(new ImageIcon("icons/trash.png"));
 		add(btnDelete);
+		btnDelete.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(TabbedPane.position==1) {
+				DeleteProfessorDialog deleteP = new DeleteProfessorDialog();
+				deleteP.setVisible(true);
+				}}
+			
+		});
 		
 		addSeparator();
 		

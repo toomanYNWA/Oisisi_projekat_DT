@@ -6,16 +6,14 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
 
-public class ProfessorsJTable extends JTable {
+public class SubjectsJTable extends JTable{
 	
-	public static int rowSelectedIndex = -1;
-	public ProfessorsJTable() {
+	public SubjectsJTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.setModel(new AbstractTableModelProfessors());
+		this.setModel(new AbstractTableModelSubjects());
 	}
 	
 	@Override

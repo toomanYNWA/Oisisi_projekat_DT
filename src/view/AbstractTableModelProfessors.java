@@ -7,7 +7,7 @@ import model.ProfessorsDatabase;
 public class AbstractTableModelProfessors extends AbstractTableModel{
 	@Override
 	public int getRowCount() {
-		return ProfessorsDatabase.getInstance().getProfesori().size();
+		return ProfessorsDatabase.getInstance().getProfessors().size();
 	}
 
 	@Override

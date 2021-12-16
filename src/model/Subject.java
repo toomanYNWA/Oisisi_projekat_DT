@@ -12,17 +12,19 @@ public class Subject {
 	private int subjectID;
 	private String subjectName;
 	private int subjectYear;
+	private Professor professor;
 	private int espb;
 	private Semestar semestar;
 	private ArrayList<String> indexPassed ;
 	private ArrayList<String> indexNotPassed ;
 	
-	public Subject(int subjectID, String subjectName,Semestar semestar, int subjectYear, int espb, ArrayList<String> studentsPassed,
+	public Subject(int subjectID, String subjectName,Semestar semestar, int subjectYear, Professor professor, int espb, ArrayList<String> studentsPassed,
 			ArrayList<String> studentsNotPassed) {
 		this.subjectID = subjectID;
 		this.subjectName = subjectName;
 		this.semestar = semestar;
 		this.subjectYear = subjectYear;
+		this.professor = professor;
 		this.espb = espb;
 		this.indexPassed = studentsPassed;
 		this.indexNotPassed = studentsNotPassed;
@@ -33,6 +35,7 @@ public class Subject {
 		this.subjectName = s.subjectName;
 		this.semestar = s.semestar;
 		this.subjectYear = s.subjectYear;
+		this.professor = s.professor;
 		this.espb = s.espb;
 		this.indexPassed = s.indexPassed;
 		this.indexNotPassed = s.indexNotPassed;
@@ -69,6 +72,14 @@ public class Subject {
 		this.subjectYear = subjectYear;
 	}
 
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+
 	public int getEspb() {
 		return espb;
 	}
@@ -96,15 +107,8 @@ public class Subject {
 	@Override
 	public String toString() {
 		return "Subject [subjectID=" + subjectID + ", subjectName=" + subjectName + ", subjectYear=" + subjectYear
-				+ ", espb=" + espb + ", semestar=" + semestar + ", studentsPassed=" + indexPassed
-				+ ", studentsNotPassed=" + indexNotPassed + "]";
-	}
-
-	
-	
-	
-	
-	
-	
+				+ ", professor=" + professor + ", espb=" + espb + ", semestar=" + semestar + ", indexPassed="
+				+ indexPassed + ", indexNotPassed=" + indexNotPassed + "]";
+	}	
 	
 }
