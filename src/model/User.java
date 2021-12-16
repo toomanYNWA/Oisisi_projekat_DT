@@ -27,6 +27,11 @@ public abstract class User {
 		this.email = email;
 		this.address = address;
 	}
+	public User(String name, String surname) {
+		this.name = name;
+		this.surname = surname;
+	
+	}
 
 	public User(User u) {
 		this.name = u.name;
@@ -37,6 +42,7 @@ public abstract class User {
 		this.email = u.email;
 		this.address = u.address;
 	}
+	
 
 	public String getName() {
 		return name;

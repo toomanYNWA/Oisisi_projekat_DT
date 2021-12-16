@@ -30,6 +30,33 @@ public class Student extends User{
 		this.passed = passed;
 		this.notPassed = notPassed;
 	}
+	public Student(String nuIndex,  int currentYear,int status, String name, String surname, float averageGrade) {
+		super(name, surname);
+		
+		this.nuIndex = nuIndex;
+		if(currentYear == 0) {
+			this.currentYear = 1;
+		}else if(currentYear == 1)
+		{
+			this.currentYear = 2;
+		}
+		else if(currentYear == 2)
+		{
+			this.currentYear = 3;
+		}
+		else if(currentYear == 3)
+		{
+			this.currentYear = 4;
+		}else if(currentYear == 4)
+		{
+			this.currentYear = 5;
+		}
+		if(status==0) {
+			this.status=Status.B;
+		}else this.status=Status.S;
+		this.averageGrade = averageGrade;
+		
+	}
 	
 	public Student(Student s) {
 		super(s);

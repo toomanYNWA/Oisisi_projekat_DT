@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -24,6 +26,8 @@ public class ToolBar extends JToolBar{
 		btnCreate.setToolTipText("Create");
 		btnCreate.setIcon(new ImageIcon("icons/pluss.png"));
 		add(btnCreate);
+		
+		
 		
 		addSeparator();
 		

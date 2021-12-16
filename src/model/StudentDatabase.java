@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Student.Status;
-import model.User.Gender;
+
 
 
 public class StudentDatabase {
@@ -71,10 +71,8 @@ public class StudentDatabase {
 			return null;
 		}
 	}
-	public void addStudent(String nuIndex, int yearOfEnrollment, int currentYear,Status status, float averageGrade, ArrayList<Subject> passed,
-			ArrayList<Subject> notPassed, String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,
-			Address address) {
-		this.students.add(new Student(nuIndex, yearOfEnrollment, currentYear, status, averageGrade, passed, notPassed , name, surname, dateofbirth,  gender, phone, email, address));
+	public void addStudent(String nuIndex, int currentYear,int status, String name, String surname, float averageGrade) {
+		this.students.add(new Student(nuIndex, currentYear, status, name, surname, averageGrade));
 	}
 	public void deleteStudent(String indexNu) {
 		for(Student i: students) {
@@ -84,24 +82,21 @@ public class StudentDatabase {
 			}
 		}
 	}
-	public void editStudent(String nuIndex, int yearOfEnrollment, int currentYear,Status status, float averageGrade, ArrayList<Subject> passed,
-			ArrayList<Subject> notPassed, String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,
+	public void editStudent(String nuIndex, int yearOfEnrollment, int currentYear,Status status,  String name, String surname, LocalDate dateofbirth, String phone, String email,
 			Address address) {
 		for(Student i : students) {
 			if(i.getNuIndex()== nuIndex) {
+				i.setNuIndex(nuIndex);
 				i.setName(name);
 				i.setSurname(surname);
 				i.setAddress(address);
 				i.setCurrentYear(currentYear);
 				i.setDateofbirth(dateofbirth);
 				i.setStatus(status);
-				i.setAverageGrade(averageGrade);
 				i.setEmail(email);
-				i.setPassed(passed);
-				i.setNotPassed(notPassed);
 				i.setPhone(phone);
 				i.setYear(yearOfEnrollment);
-				i.setGender(gender);
+				
 			}
 		}
 	}
