@@ -15,10 +15,11 @@ public class StudentsTablePanel extends JPanel{
 		
 		
 	StudentsTablePanel(){
-		lab = new JLabel("STUDENTS");
+		lab = new JLabel("");
 		table = new StudentsJTable();
 		add(lab);
 		add(new JScrollPane(table),BorderLayout.CENTER);
+		
 		
 	}
 	

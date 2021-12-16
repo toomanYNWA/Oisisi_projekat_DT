@@ -31,7 +31,11 @@ public class ToolBar extends JToolBar{
 		btnCreate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(TabbedPane.position==1) {
+				if(TabbedPane.position==0) {
+					StudentDialogue addS = new StudentDialogue();
+					addS.setVisible(true);
+					}
+				else if(TabbedPane.position==1) {
 				AddProfessorDialog addP = new AddProfessorDialog();
 				addP.setVisible(true);
 				}}

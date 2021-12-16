@@ -1,7 +1,11 @@
 package controller;
 
+import java.time.LocalDate;
+
+import model.Address;
 import model.Student;
 import model.StudentDatabase;
+import model.Student.Status;
 import view.MainFrame;
 
 public class StudentsController {
@@ -16,8 +20,8 @@ public class StudentsController {
 		}
 		private StudentsController() {}
 		
-		public void addStudent() {
-			StudentDatabase.getInstance().addStudent(null, 0, 0, null, 0, null, null, null, null, null, null, null, null, null);
+		public void addStudent(String nuIndex,int currentYear,int status, String name, String surname, float averageGrade) {
+			StudentDatabase.getInstance().addStudent(nuIndex, currentYear, status, name, surname,averageGrade);
 			
 			//MainFrame.getInstance().patchView("ADDED",-1);
 		}
@@ -38,8 +42,8 @@ public class StudentsController {
 				return;
 			}
 			Student student = StudentDatabase.getInstance().getRow(rowSelectedIndex);
-			//editStudent da l treba ovo u zagradi?
-			StudentDatabase.getInstance().editStudent(null, rowSelectedIndex, rowSelectedIndex, null, rowSelectedIndex, null, null, null, null, null, null, null, null, null);
+			//editStudent
+			StudentDatabase.getInstance().editStudent(null, rowSelectedIndex, rowSelectedIndex, null, null, null, null, null, null, null);
 			//MainFrame.getInstance().patchView(null,-1);
 		}	
 		
