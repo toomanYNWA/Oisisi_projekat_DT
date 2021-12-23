@@ -84,12 +84,13 @@ public abstract class User {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", surname=" + surname + ", dateofbirth=" + dateofbirth
-				+ ", phone=" + phone + ", email=" + email + ", address=" + address + "]";
+		return "User [name=" + name + ", surname=" + surname + ", dateofbirth=" + dateofbirth + ", phone=" + phone
+				+ ", email=" + email + ", address=" + address + "]";
 	}
+
+	
 	
 	
 }

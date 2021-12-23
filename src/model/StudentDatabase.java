@@ -32,15 +32,17 @@ public class StudentDatabase {
 		this.columns.add("GODINA STUDIJA");
 		this.columns.add("STATUS");
 		this.columns.add("PROSEK");
+		
+		
 	}
 	
 	
 	public ArrayList<Student> getStudents(){
 		return students;
 	}
-//	public void setStudenti(ArrayList<Student> students) {
-//		this.students = students;
-//	}
+	public void setStudenti(ArrayList<Student> students) {
+		this.students = students;
+}
 	
 	public int getColumnCount() {
 		return columns.size();
@@ -71,18 +73,14 @@ public class StudentDatabase {
 			return null;
 		}
 	}
-	public void addStudent(String nuIndex, int currentYear,int status, String name, String surname, float averageGrade) {
-		this.students.add(new Student(nuIndex, currentYear, status, name, surname, averageGrade));
+	public void addStudent(String nuIndex, int currentYear,int status, String name, String surname, LocalDate dateOfBirth, Address address,String email,int yearOfEnrollment,String phone) {
+		this.students.add(new Student(nuIndex, currentYear, status,  name,  surname, dateOfBirth,  address, email,yearOfEnrollment,phone));
 	}
-	public void deleteStudent(String indexNu) {
-		for(Student i: students) {
-			if(indexNu == i.getNuIndex()) {
-				students.remove(i);
-				break;
-			}
-		}
+	public void deleteStudent(int indexNu) {
+		students.remove(indexNu);
+		
 	}
-	public void editStudent(String nuIndex, int yearOfEnrollment, int currentYear,Status status,  String name, String surname, LocalDate dateofbirth, String phone, String email,
+	public void editStudent(int indexRowSelected,String nuIndex, int yearOfEnrollment, int currentYear,Status status,  String name, String surname, LocalDate dateofbirth, String phone, String email,
 			Address address) {
 		for(Student i : students) {
 			if(i.getNuIndex()== nuIndex) {

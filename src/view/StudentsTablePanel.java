@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import controller.AbstractTableModelStudent;
+
 public class StudentsTablePanel extends JPanel{
 	
 		//labela za studenta i tabela za studenta
@@ -22,9 +24,16 @@ public class StudentsTablePanel extends JPanel{
 		
 		
 	}
+
+	public void patchView() {
+		AbstractTableModelStudent model = (AbstractTableModelStudent)table.getModel();
+		model.fireTableDataChanged();
+        validate();
+	}
 	
-	
-	
-	
+	public JTable getTable() {
+		return (StudentsJTable)table;
+	}
+
 	
 }

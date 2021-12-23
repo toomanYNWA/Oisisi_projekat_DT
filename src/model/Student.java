@@ -19,18 +19,24 @@ public class Student extends User{
 	private ArrayList<Subject> passed;
 	private ArrayList<Subject> notPassed ;
 	
-	public Student(String nuIndex, int yearOfEnrollment, int currentYear,Status status, float averageGrade, ArrayList<Subject> passed,ArrayList<Subject> notPassed, String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,	Address address) {
-		super(name, surname, dateofbirth, gender, phone, email, address);
+	public Student(String nuIndex, int currentYear,int status, String name, String surname, LocalDate dateOfBirth, Address address,String email,int yearOfEnrollment,String phone) {
+		super(name, surname, dateOfBirth, phone, email, address);
 		
 		this.nuIndex = nuIndex;
 		this.yearOfEnrollment = yearOfEnrollment;
-		this.currentYear = currentYear;
-		this.status = status;
+		this.currentYear = ++currentYear;
 		this.averageGrade = averageGrade;
 		this.passed = passed;
 		this.notPassed = notPassed;
+		
+		this.nuIndex = nuIndex;
+		
+		if(status==0) {
+			this.status=Status.B;
+		}else this.status=Status.S;
+		this.averageGrade = 0f;
 	}
-	public Student(String nuIndex,  int currentYear,int status, String name, String surname, float averageGrade) {
+	public Student(String nuIndex,  int currentYear,int status, String name, String surname) {
 		super(name, surname);
 		
 		this.nuIndex = nuIndex;
@@ -54,7 +60,7 @@ public class Student extends User{
 		if(status==0) {
 			this.status=Status.B;
 		}else this.status=Status.S;
-		this.averageGrade = averageGrade;
+		this.averageGrade = 0f;
 		
 	}
 	

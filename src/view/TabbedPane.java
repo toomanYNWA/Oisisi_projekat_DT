@@ -24,9 +24,10 @@ public class TabbedPane extends JTabbedPane {
 		return instance;
 	}
 	public static int position=0;
+	private StudentsTablePanel studentPanel;
 	public TabbedPane() {
 		
-		JPanel studentPanel=new StudentsTablePanel();
+		studentPanel=new StudentsTablePanel();
 		JPanel professorPanel=new JPanel();
 		JPanel subjectPanel=new JPanel();
 		
@@ -57,5 +58,9 @@ public class TabbedPane extends JTabbedPane {
 		AbstractTableModelProfessors model=(AbstractTableModelProfessors)tableProfessors.getModel();
 		model.fireTableDataChanged();
 		validate();
+		
+	}
+	public StudentsTablePanel getStudentsTable() {
+		return studentPanel;
 	}
 }
