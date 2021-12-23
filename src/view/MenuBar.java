@@ -90,6 +90,15 @@ public class MenuBar extends JMenuBar {
 					}}
 				
 			});
+			new1.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(TabbedPane.position==0) {
+					StudentDialogue addS = new StudentDialogue();
+					addS.setVisible(true);
+					}}
+				
+			});
 			
 			edit2.addActionListener(new ActionListener() {
 				@Override

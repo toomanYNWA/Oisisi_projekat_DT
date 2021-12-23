@@ -7,6 +7,8 @@ import model.Student;
 import model.StudentDatabase;
 import model.Student.Status;
 import view.MainFrame;
+import view.StudentsTablePanel;
+import view.TabbedPane;
 
 public class StudentsController {
 
@@ -20,31 +22,31 @@ public class StudentsController {
 		}
 		private StudentsController() {}
 		
-		public void addStudent(String nuIndex,int currentYear,int status, String name, String surname, float averageGrade) {
-			StudentDatabase.getInstance().addStudent(nuIndex, currentYear, status, name, surname,averageGrade);
+		public void addStudent(String nuIndex,int currentYear,int status, String name, String surname,LocalDate date,Address address,String email,int yearOfEnrollment,String phone) {
+			StudentDatabase.getInstance().addStudent(nuIndex, currentYear, status, name, surname,date,address,email,yearOfEnrollment,phone);
 			
-			//MainFrame.getInstance().patchView("ADDED",-1);
+			TabbedPane.getInstance().getStudentsTable().patchView();
 		}
 		public void deleteStudent(int rowSelectedIndex) {
 			if(rowSelectedIndex < 0) {
+				
 				return;
 			}
-		
-		//izmena modela
-		Student student = StudentDatabase.getInstance().getRow(rowSelectedIndex);
-		StudentDatabase.getInstance().deleteStudent(student.getNuIndex());
-		//azuriranje prikaza
-		//MainFrame.getInstance().patchView("DELETED",rowSelectedIndex);
+			StudentDatabase.getInstance().deleteStudent(rowSelectedIndex);
+			TabbedPane.getInstance().getStudentsTable().patchView();
 		}
 		
-		public void editStudent(int rowSelectedIndex) {
-			if(rowSelectedIndex <0) {
-				return;
-			}
+		
+
+		int row = TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow();
+		public void editStudent(int rowSelectedIndex,String nuIndex,int currentYear,int status, String name, String surname,LocalDate date,Address address,String email,int yearOfEnrollment,String phone) {
+			 if (rowSelectedIndex < 0) {
+				 return;
+			 }
 			Student student = StudentDatabase.getInstance().getRow(rowSelectedIndex);
-			//editStudent
-			StudentDatabase.getInstance().editStudent(null, rowSelectedIndex, rowSelectedIndex, null, null, null, null, null, null, null);
-			//MainFrame.getInstance().patchView(null,-1);
+			//StudentDatabase.getInstance().editStudent(student.getNuIndex(), yearOfEnrollment, currentYear, status, name, surname, dateofbirth, phone, email, address);
+			TabbedPane.getInstance().getStudentsTable().patchView();
+			
 		}	
 		
 		

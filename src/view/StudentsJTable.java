@@ -14,7 +14,7 @@ public class StudentsJTable extends JTable{
 		
 	public StudentsJTable() {
 		this.setRowSelectionAllowed(true);
-		this.setColumnSelectionAllowed(true);
+		this.setColumnSelectionAllowed(false);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelStudent());
 		

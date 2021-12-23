@@ -53,7 +53,12 @@ public class ToolBar extends JToolBar{
 				if(TabbedPane.position==1) {
 				EditProfessorDialog editP = new EditProfessorDialog();
 				editP.setVisible(true);
-				}}
+				}
+				else if(TabbedPane.position==0) {
+					EditStudentDialogue editS = new EditStudentDialogue();
+					editS.setVisible(true);
+				}
+				}
 			
 		});
 		
@@ -69,7 +74,12 @@ public class ToolBar extends JToolBar{
 				if(TabbedPane.position==1) {
 				DeleteProfessorDialog deleteP = new DeleteProfessorDialog();
 				deleteP.setVisible(true);
-				}}
+				}
+				else if(TabbedPane.position==0) {
+					DeleteStudent deleteS = new DeleteStudent();
+					deleteS.setVisible(true);
+				}
+					}
 			
 		});
 		
