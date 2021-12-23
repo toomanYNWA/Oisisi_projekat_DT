@@ -3,12 +3,19 @@ package view;
 import java.awt.Color;
 import java.awt.Component;
 
+
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
 
 public class ProfessorsJTable extends JTable {
+	/*private static ProfessorsJTable instance = null;
+	public static ProfessorsJTable getInstance() {
+		if (instance == null) {
+			instance = new ProfessorsJTable();
+		}
+		return instance;
+	} */
 	
 	public static int rowSelectedIndex = -1;
 	public ProfessorsJTable() {

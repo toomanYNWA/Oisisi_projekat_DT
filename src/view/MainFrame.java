@@ -55,8 +55,7 @@ private static final long serialVersionUID = 1L;
 		StatusBar statusBar = new StatusBar();
 		add(statusBar, BorderLayout.SOUTH);
 		
-		TabbedPane tabbedPane = new TabbedPane();
-		add(tabbedPane, BorderLayout.CENTER);
+		add(TabbedPane.getInstance(), BorderLayout.CENTER);
 		
 	}
 	

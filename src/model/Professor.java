@@ -21,20 +21,20 @@ public class Professor extends User {
 	private ArrayList<Subject> subjects;
 	
 
-	public Professor(String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,
+	public Professor(String name, String surname, LocalDate dateofbirth, String phone, String email,
 			Address address, Address officeAdress, String id, int yearsOfTrail, Title title, ArrayList<Subject> subjects ) {
 
-		super(name, surname, dateofbirth, gender, phone, email, address);
+		super(name, surname, dateofbirth, phone, email, address);
 		this.officeAdress = officeAdress;
 		this.id = id;
 		this.yearsOfTrail = yearsOfTrail;
 		this.title= title;
 		this.subjects=subjects; 
 	}
-	public Professor(String name, String surname, LocalDate dateofbirth, Gender gender, String phone, String email,
+	public Professor(String name, String surname, LocalDate dateofbirth, String phone, String email,
 			Address address, Address officeAdress, String id, int yearsOfTrail, Title title ) {
 
-		super(name, surname, dateofbirth, gender, phone, email, address);
+		super(name, surname, dateofbirth, phone, email, address);
 		this.officeAdress = officeAdress;
 		this.id = id;
 		this.yearsOfTrail = yearsOfTrail;

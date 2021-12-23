@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.ProfessorsController;
+
 public class DeleteProfessorDialog extends JDialog{
 	
 	public DeleteProfessorDialog() {
@@ -30,6 +32,16 @@ public class DeleteProfessorDialog extends JDialog{
 		message.add(messageL);
 		JPanel yesNo = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JButton yes = new JButton("Yes");
+		
+		yes.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ProfessorsController.getInstance().deleteProfessor(TabbedPane.getInstance().getTableProfessors().getSelectedRow());
+				dispose();
+			}
+		}); 
+		
 		JButton no = new JButton("No");
 		no.addActionListener(new ActionListener() {
 			

@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Dimension;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -11,6 +10,11 @@ import javax.swing.event.ChangeListener;
 
 public class TabbedPane extends JTabbedPane {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTable tableProfessors;
 	private static TabbedPane instance = null;
 
 	public static TabbedPane getInstance() {
@@ -26,14 +30,13 @@ public class TabbedPane extends JTabbedPane {
 		JPanel professorPanel=new JPanel();
 		JPanel subjectPanel=new JPanel();
 		
-		SubjectsJTable tabelSubjects=new SubjectsJTable();
-		JScrollPane subjectsPane=new JScrollPane(tabelSubjects);
+		SubjectsJTable tableSubjects=new SubjectsJTable();
+		JScrollPane subjectsPane=new JScrollPane(tableSubjects);
 		subjectPanel.add(subjectsPane);
 		
-		ProfessorsJTable tabelProfessors=new ProfessorsJTable();
-		JScrollPane professorsPane=new JScrollPane(tabelProfessors);
+		tableProfessors =new ProfessorsJTable();
+		JScrollPane professorsPane=new JScrollPane(tableProfessors);
 		professorPanel.add(professorsPane);
-		
 		
 		add("Studenti", studentPanel);
 		add("Profesori", professorPanel);
@@ -45,6 +48,14 @@ public class TabbedPane extends JTabbedPane {
 				position=getSelectedIndex();
 			}
 		});
-
+		
+	}
+	public JTable getTableProfessors() {
+		return tableProfessors;
+	}
+	public void updateProfessors() {
+		AbstractTableModelProfessors model=(AbstractTableModelProfessors)tableProfessors.getModel();
+		model.fireTableDataChanged();
+		validate();
 	}
 }

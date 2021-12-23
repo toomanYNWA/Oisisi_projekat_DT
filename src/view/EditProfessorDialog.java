@@ -1,12 +1,12 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import javax.swing.Box;
@@ -20,8 +20,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import controller.FocusListenerProfessors;
+import controller.ProfessorsController;
+import model.Address;
 import model.Professor;
-import model.ProfessorsDatabase;
+import model.Professor.Title;
 
 public class EditProfessorDialog extends JDialog{
 	public static JTextField nameTF;
@@ -33,6 +35,7 @@ public class EditProfessorDialog extends JDialog{
 	public static JTextField idTF;
 	public static JTextField emailTF;
 	public static JTextField yearsOfTrailTF;
+	public static String titleP;
 	
 	public EditProfessorDialog() {
 		
@@ -85,6 +88,7 @@ public class EditProfessorDialog extends JDialog{
 		
 		date.add(dateL);
 		date.add(dateOfBirthTF);
+		
 		
 		JPanel phone = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
 		JLabel phoneL=new JLabel("Broj telefona: *");
@@ -184,17 +188,42 @@ public class EditProfessorDialog extends JDialog{
 
 			}
 		});
-		/*Professor prof=new Professor(ProfessorsDatabase.getInstance().getRow(ProfessorsJTable.getInstance().getSelectedRow()));
+		potvrdi.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String [] date = dateOfBirthTF.getText().split("\\.");
+				LocalDate dOB = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
+				
+				String [] address = addressTF.getText().split("\\,");
+				Address a = new Address(address[0], address[1], address[2], address[3]); // ulica, broj, grad, drzava
+				String [] officeAddress = officeAddressTF.getText().split("\\,");
+				Address aO = new Address(officeAddress[0], officeAddress[1], officeAddress[2], officeAddress[3]);
+				
+				titleP=(String)titleCB.getSelectedItem();
+				Title t;
+
+				if(titleP.equals("Asistent"))
+					t = Title.ASISTANT_PROFESSOR;
+				else if (titleP.equals("Docent"))
+					t = Title.ASSOCIATE_PROFESSOR;
+				else
+					t = Title.PROFESSOR;
+				ProfessorsController.getInstance().editProfessor(TabbedPane.getInstance().getTableProfessors().getSelectedRow(), nameTF.getText(), surnameTF.getText(), dOB, phoneTF.getText(), emailTF.getText(), a, aO, idTF.getText(), Integer.parseInt(yearsOfTrailTF.getText()), t);
+				dispose();
+			}
+		}); 
+		Professor prof = new Professor(ProfessorsController.getInstance().getProfessor(TabbedPane.getInstance().getTableProfessors().getSelectedRow()));
 		nameTF.setText(prof.getName());
 		surnameTF.setText(prof.getSurname());
 		dateOfBirthTF.setText(prof.getDateofbirth().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-		adresaTF.setText(prof.getAdresaStanovanja());
-		telefonTF.setText(prof.getKontaktTel());
+		addressTF.setText(prof.getAddress().toString());
+		phoneTF.setText(prof.getPhone());
 		emailTF.setText(prof.getEmail());
-		kancelarijaTF.setText(prof.getAdresa_kancelarije());
-		blkTF.setText(prof.getBLK());
-		titula=prof.getTitula();
-		zvanje=prof.getZvanje(); */
+		officeAddressTF.setText(prof.getOfficeAdress().toString());
+		idTF.setText(prof.getId());
+		yearsOfTrailTF.setText(String.valueOf(prof.getYearsOfTrail()));
+		// podesiti combobox
 		
 		odustanakPotvrda.add(potvrdi);
 		odustanakPotvrda.add(odustani);

@@ -7,9 +7,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 import javax.swing.Box;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -19,6 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.FocusListenerProfessors;
+import controller.ProfessorsController;
+import model.Address;
+import model.Professor.Title;
 
 public class AddProfessorDialog extends JDialog{
 	
@@ -31,6 +34,7 @@ public class AddProfessorDialog extends JDialog{
 	public static JTextField idTF;
 	public static JTextField emailTF;
 	public static JTextField yearsOfTrailTF;
+	public static String titleP;
 	
 	public AddProfessorDialog() {
 		
@@ -83,6 +87,7 @@ public class AddProfessorDialog extends JDialog{
 		
 		date.add(dateL);
 		date.add(dateOfBirthTF);
+
 		
 		JPanel phone = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
 		JLabel phoneL=new JLabel("Broj telefona: *");
@@ -116,7 +121,7 @@ public class AddProfessorDialog extends JDialog{
 		addressTF.setPreferredSize(new Dimension(200,25));
 		addressTF.setName("txtRequired");
 		addressTF.addFocusListener(focus);
-		addressTF.setToolTipText("npr. Dositejeva 16, Novi Sad");
+		addressTF.setToolTipText("npr. Dositejeva, 16, Novi Sad, Srbija");
 
 		address.add(addressL);
 		address.add(addressTF);
@@ -130,7 +135,7 @@ public class AddProfessorDialog extends JDialog{
 		officeAddressTF.setPreferredSize(new Dimension(200,25));
 		officeAddressTF.setName("txtRequired");
 		officeAddressTF.addFocusListener(focus);
-		officeAddressTF.setToolTipText("npr. Dositeja Obradoviæa 6, Novi Sad, NTP 5");
+		officeAddressTF.setToolTipText("npr. Dositeja Obradoviæa, 6, Novi Sad, Srbija");
 
 		
 		office.add(officeL);
@@ -170,10 +175,37 @@ public class AddProfessorDialog extends JDialog{
 		title.add(titleL);
 		title.add(titleCB);
 		
-		JPanel odustanakPotvrda = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JButton odustani = new JButton("Odustani");
-		JButton potvrdi = new JButton("Potvrdi");
-		odustani.addActionListener(new ActionListener() {
+		JPanel yesNo = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JButton no = new JButton("Odustani");
+		JButton yes = new JButton("Potvrdi");
+		
+		yes.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String [] date = dateOfBirthTF.getText().split("\\.");
+				LocalDate dOB = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
+				
+				String [] address = addressTF.getText().split("\\,");
+				Address a = new Address(address[0], address[1], address[2], address[3]); // ulica, broj, grad, drzava
+				String [] officeAddress = officeAddressTF.getText().split("\\,");
+				Address aO = new Address(officeAddress[0], officeAddress[1], officeAddress[2], officeAddress[3]);
+				
+				titleP=(String)titleCB.getSelectedItem();
+				Title t;
+
+				if(titleP.equals("Asistent"))
+					t = Title.ASISTANT_PROFESSOR;
+				else if (titleP.equals("Docent"))
+					t = Title.ASSOCIATE_PROFESSOR;
+				else
+					t = Title.PROFESSOR;
+				ProfessorsController.getInstance().addProfessor(nameTF.getText(), surnameTF.getText(), dOB, phoneTF.getText(), emailTF.getText(), a, aO, idTF.getText(), Integer.parseInt(yearsOfTrailTF.getText()), t);
+				dispose();
+			}
+		}); 
+		
+		no.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -183,8 +215,8 @@ public class AddProfessorDialog extends JDialog{
 			}
 		});
 		
-		odustanakPotvrda.add(potvrdi);
-		odustanakPotvrda.add(odustani);
+		yesNo.add(yes);
+		yesNo.add(no);
 		
 		Box pattern = Box.createVerticalBox();
 		pattern.add(Box.createVerticalStrut(10));
@@ -198,7 +230,7 @@ public class AddProfessorDialog extends JDialog{
 		pattern.add(email);
 		pattern.add(yearsOT);
 		pattern.add(title);
-		pattern.add(odustanakPotvrda);
+		pattern.add(yesNo);
 		pattern.add(Box.createGlue());
 		
 		
