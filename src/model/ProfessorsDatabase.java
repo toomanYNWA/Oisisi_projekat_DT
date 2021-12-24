@@ -124,9 +124,9 @@ public class ProfessorsDatabase {
 		Professor profesori=this.professors.get(row);
 		switch(col) {
 		case 0:
-			return profesori.getSurname();
-		case 1:
 			return profesori.getName();
+		case 1:
+			return profesori.getSurname();
 		case 2:
 			return profesori.getEmail();
 		case 3:

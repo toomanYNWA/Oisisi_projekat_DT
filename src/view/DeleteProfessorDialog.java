@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.ProfessorsController;
@@ -19,6 +20,7 @@ import controller.ProfessorsController;
 public class DeleteProfessorDialog extends JDialog{
 	
 	public DeleteProfessorDialog() {
+		
 		setModal(true);
 		setSize(300,150);
 		Toolkit kit = Toolkit.getDefaultToolkit();

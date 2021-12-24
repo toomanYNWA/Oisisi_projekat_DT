@@ -35,7 +35,6 @@ public class SubjectsDatabase {
 	}
 	private void initsubjects() {
 		this.subjects = new ArrayList<Subject>();
-		//this.sviPredmeti=new ArrayList<Predmet>();
 		
 		String next=null;
 		String[] column=null;
@@ -70,7 +69,6 @@ public class SubjectsDatabase {
 				else
 					s=Semestar.SUMMER;
 				Professor p = ProfessorsDatabase.getInstance().getProfById(column[4].trim());
-				//System.out.println(p.getName()); //radi dodavnje<333
 				
 				subjects.add(new Subject(sId ,column[1].trim(),s,sY,p,espb, indexP, indexNP));
 
