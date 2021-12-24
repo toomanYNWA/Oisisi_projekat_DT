@@ -340,8 +340,6 @@ public class AddProfessorDialog extends JDialog{
 		
 		this.add(pattern,BorderLayout.CENTER);
 		
-
-		//setVisible(true);
 	}
 	
 }
