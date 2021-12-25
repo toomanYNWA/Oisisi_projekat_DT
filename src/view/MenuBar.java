@@ -8,12 +8,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 
 public class MenuBar extends JMenuBar {
-
+	
 		public MenuBar() {
 				
 			JMenu file = new JMenu("File");
@@ -82,13 +81,16 @@ public class MenuBar extends JMenuBar {
 			add(edit);
 			add(help);
 			
+			
+			
 			new1.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(TabbedPane.position==1) {
-					AddProfessorDialog addP = new AddProfessorDialog();
-					addP.setVisible(true);
-					}}
+						AddProfessorDialog addP=new AddProfessorDialog();
+						addP.setVisible(true);
+						}
+					}
 				
 			});
 			new1.addActionListener(new ActionListener() {
@@ -108,7 +110,6 @@ public class MenuBar extends JMenuBar {
 					if(TabbedPane.position==1) {
 						EditProfessorDialog editP = new EditProfessorDialog();
 						editP.setVisible(true);
-		 				
 					}
 		         
 				}
