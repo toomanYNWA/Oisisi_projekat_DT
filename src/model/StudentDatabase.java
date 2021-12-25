@@ -15,9 +15,8 @@ public class StudentDatabase {
 		if (instance== null) {
 			instance = new StudentDatabase();
 		}
-		return instance;
-		
- }
+		return instance;		
+	}
 	//private long generator;
 	
 	private ArrayList<Student> students;
@@ -42,7 +41,7 @@ public class StudentDatabase {
 	}
 	public void setStudenti(ArrayList<Student> students) {
 		this.students = students;
-}
+    }
 	
 	public int getColumnCount() {
 		return columns.size();
@@ -80,23 +79,25 @@ public class StudentDatabase {
 		students.remove(indexNu);
 		
 	}
-	public void editStudent(int indexRowSelected,String nuIndex, int yearOfEnrollment, int currentYear,Status status,  String name, String surname, LocalDate dateofbirth, String phone, String email,
+	public Student gback(int r) {
+		return students.get(r); 
+	}
+	public void editStudent(int rowSelectedIndex,String nuIndex, int yearOfEnrollment, int currentYear,int status,  String name, String surname, LocalDate dateofbirth, String phone, String email,
 			Address address) {
-		for(Student i : students) {
-			if(i.getNuIndex()== nuIndex) {
-				i.setNuIndex(nuIndex);
-				i.setName(name);
-				i.setSurname(surname);
-				i.setAddress(address);
-				i.setCurrentYear(currentYear);
-				i.setDateofbirth(dateofbirth);
-				i.setStatus(status);
-				i.setEmail(email);
-				i.setPhone(phone);
-				i.setYear(yearOfEnrollment);
+			Student s = gback(rowSelectedIndex);
+			
+				s.setNuIndex(nuIndex);
+				s.setName(name);
+				s.setSurname(surname);
+				s.setAddress(address);
+				s.setCurrentYear(currentYear);
+				s.setDateofbirth(dateofbirth);
+				s.setStatus(status);
+				s.setEmail(email);
+				s.setPhone(phone);
+				s.setYear(yearOfEnrollment);
 				
-			}
-		}
+		
 	}
 	}
 	

@@ -27,6 +27,20 @@ public class StudentsController {
 			
 			TabbedPane.getInstance().getStudentsTable().patchView();
 		}
+		
+
+		//int row = TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow();
+		public void editStudent(int rowSelectedIndex,String nuIndex, int yearOfEnrollment, int currentYear,int status,  String name, String surname, LocalDate dateofbirth, String phone, String email,
+				Address address) {
+			 if (rowSelectedIndex < 0) {
+				 return;
+			 }
+			Student student = StudentDatabase.getInstance().getRow(rowSelectedIndex);
+			StudentDatabase.getInstance().editStudent(rowSelectedIndex, nuIndex,  yearOfEnrollment, currentYear, status, name, surname, dateofbirth, phone, email, address);
+			TabbedPane.getInstance().getStudentsTable().patchView();
+			
+		}	
+		
 		public void deleteStudent(int rowSelectedIndex) {
 			if(rowSelectedIndex < 0) {
 				
@@ -35,21 +49,9 @@ public class StudentsController {
 			StudentDatabase.getInstance().deleteStudent(rowSelectedIndex);
 			TabbedPane.getInstance().getStudentsTable().patchView();
 		}
-		
-		
-
-		int row = TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow();
-		public void editStudent(int rowSelectedIndex,String nuIndex,int currentYear,int status, String name, String surname,LocalDate date,Address address,String email,int yearOfEnrollment,String phone) {
-			 if (rowSelectedIndex < 0) {
-				 return;
-			 }
+		public Student getStudent(int rowSelectedIndex) {
 			Student student = StudentDatabase.getInstance().getRow(rowSelectedIndex);
-			//StudentDatabase.getInstance().editStudent(student.getNuIndex(), yearOfEnrollment, currentYear, status, name, surname, dateofbirth, phone, email, address);
-			TabbedPane.getInstance().getStudentsTable().patchView();
-			
-		}	
-		
-		
-		
+			return student;
+		}
 		
 }

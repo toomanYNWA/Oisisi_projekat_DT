@@ -21,8 +21,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.FocusListenerStudent;
+import controller.ProfessorsController;
 import controller.StudentsController;
 import model.Address;
+import model.Professor.Title;
 import model.Student.Status;
 
 public class StudentDialogue extends JDialog{
@@ -101,7 +103,7 @@ public class StudentDialogue extends JDialog{
 		addressTF.setPreferredSize(new Dimension(200,25));
 		//addressTF.setName("txtRequired");
 		//addressTF.addFocusListener(focus);
-		addressTF.setToolTipText("npr. Ljutice Bogdana 23");
+		addressTF.setToolTipText("npr. Pere Antica , 33, Beograd , Srbija ");
 		
 		address.add(addressL);
 		address.add(addressTF);
@@ -186,9 +188,10 @@ public class StudentDialogue extends JDialog{
 		
 		conf.add(dont);
 		conf.add(doo);
-		
 	
+
 		doo.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(nameTF.getText().trim().isEmpty() ||surnameTF.getText().trim().isEmpty() ||dateOfBirthTF.getText().trim().isEmpty()
 						||addressTF.getText().trim().isEmpty()||phoneTF.getText().trim().isEmpty()||emailTF.getText().trim().isEmpty()||indexNTF.getText().trim().isEmpty()
@@ -196,11 +199,13 @@ public class StudentDialogue extends JDialog{
 				
 				System.out.println("Nisu sva polja popunjena");
 			}else {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-				LocalDate date1;
-				date1 = LocalDate.parse(dateOfBirthTF.getText(), formatter);
+				String [] date = dateOfBirthTF.getText().split("\\.");
+				LocalDate dateOB = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
 				
-				StudentsController.getInstance().addStudent(indexNTF.getText(),cyCB.getSelectedIndex(),statusCB.getSelectedIndex(),nameTF.getText(),surnameTF.getText(),date1,new Address(addressTF.getText(),"","",""),emailTF.getText(),Integer.parseInt(yearOfEnrollmentTF.getText()),phoneTF.getText());
+				String [] address = addressTF.getText().split("\\,");
+				Address adr = new Address(address[0], address[1], address[2], address[3]);
+				
+				StudentsController.getInstance().addStudent(indexNTF.getText(),cyCB.getSelectedIndex(),statusCB.getSelectedIndex(),nameTF.getText(),surnameTF.getText(), dateOB, adr,emailTF.getText(),Integer.parseInt(yearOfEnrollmentTF.getText()),phoneTF.getText());
 				dispose();
 			}
 		

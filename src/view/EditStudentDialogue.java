@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -21,8 +22,11 @@ import javax.swing.JTextField;
 
 import controller.FocusListenerProfessors;
 import controller.FocusListenerStudent;
+import controller.ProfessorsController;
 import controller.StudentsController;
 import model.Address;
+import model.Professor;
+import model.Student;
 import model.Student.Status;
 
 public class EditStudentDialogue extends JDialog{
@@ -194,17 +198,27 @@ doo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				
-				String [] date = dateOfBirthTF.getText().split("\\,");
-				LocalDate ld =LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
-				String [] address= addressTF.getText().split("\\,");
-				Address adr = new Address(address[0],address[1],address[2],address[3]);
+				String [] date = dateOfBirthTF.getText().split("\\.");
+				LocalDate dateOB = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
 				
+				String [] address = addressTF.getText().split("\\,");
+				Address adr = new Address(address[0], address[1], address[2], address[3]);
 				
-				//StudentsController.getInstance().editStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow(),indexNTF.getText(),cyCB.getSelectedIndex(),statusCB.getSelectedIndex(),nameTF.getText(),surnameTF.getText());
+				StudentsController.getInstance().editStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow(),indexNTF.getText(),Integer.parseInt(yearOfEnrollmentTF.getText()),cyCB.getSelectedIndex(),statusCB.getSelectedIndex(),nameTF.getText(),surnameTF.getText(), dateOB, phoneTF.getText(),emailTF.getText(),adr);
 				dispose();
 
 			}
 		});
+
+		Student student = new Student(StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
+		nameTF.setText(student.getName());
+		surnameTF.setText(student.getSurname());
+		dateOfBirthTF.setText(student.getDateofbirth().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+		addressTF.setText(student.getAddress().toString());
+		indexNTF.setText(student.getNuIndex());
+		phoneTF.setText(student.getPhone());
+		emailTF.setText(student.getEmail());
+		yearOfEnrollmentTF.setText(String.valueOf(student.getYear()));
 		
 		
 		conf.add(doo);

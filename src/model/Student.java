@@ -129,8 +129,9 @@ public class Student extends User{
 		return status;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setStatus(int status) {
+		if (status==0) this.status = Status.B;
+		else this.status = Status.S;
 	}
 
 	@Override
