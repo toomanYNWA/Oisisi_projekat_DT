@@ -480,12 +480,7 @@ public class StudentDialogue extends JDialog{
 			String dateReg = "[0-9]{2}[.][0-9]{2}[.][0-9]{4}[.]";
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(nameTF.getText().trim().isEmpty() ||surnameTF.getText().trim().isEmpty() ||dateOfBirthTF.getText().trim().isEmpty()
-						||streetTF.getText().trim().isEmpty()||cityTF.getText().trim().isEmpty()||countryTF.getText().trim().isEmpty()||numTF.getText().trim().isEmpty()||phoneTF.getText().trim().isEmpty()||emailTF.getText().trim().isEmpty()||indexNTF.getText().trim().isEmpty()
-						||yearOfEnrollmentTF.getText().trim().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Niste popunili sva polja!","",JOptionPane.ERROR_MESSAGE);
-					
-				}else if(!nameTF.getText().trim().matches(nameSurnameReg)){
+				 if(!nameTF.getText().trim().matches(nameSurnameReg)){
 					JOptionPane.showMessageDialog(null, "Ime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!surnameTF.getText().trim().matches(nameSurnameReg)){
 					JOptionPane.showMessageDialog(null, "Prezime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
