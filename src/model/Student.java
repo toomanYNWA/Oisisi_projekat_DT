@@ -24,7 +24,7 @@ public class Student extends User{
 		
 		this.nuIndex = nuIndex;
 		this.yearOfEnrollment = yearOfEnrollment;
-		this.currentYear = ++currentYear;
+		this.currentYear= currentYear ;
 		this.averageGrade = averageGrade;
 		this.passed = passed;
 		this.notPassed = notPassed;
@@ -33,36 +33,13 @@ public class Student extends User{
 		
 		if(status==0) {
 			this.status=Status.B;
-		}else this.status=Status.S;
+		}else {
+			this.status=Status.S;
+		}
+		
 		this.averageGrade = 0f;
 	}
-	public Student(String nuIndex,  int currentYear,int status, String name, String surname) {
-		super(name, surname);
-		
-		this.nuIndex = nuIndex;
-		if(currentYear == 0) {
-			this.currentYear = 1;
-		}else if(currentYear == 1)
-		{
-			this.currentYear = 2;
-		}
-		else if(currentYear == 2)
-		{
-			this.currentYear = 3;
-		}
-		else if(currentYear == 3)
-		{
-			this.currentYear = 4;
-		}else if(currentYear == 4)
-		{
-			this.currentYear = 5;
-		}
-		if(status==0) {
-			this.status=Status.B;
-		}else this.status=Status.S;
-		this.averageGrade = 0f;
-		
-	}
+	
 	
 	public Student(Student s) {
 		super(s);
@@ -125,13 +102,16 @@ public class Student extends User{
 		this.notPassed = notPassed;
 	}
 
-	public Status getStatus() {
-		return status;
+	public int getStatus() {
+		if(this.status== Status.B) {
+			return 0;
+		} else return 1;
 	}
 
 	public void setStatus(int status) {
 		if (status==0) this.status = Status.B;
 		else this.status = Status.S;
+		
 	}
 
 	@Override

@@ -115,12 +115,37 @@ public class MenuBar extends JMenuBar {
 				
 			});
 			
+			edit2.addActionListener(new ActionListener() {
+				@Override
+		        public void actionPerformed(ActionEvent e) 
+		         {
+					if(TabbedPane.position==0) {
+						EditStudentDialogue editS = new EditStudentDialogue();
+						editS.setVisible(true);
+		 				
+					}
+		         
+				}
+				
+			});
+			
+			
 			delete.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(TabbedPane.position==1) {
 						DeleteProfessorDialog deleteP = new DeleteProfessorDialog();
 						deleteP.setVisible(true);
+						
+					}}
+				
+			});
+			delete.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(TabbedPane.position==0) {
+						DeleteStudent deleteS = new DeleteStudent();
+						deleteS.setVisible(true);
 						
 					}}
 				

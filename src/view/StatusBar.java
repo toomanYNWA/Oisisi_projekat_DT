@@ -3,6 +3,8 @@ package view;
 
 import javax.swing.JMenuBar;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,11 +20,12 @@ import javax.swing.JLabel;
 
 public class StatusBar extends JMenuBar {
 	 
-	private SimpleDateFormat simpleDateFormat= new SimpleDateFormat("HH:mm:ss        dd.MM.yyyy.        "); 
+	private SimpleDateFormat simpleDateFormat= new SimpleDateFormat("HH:mm:ss        dd.MM.yyyy.     "); 
+	private JLabel statusLabel; // nn
 	public StatusBar() {
 		JPanel statusBL = new JPanel();
 		statusBL.setLayout(new FlowLayout(FlowLayout.LEFT));
-		JLabel statusLabel = new JLabel("  Studentska služba");
+		statusLabel = new JLabel(" Studentska služba - Student ");
 		statusBL.add(statusLabel);
 		
 		add(statusBL);
@@ -54,6 +57,10 @@ public class StatusBar extends JMenuBar {
 		statusBD.add(statusLabel1);
 		add(statusBD);
 	}
+	public JLabel getStatusLabel() {
+		return statusLabel;
+	}
+	
 }
 
 

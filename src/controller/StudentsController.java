@@ -23,6 +23,7 @@ public class StudentsController {
 		private StudentsController() {}
 		
 		public void addStudent(String nuIndex,int currentYear,int status, String name, String surname,LocalDate date,Address address,String email,int yearOfEnrollment,String phone) {
+			currentYear++;
 			StudentDatabase.getInstance().addStudent(nuIndex, currentYear, status, name, surname,date,address,email,yearOfEnrollment,phone);
 			
 			TabbedPane.getInstance().getStudentsTable().patchView();
@@ -32,10 +33,11 @@ public class StudentsController {
 		//int row = TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow();
 		public void editStudent(int rowSelectedIndex,String nuIndex, int yearOfEnrollment, int currentYear,int status,  String name, String surname, LocalDate dateofbirth, String phone, String email,
 				Address address) {
-			 if (rowSelectedIndex < 0) {
+			 currentYear++;
+			if (rowSelectedIndex < 0) {
 				 return;
 			 }
-			Student student = StudentDatabase.getInstance().getRow(rowSelectedIndex);
+			//Student student = StudentDatabase.getInstance().getRow(rowSelectedIndex);
 			StudentDatabase.getInstance().editStudent(rowSelectedIndex, nuIndex,  yearOfEnrollment, currentYear, status, name, surname, dateofbirth, phone, email, address);
 			TabbedPane.getInstance().getStudentsTable().patchView();
 			

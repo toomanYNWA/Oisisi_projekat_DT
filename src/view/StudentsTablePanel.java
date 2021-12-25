@@ -11,7 +11,7 @@ import controller.AbstractTableModelStudent;
 
 public class StudentsTablePanel extends JPanel{
 	
-		//labela za studenta i tabela za studenta
+		
 		private JLabel lab;
 		private JTable table;
 		

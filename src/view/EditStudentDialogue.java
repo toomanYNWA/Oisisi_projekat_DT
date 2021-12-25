@@ -7,8 +7,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -16,16 +19,16 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
-import controller.FocusListenerProfessors;
 import controller.FocusListenerStudent;
-import controller.ProfessorsController;
 import controller.StudentsController;
 import model.Address;
-import model.Professor;
 import model.Student;
 import model.Student.Status;
 
@@ -34,7 +37,10 @@ public class EditStudentDialogue extends JDialog{
 	public static JTextField nameTF;
 	public static JTextField surnameTF;
 	public static JTextField dateOfBirthTF;
-	public static JTextField addressTF;
+	public static JTextField streetTF;
+	public static JTextField numTF;
+	public static JTextField cityTF;
+	public static JTextField countryTF;
 	public static JTextField phoneTF;
 	public static JTextField emailTF;
 	public static JTextField indexNTF;
@@ -42,7 +48,7 @@ public class EditStudentDialogue extends JDialog{
 	public static JTextField currentYearTF;
 	public static JTextField statusTF;
 
-	
+	public JButton doo;
 	public EditStudentDialogue() {
 		setModal(true);
 		setSize(450,500);
@@ -68,6 +74,29 @@ public class EditStudentDialogue extends JDialog{
 		//nameTF.setText();
 		name.add(nameL);
 		name.add(nameTF);
+		nameTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
 		
 		JPanel surname = new JPanel(new FlowLayout(FlowLayout.LEFT, 30 ,0));
 		JLabel surnameL=new JLabel("Prezime: *");
@@ -81,6 +110,30 @@ public class EditStudentDialogue extends JDialog{
 		surname.add(surnameL);
 		surname.add(surnameTF);
 		
+		surnameTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		
 		JPanel date = new JPanel(new FlowLayout(FlowLayout.LEFT, 30,0));
 		JLabel dateL=new JLabel("Datum rodjenja: *");
 		dateL.setPreferredSize(dim);
@@ -88,11 +141,35 @@ public class EditStudentDialogue extends JDialog{
 		dateOfBirthTF.setPreferredSize(new Dimension(200,25));
 		//dateOfBirthTF.setName("txtRequired");
 		//dateOfBirthTF.addFocusListener(focus);
-		dateOfBirthTF.setToolTipText("Uneti u formatu dd.MM.yyyy (npr. 17.08.2000)");
+		dateOfBirthTF.setToolTipText("Uneti u formatu dd.MM.yyyy. (npr. 17.08.2000.)");
 		
 		
 		date.add(dateL);
 		date.add(dateOfBirthTF);
+		
+		dateOfBirthTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
 		
 		JPanel phone = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
 		JLabel phoneL=new JLabel("Broj telefona: *");
@@ -106,17 +183,154 @@ public class EditStudentDialogue extends JDialog{
 		phone.add(phoneL);
 		phone.add(phoneTF);
 		
+		phoneTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		
 		JPanel address = new JPanel(new FlowLayout(FlowLayout.LEFT, 30 ,0));
 		JLabel addressL= new JLabel("Adresa stanovanja:* ");
 		addressL.setPreferredSize(dim);
-		addressTF = new JTextField();
-		addressTF.setPreferredSize(new Dimension(200,25));
-		//addressTF.setName("txtRequired");
-		//addressTF.addFocusListener(focus);
-		addressTF.setToolTipText("npr. Danila Kisa , Novi Sad");
-
+		streetTF=new JTextField();
+		streetTF.setPreferredSize(new Dimension(40,25));
+		//streetTF.setName("txtRequired");
+		//streetTF.addFocusListener(focus);
+		streetTF.setToolTipText("Ulica npr. Ljermontova ");
+		numTF = new JTextField();
+		numTF.setPreferredSize(new Dimension(25,25));
+		//numTF.setName("txtRequired");
+		//numTF.addFocusListener(focus);
+		numTF.setToolTipText("Broj");
+		cityTF = new JTextField();
+		cityTF.setPreferredSize(new Dimension(45,25));
+		//cityTF.setName("txtRequired");
+		//cityTF.addFocusListener(focus);
+		cityTF.setToolTipText("Grad");
+		countryTF = new JTextField();
+		countryTF.setPreferredSize(new Dimension(45,25));
+		//countryTF.setName("txtRequired");
+		//countryTF.addFocusListener(focus);
+		countryTF.setToolTipText("Drzava");
+		
+		
 		address.add(addressL);
-		address.add(addressTF);
+		address.add(streetTF);
+		address.add(numTF);
+		address.add(cityTF);
+		address.add(countryTF);
+		streetTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		
+		countryTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		
+		numTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		cityTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
 		
 		JPanel email = new JPanel(new FlowLayout(FlowLayout.LEFT, 30 ,0));
 		JLabel emailL=new JLabel("E-mail adresa je:*");
@@ -129,6 +343,30 @@ public class EditStudentDialogue extends JDialog{
 		
 		email.add(emailL);
 		email.add(emailTF);
+		
+		emailTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
 		
 		JPanel index = new JPanel(new FlowLayout(FlowLayout.LEFT,30,0));
 		JLabel indexL=new JLabel("Broj indeksa je: *");
@@ -143,6 +381,30 @@ public class EditStudentDialogue extends JDialog{
 		index.add(indexL);
 		index.add(indexNTF);
 		
+		indexNTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		
 		JPanel yoe = new JPanel(new FlowLayout(FlowLayout.LEFT,30,0));
 		JLabel yoeL=new JLabel("Godina upisa je: *");
 		yoeL.setPreferredSize(dim);
@@ -154,6 +416,30 @@ public class EditStudentDialogue extends JDialog{
 		
 		yoe.add(yoeL);
 		yoe.add(yearOfEnrollmentTF);
+		
+		yearOfEnrollmentTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
 		
 		JPanel status = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
 		JLabel statusL=new JLabel("Nacin finansiranja:*");
@@ -167,10 +453,12 @@ public class EditStudentDialogue extends JDialog{
 		status.add(statusCB);
 		
 		
+		
+		
 		JPanel cy = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
 		JLabel cyL=new JLabel("Trenutna godina:*");
 		cyL.setPreferredSize(dim);
-		String[] cyS= {"I", "II","III","IV","Master"};
+		String[] cyS= {"I", "II","III","IV","V"};
 		JComboBox<Object> cyCB=new JComboBox<Object>(cyS);
 		cyCB.setPreferredSize(new Dimension(200,25));
 		cyCB.setMaximumSize(statusCB.getPreferredSize());
@@ -180,7 +468,7 @@ public class EditStudentDialogue extends JDialog{
 		
 		JPanel conf = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JButton dont = new JButton("Odustani");
-		JButton doo = new JButton("Potvrdi");
+		doo = new JButton("Potvrdi");
 		
 		dont.addActionListener(new ActionListener() {
 			
@@ -192,33 +480,75 @@ public class EditStudentDialogue extends JDialog{
 			}
 		});
 		
-doo.addActionListener(new ActionListener() {
+		doo.addActionListener(new ActionListener() {
+			String nameSurnameReg="[A-Ž][a-ž]+";
+			String addressNumReg = "[0-9a-z]+";
+			String addressReg="[a-žA-Ž ]+"; 
+			String emailReg="[a-zA-Z0-9._]+@[a-zA-Z]+[.][a-zA-Z]+[.]?[a-zA-Z]*";
+			String numbersReg="[0-9]+";
+			String indReg = "[a-žA-Ž]+[0-9]+[/][0-9]+";
+			String dateReg = "[0-9]{2}[.][0-9]{2}[.][0-9]{4}[.]";
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
+				if(nameTF.getText().trim().isEmpty() ||surnameTF.getText().trim().isEmpty() ||dateOfBirthTF.getText().trim().isEmpty()
+						||streetTF.getText().trim().isEmpty()||cityTF.getText().trim().isEmpty()||countryTF.getText().trim().isEmpty()||numTF.getText().trim().isEmpty()||phoneTF.getText().trim().isEmpty()||emailTF.getText().trim().isEmpty()||indexNTF.getText().trim().isEmpty()
+						||yearOfEnrollmentTF.getText().trim().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Niste popunili sva polja!","",JOptionPane.ERROR_MESSAGE);
+					
+				}else if(!nameTF.getText().trim().matches(nameSurnameReg)){
+					JOptionPane.showMessageDialog(null, "Ime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
+				}else if(!surnameTF.getText().trim().matches(nameSurnameReg)){
+					JOptionPane.showMessageDialog(null, "Prezime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
+				}else if(!yearOfEnrollmentTF.getText().trim().matches(numbersReg)){
+					JOptionPane.showMessageDialog(null, "Godine radnog staza nisu pravilno unete!","",JOptionPane.ERROR_MESSAGE);
+				}else if(!streetTF.getText().trim().matches(addressReg)) {
+					JOptionPane.showMessageDialog(null, "Ulica nije pravilno uneta! ","",JOptionPane.ERROR_MESSAGE);
+				}else if(!numTF.getText().trim().matches(addressNumReg)) {
+					JOptionPane.showMessageDialog(null, "Broj nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
+				}else if(!cityTF.getText().trim().matches(addressReg)) {
+					JOptionPane.showMessageDialog(null, "Grad nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
+				}else if(!countryTF.getText().trim().matches(addressReg)) {
+					JOptionPane.showMessageDialog(null, "Drzava nije pravilno uneta!","",JOptionPane.ERROR_MESSAGE);
+				}else if(!phoneTF.getText().matches(numbersReg)) {
+					JOptionPane.showMessageDialog(null, "Telefon nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
+				}else if(!emailTF.getText().matches(emailReg)) {
+					JOptionPane.showMessageDialog(null, "Email nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
+				}else if(!indexNTF.getText().matches(indReg)){
+					JOptionPane.showMessageDialog(null, "Broj indeksa nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
+				}else if(!dateOfBirthTF.getText().matches(dateReg)) {
+					JOptionPane.showMessageDialog(null, "Datum nije pravilno unet (dd.MM.yy.)","",JOptionPane.ERROR_MESSAGE);
+				}else {	
 				
 				String [] date = dateOfBirthTF.getText().split("\\.");
 				LocalDate dateOB = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
 				
-				String [] address = addressTF.getText().split("\\,");
-				Address adr = new Address(address[0], address[1], address[2], address[3]);
+				
+				Address adr = new Address(streetTF.getText(), numTF.getText(), cityTF.getText(), countryTF.getText());
 				
 				StudentsController.getInstance().editStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow(),indexNTF.getText(),Integer.parseInt(yearOfEnrollmentTF.getText()),cyCB.getSelectedIndex(),statusCB.getSelectedIndex(),nameTF.getText(),surnameTF.getText(), dateOB, phoneTF.getText(),emailTF.getText(),adr);
 				dispose();
-
+				}
 			}
+
 		});
 
 		Student student = new Student(StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
 		nameTF.setText(student.getName());
 		surnameTF.setText(student.getSurname());
-		dateOfBirthTF.setText(student.getDateofbirth().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-		addressTF.setText(student.getAddress().toString());
+		dateOfBirthTF.setText(student.getDateofbirth().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
+		Address adr = student.getAddress();
+		streetTF.setText(adr.getStreet());
+		numTF.setText(adr.getNumber());
+		cityTF.setText(adr.getCity());
+		countryTF.setText(adr.getState());
 		indexNTF.setText(student.getNuIndex());
 		phoneTF.setText(student.getPhone());
 		emailTF.setText(student.getEmail());
 		yearOfEnrollmentTF.setText(String.valueOf(student.getYear()));
+		int i = student.getCurrentYear();
+		cyCB.setSelectedIndex(i-1);
+		statusCB.setSelectedIndex(student.getStatus());
 		
 		
 		conf.add(doo);
@@ -247,6 +577,13 @@ doo.addActionListener(new ActionListener() {
 		tabs.add("Nepolozeni",subjs2);
 		this.add(tabs);
 		//this.add(pattern,BorderLayout.CENTER);
+	}
+	public void check() {
+		if(!nameTF.getText().trim().isEmpty() && !surnameTF.getText().trim().isEmpty() && !dateOfBirthTF.getText().trim().isEmpty()
+				&& !streetTF.getText().trim().isEmpty()&& !cityTF.getText().trim().isEmpty() && !countryTF.getText().trim().isEmpty() && !numTF.getText().trim().isEmpty() && !phoneTF.getText().trim().isEmpty() && !emailTF.getText().trim().isEmpty() && !indexNTF.getText().trim().isEmpty()
+				&& !yearOfEnrollmentTF.getText().trim().isEmpty()) {
+			doo.setEnabled(true);
+		} else doo.setEnabled(false);
 	}
 	
 }
