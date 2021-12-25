@@ -65,7 +65,9 @@ public class StudentDatabase {
 		case 3:
 			return student.getCurrentYear();
 		case 4:
-			return student.getStatus();
+			 if(student.getStatus()==0) {
+				 return "B";
+			 } else return "S";
 		case 5:
 			return student.getAverageGrade();
 		default:
