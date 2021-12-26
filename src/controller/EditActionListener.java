@@ -12,8 +12,10 @@ public class EditActionListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(TabbedPane.position==0) {
+			if(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()>=0) {
 			EditStudentDialogue editS = new EditStudentDialogue();
 			editS.setVisible(true);	
+		}
 		}
 		else if(TabbedPane.position==1) {
 			if(TabbedPane.getInstance().getTableProfessors().getSelectedRow()>=0) {

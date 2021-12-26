@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import controller.AbstractTableModelStudent;
 
 public class StudentsTablePanel extends JPanel{
 	
