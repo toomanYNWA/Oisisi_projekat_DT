@@ -11,6 +11,10 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
+import controller.AddActionListener;
+import controller.DeleteActionListener;
+import controller.EditActionListener;
+
 public class ToolBar extends JToolBar{
 	
 	/**
@@ -26,40 +30,16 @@ public class ToolBar extends JToolBar{
 		btnCreate.setToolTipText("Add new");
 		btnCreate.setIcon(new ImageIcon("icons/pluss.png"));
 		add(btnCreate);
-		//btnCreate.addMouseListener(new AddProfessorListener());
-		btnCreate.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(TabbedPane.position==0) {
-					StudentDialogue addS = new StudentDialogue();
-					addS.setVisible(true);
-					}
-				else if(TabbedPane.position==1) {
-				AddProfessorDialog addP = new AddProfessorDialog();
-				addP.setVisible(true);
-				}}
-			
-		});
+		AddActionListener addA = new AddActionListener();
+		btnCreate.addActionListener(addA);
 		addSeparator();
 		
 		JButton btnOpen = new JButton();
-		btnOpen.setToolTipText("Open");
+		btnOpen.setToolTipText("Edit");
 		btnOpen.setIcon(new ImageIcon("icons/edit.png"));
 		add(btnOpen);
-		btnOpen.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(TabbedPane.position==1) {
-				EditProfessorDialog editP = new EditProfessorDialog();
-				editP.setVisible(true);
-				}
-				else if(TabbedPane.position==0) {
-					EditStudentDialogue editS = new EditStudentDialogue();
-					editS.setVisible(true);
-				}
-				}
-			
-		});
+		EditActionListener editA = new EditActionListener();
+		btnOpen.addActionListener(editA);
 		
 		addSeparator();
 		
@@ -67,20 +47,8 @@ public class ToolBar extends JToolBar{
 		btnDelete.setToolTipText("Delete");
 		btnDelete.setIcon(new ImageIcon("icons/trash.png"));
 		add(btnDelete);
-		btnDelete.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(TabbedPane.position==1) {
-				DeleteProfessorDialog deleteP = new DeleteProfessorDialog();
-				deleteP.setVisible(true);
-				}
-				else if(TabbedPane.position==0) {
-					DeleteStudent deleteS = new DeleteStudent();
-					deleteS.setVisible(true);
-				}
-					}
-			
-		});
+		DeleteActionListener deleteA = new DeleteActionListener();
+		btnDelete.addActionListener(deleteA);
 		
 		addSeparator();
 		

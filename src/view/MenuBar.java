@@ -10,6 +10,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import controller.AddActionListener;
+import controller.DeleteActionListener;
+import controller.EditActionListener;
+
+
 
 public class MenuBar extends JMenuBar {
 	
@@ -81,93 +86,12 @@ public class MenuBar extends JMenuBar {
 			add(edit);
 			add(help);
 			
+			AddActionListener addA = new AddActionListener();
+			new1.addActionListener(addA);
+			EditActionListener editA = new EditActionListener();
+			edit2.addActionListener(editA);
+			DeleteActionListener deleteA = new DeleteActionListener();
+			delete.addActionListener(deleteA);
 			
-			
-			new1.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if(TabbedPane.position==1) {
-						AddProfessorDialog addP=new AddProfessorDialog();
-						addP.setVisible(true);
-						}
-					}
-				
-			});
-			new1.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if(TabbedPane.position==0) {
-					StudentDialogue addS = new StudentDialogue();
-					addS.setVisible(true);
-					}}
-				
-			});
-			
-			edit2.addActionListener(new ActionListener() {
-				@Override
-		        public void actionPerformed(ActionEvent ae) 
-		         {
-					if(TabbedPane.position==1) {
-						EditProfessorDialog editP = new EditProfessorDialog();
-						editP.setVisible(true);
-					}
-		         
-				}
-				
-			});
-			
-			edit2.addActionListener(new ActionListener() {
-				@Override
-		        public void actionPerformed(ActionEvent e) 
-		         {
-					if(TabbedPane.position==0) {
-						EditStudentDialogue editS = new EditStudentDialogue();
-						editS.setVisible(true);
-		 				
-					}
-		         
-				}
-				
-			});
-			
-			
-			delete.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if(TabbedPane.position==1) {
-						DeleteProfessorDialog deleteP = new DeleteProfessorDialog();
-						deleteP.setVisible(true);
-						
-					}}
-				
-			});
-			delete.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if(TabbedPane.position==0) {
-						DeleteStudent deleteS = new DeleteStudent();
-						deleteS.setVisible(true);
-						
-					}}
-				
-			});
-			/*new1.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					if(TabbedPane.getInstance().getSelectedIndex() == 0) {
-						//AddStudentDialog addS = new AddStudentDialog();
-						//addP.setVisible(true);
-					}else if(TabbedPane.getInstance().getSelectedIndex() == 1) {
-						AddProfessorDialog addP = new AddProfessorDialog();
-						addP.setVisible(true);
-					}else if(TabbedPane.getInstance().getSelectedIndex() == 2) {
-						//AddSubjectDialog addSub = new AddSubjectDialog();
-						//addP.setVisible(true);
-					} 
-					
-				}
-			}); 
-			*/
 		}
 }

@@ -22,8 +22,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
-import controller.FocusListenerProfessors;
 import controller.ProfessorsController;
 import model.Address;
 import model.Professor;
@@ -46,6 +47,7 @@ public class EditProfessorDialog extends JDialog{
 	public static JTextField emailTF;
 	public static JTextField yearsOfTrailTF;
 	public static String titleP;
+	public JButton potvrdi;
 	
 	public EditProfessorDialog() {
 		
@@ -59,7 +61,6 @@ public class EditProfessorDialog extends JDialog{
 		Image img = kit.getImage("icons/edit.png");
 		setIconImage(img);
 		
-		FocusListenerProfessors focus=new FocusListenerProfessors();
 		Dimension dim = new Dimension(120, 20);
 		
 		JPanel name = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 0));
@@ -67,8 +68,6 @@ public class EditProfessorDialog extends JDialog{
 		nameL.setPreferredSize(dim);
 		nameTF=new JTextField();
 		nameTF.setPreferredSize(new Dimension(200,25));
-		nameTF.setName("txtRequired");
-		nameTF.addFocusListener(focus);
 		nameTF.setToolTipText("unesite ime");
 		
 		name.add(nameL);
@@ -80,8 +79,6 @@ public class EditProfessorDialog extends JDialog{
 		surnameL.setPreferredSize(dim);
 		surnameTF=new JTextField();
 		surnameTF.setPreferredSize(new Dimension(200,25));
-		surnameTF.setName("txtRequired");
-		surnameTF.addFocusListener(focus);
 		surnameTF.setToolTipText("unesite prezime");
 		
 		surname.add(surnameL);
@@ -92,8 +89,6 @@ public class EditProfessorDialog extends JDialog{
 		dateL.setPreferredSize(dim);
 		dateOfBirthTF=new JTextField();
 		dateOfBirthTF.setPreferredSize(new Dimension(200,25));
-		dateOfBirthTF.setName("txtRequired");
-		dateOfBirthTF.addFocusListener(focus);
 		dateOfBirthTF.setToolTipText("uneti u formatu dd.MM.yyyy (npr. 17.08.2000)");
 		
 		
@@ -106,8 +101,6 @@ public class EditProfessorDialog extends JDialog{
 		phoneL.setPreferredSize(dim);
 		phoneTF=new JTextField();
 		phoneTF.setPreferredSize(new Dimension(200,25));
-		phoneTF.setName("txtRequired");
-		phoneTF.addFocusListener(focus);
 		phoneTF.setToolTipText("npr. 0651234567");
 		
 		phone.add(phoneL);
@@ -118,8 +111,6 @@ public class EditProfessorDialog extends JDialog{
 		emailL.setPreferredSize(dim);
 		emailTF=new JTextField();
 		emailTF.setPreferredSize(new Dimension(200,25));
-		emailTF.setName("txtRequired");
-		emailTF.addFocusListener(focus);
 		emailTF.setToolTipText("npr. ime.prezime@uns.ac.rs");
 		
 		email.add(emailL);
@@ -131,23 +122,15 @@ public class EditProfessorDialog extends JDialog{
 		addressL.setPreferredSize(dim);
 		streetTF = new JTextField();
 		streetTF.setPreferredSize(new Dimension(70,25));
-		streetTF.setName("txtRequired");
-		streetTF.addFocusListener(focus);
 		streetTF.setToolTipText("Ulica");
 		numberTF = new JTextField();
 		numberTF.setPreferredSize(new Dimension(30,25));
-		numberTF.setName("txtRequired");
-		numberTF.addFocusListener(focus);
 		numberTF.setToolTipText("Broj");
 		cityTF = new JTextField();
 		cityTF.setPreferredSize(new Dimension(50,25));
-		cityTF.setName("txtRequired");
-		cityTF.addFocusListener(focus);
 		cityTF.setToolTipText("Grad");
 		stateTF = new JTextField();
 		stateTF.setPreferredSize(new Dimension(50,25));
-		stateTF.setName("txtRequired");
-		stateTF.addFocusListener(focus);
 		stateTF.setToolTipText("Drzava");
 		
 		address.add(addressL);
@@ -163,23 +146,15 @@ public class EditProfessorDialog extends JDialog{
 		officeL.setPreferredSize(dim);
 		streetOTF = new JTextField();
 		streetOTF.setPreferredSize(new Dimension(70,25));
-		streetOTF.setName("txtRequired");
-		streetOTF.addFocusListener(focus);
 		streetOTF.setToolTipText("Ulica");
 		numberOTF = new JTextField();
 		numberOTF.setPreferredSize(new Dimension(30,25));
-		numberOTF.setName("txtRequired");
-		numberOTF.addFocusListener(focus);
 		numberOTF.setToolTipText("Broj");
 		cityOTF = new JTextField();
 		cityOTF.setPreferredSize(new Dimension(50,25));
-		cityOTF.setName("txtRequired");
-		cityOTF.addFocusListener(focus);
 		cityOTF.setToolTipText("Grad");
 		stateOTF = new JTextField();
 		stateOTF.setPreferredSize(new Dimension(50,25));
-		stateOTF.setName("txtRequired");
-		stateOTF.addFocusListener(focus);
 		stateOTF.setToolTipText("Drzava");
 
 		
@@ -194,8 +169,6 @@ public class EditProfessorDialog extends JDialog{
 		idL.setPreferredSize(dim);
 		idTF=new JTextField();
 		idTF.setPreferredSize(new Dimension(200,25));
-		idTF.setName("txtRequired");
-		idTF.addFocusListener(focus);
 		idTF.setToolTipText("npr. 123456789");
 		
 		id.add(idL);
@@ -206,8 +179,6 @@ public class EditProfessorDialog extends JDialog{
 		yOTL.setPreferredSize(dim);
 		yearsOfTrailTF=new JTextField();
 		yearsOfTrailTF.setPreferredSize(new Dimension(200,25));
-		yearsOfTrailTF.setName("txtRequired");
-		yearsOfTrailTF.addFocusListener(focus);
 		yearsOfTrailTF.setToolTipText("npr. 15");
 		
 		yearsOT.add(yOTL);
@@ -222,10 +193,355 @@ public class EditProfessorDialog extends JDialog{
 		titleCB.setMaximumSize(titleCB.getPreferredSize());
 		title.add(titleL);
 		title.add(titleCB);
+		nameTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		surnameTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		dateOfBirthTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		phoneTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		streetTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		numberTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		cityTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		stateTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		streetOTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		numberOTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		cityOTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		stateOTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		idTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		emailTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		yearsOfTrailTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
 		
 		JPanel odustanakPotvrda = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JButton odustani = new JButton("Odustani");
-		JButton potvrdi = new JButton("Potvrdi");
+		potvrdi = new JButton("Potvrdi");
 		odustani.addActionListener(new ActionListener() {
 			
 			@Override
@@ -238,15 +554,12 @@ public class EditProfessorDialog extends JDialog{
 		potvrdi.addActionListener(new ActionListener() {
 			String nameSurnameReg="[A-Ž][a-ž]+";
 			String addressNumReg = "[0-9a-z]+";
-			String addressReg="[a-žA-Ž ]+"; //ne radi popraviti
+			String addressReg="[a-žA-Ž ]+"; 
 			String emailReg="[a-zA-Z0-9._]+@[a-zA-Z]+[.][a-zA-Z]+[.]?[a-zA-Z]*";
 			String numbersReg="[0-9]+";
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(nameTF.getText().equals("") || surnameTF.getText().equals("") || dateOfBirthTF.getText().equals("") || streetTF.getText().equals("")|| numberTF.getText().equals("") || cityTF.getText().equals("")|| stateTF.getText().equals("")|| 
-						phoneTF.getText().equals("") || emailTF.getText().equals("") || streetOTF.getText().equals("")|| numberOTF.getText().equals("") || cityOTF.getText().equals("")|| stateOTF.getText().equals("")  || idTF.getText().equals("")|| yearsOfTrailTF.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "Niste popunili sva obavezna polja!","",JOptionPane.ERROR_MESSAGE);
-				}else if(!nameTF.getText().trim().matches(nameSurnameReg)){
+				if(!nameTF.getText().trim().matches(nameSurnameReg)){
 					JOptionPane.showMessageDialog(null, "Ime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!surnameTF.getText().trim().matches(nameSurnameReg)){
 					JOptionPane.showMessageDialog(null, "Prezime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
@@ -364,9 +677,14 @@ public class EditProfessorDialog extends JDialog{
 		tabs.add("Info", pattern);
 		tabs.add("Predmeti", subjs);
 		this.add(tabs);
-		//this.add(pattern,BorderLayout.CENTER);
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Nije selektovan profesor!","",JOptionPane.ERROR_MESSAGE);
 		} 
+	}
+	public void check() {
+		if(!(nameTF.getText().equals("") || surnameTF.getText().equals("") || dateOfBirthTF.getText().equals("") || streetTF.getText().equals("")|| numberTF.getText().equals("") || cityTF.getText().equals("")|| stateTF.getText().equals("")|| 
+				phoneTF.getText().equals("") || emailTF.getText().equals("") || streetOTF.getText().equals("")|| numberOTF.getText().equals("") || cityOTF.getText().equals("")|| stateOTF.getText().equals("")  || idTF.getText().equals("")|| yearsOfTrailTF.getText().equals(""))) {
+			potvrdi.setEnabled(true);
+		} else potvrdi.setEnabled(false);
 	}
 }
