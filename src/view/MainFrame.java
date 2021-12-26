@@ -15,7 +15,16 @@ public class MainFrame extends JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
+	
+	private static MainFrame instance = null;
+
+	public static MainFrame getInstance() {
+	if (instance == null) {
+	instance = new MainFrame();
+	}
+	return instance;
+	}
 	
 	
 	public MainFrame() {
@@ -43,10 +52,12 @@ public class MainFrame extends JFrame {
 		ToolBar toolBar = new ToolBar();
 		add(toolBar, BorderLayout.NORTH);
 		
-		//StatusBar statusBar = new StatusBar();
-		//add(statusBar, BorderLayout.SOUTH);
+		StatusBar statusBar = new StatusBar();
+		add(statusBar, BorderLayout.SOUTH);
 		
+
 		
+		add(TabbedPane.getInstance(statusBar), BorderLayout.CENTER);
 		
 	}
 	

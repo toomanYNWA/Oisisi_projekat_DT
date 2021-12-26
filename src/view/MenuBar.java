@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
@@ -9,9 +10,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import controller.AddActionListener;
+import controller.DeleteActionListener;
+import controller.EditActionListener;
+
+
 
 public class MenuBar extends JMenuBar {
-
+	
 		public MenuBar() {
 				
 			JMenu file = new JMenu("File");
@@ -80,7 +86,12 @@ public class MenuBar extends JMenuBar {
 			add(edit);
 			add(help);
 			
-			
+			AddActionListener addA = new AddActionListener();
+			new1.addActionListener(addA);
+			EditActionListener editA = new EditActionListener();
+			edit2.addActionListener(editA);
+			DeleteActionListener deleteA = new DeleteActionListener();
+			delete.addActionListener(deleteA);
 			
 		}
 }

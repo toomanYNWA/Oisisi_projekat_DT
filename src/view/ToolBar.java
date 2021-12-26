@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -8,6 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+
+import controller.AddActionListener;
+import controller.DeleteActionListener;
+import controller.EditActionListener;
 
 public class ToolBar extends JToolBar{
 	
@@ -21,16 +27,19 @@ public class ToolBar extends JToolBar{
 		super(SwingConstants.HORIZONTAL);
 		
 		JButton btnCreate = new JButton();
-		btnCreate.setToolTipText("Create");
+		btnCreate.setToolTipText("Add new");
 		btnCreate.setIcon(new ImageIcon("icons/pluss.png"));
 		add(btnCreate);
-		
+		AddActionListener addA = new AddActionListener();
+		btnCreate.addActionListener(addA);
 		addSeparator();
 		
 		JButton btnOpen = new JButton();
-		btnOpen.setToolTipText("Open");
+		btnOpen.setToolTipText("Edit");
 		btnOpen.setIcon(new ImageIcon("icons/edit.png"));
 		add(btnOpen);
+		EditActionListener editA = new EditActionListener();
+		btnOpen.addActionListener(editA);
 		
 		addSeparator();
 		
@@ -38,6 +47,8 @@ public class ToolBar extends JToolBar{
 		btnDelete.setToolTipText("Delete");
 		btnDelete.setIcon(new ImageIcon("icons/trash.png"));
 		add(btnDelete);
+		DeleteActionListener deleteA = new DeleteActionListener();
+		btnDelete.addActionListener(deleteA);
 		
 		addSeparator();
 		
