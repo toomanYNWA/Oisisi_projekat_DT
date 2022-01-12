@@ -1,17 +1,13 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -30,7 +26,6 @@ import javax.swing.event.DocumentListener;
 import controller.StudentsController;
 import model.Address;
 import model.Student;
-import model.Student.Status;
 
 public class EditStudentDialogue extends JDialog{
 
@@ -47,6 +42,7 @@ public class EditStudentDialogue extends JDialog{
 	public static JTextField yearOfEnrollmentTF;
 	public static JTextField currentYearTF;
 	public static JTextField statusTF;
+	private NotPassedSubjectsPanel subjs2;
 
 	public JButton doo;
 	public EditStudentDialogue() {
@@ -566,7 +562,8 @@ public class EditStudentDialogue extends JDialog{
 		
 		JTabbedPane tabs= new JTabbedPane();
 		JPanel subjs= new JPanel();
-		JPanel subjs2= new JPanel();
+		
+		subjs2= new NotPassedSubjectsPanel();
 		tabs.add("Informacije", pattern);
 		tabs.add("Polozeni", subjs);
 		tabs.add("Nepolozeni",subjs2);

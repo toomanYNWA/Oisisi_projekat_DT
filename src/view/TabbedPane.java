@@ -18,6 +18,7 @@ public class TabbedPane extends JTabbedPane {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTable tableProfessors;
+	private JTable tableSubjects;
 	private static TabbedPane instance = null;
 	private static StatusBar st;
 	public static TabbedPane getInstance() {
@@ -70,7 +71,7 @@ public class TabbedPane extends JTabbedPane {
 		
 		
 		
-		SubjectsJTable tableSubjects=new SubjectsJTable();
+		tableSubjects=new SubjectsJTable();
 		JScrollPane subjectsPane=new JScrollPane(tableSubjects);
 		subjectPanel.add(subjectsPane);
 		
@@ -102,6 +103,18 @@ public class TabbedPane extends JTabbedPane {
 		validate();
 		
 	}
+	
+	public void updateSubjects() {
+		AbstractTableModelSubjects model=(AbstractTableModelSubjects)tableSubjects.getModel();
+		model.fireTableDataChanged();
+		validate();
+		
+	}
+	
+	public JTable getTableSubjects() {
+		return tableSubjects;
+	} 
+	
 	public StudentsTablePanel getStudentsTable() {
 		return studentPanel;
 	}

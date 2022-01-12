@@ -14,22 +14,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controller.ProfessorsController;
+import controller.SubjectsController;
 
-public class DeleteProfessorDialog extends JDialog{
-	
-	public DeleteProfessorDialog() {
-		
+public class DeleteSubjectDialog extends JDialog {
+	public DeleteSubjectDialog() {
 		setModal(true);
 		setSize(300,150);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setTitle("Brisanje profesora");
+		setTitle("Brisanje predmeta");
 		Image img = kit.getImage("icons/trash.png");
 		setIconImage(img);
 		JPanel message = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JLabel messageL=new JLabel("Da li ste sigurni da zelite da obrisete profesora?");
+		JLabel messageL=new JLabel("Da li ste sigurni da zelite da obrisete predmet?");
 		message.add(messageL);
 		JPanel yesNo = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JButton yes = new JButton("Yes");
@@ -38,7 +36,7 @@ public class DeleteProfessorDialog extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ProfessorsController.getInstance().deleteProfessor(TabbedPane.getInstance().getTableProfessors().getSelectedRow());
+				SubjectsController.getInstance().deleteSubject(TabbedPane.getInstance().getTableSubjects().getSelectedRow());
 				dispose();
 			}
 		}); 

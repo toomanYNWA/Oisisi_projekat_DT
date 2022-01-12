@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import controller.ProfessorsController;
+import controller.StudentsController;
 import model.Subject.Semestar;
+import view.TabbedPane;
 
 public class SubjectsDatabase {
 	private static SubjectsDatabase instance = null;
@@ -22,6 +25,7 @@ public class SubjectsDatabase {
 	}
 
 	private ArrayList<Subject> subjects;
+	private ArrayList<Subject> notPassed;
 	private List<String> columns;
 
 	private SubjectsDatabase() {
@@ -35,6 +39,7 @@ public class SubjectsDatabase {
 	}
 	private void initsubjects() {
 		this.subjects = new ArrayList<Subject>();
+		this.notPassed = new ArrayList<Subject>();
 		
 		String next=null;
 		String[] column=null;
@@ -71,8 +76,17 @@ public class SubjectsDatabase {
 				Professor p = ProfessorsDatabase.getInstance().getProfById(column[4].trim());
 				
 				subjects.add(new Subject(sId ,column[1].trim(),s,sY,p,espb, indexP, indexNP));
+				
+				/*Student stud = StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
+				for(Subject sub:subjects) {
+					ArrayList<String> nP = sub.getStudentsNotPassed();
+					for(String str:nP)
+						if(str==stud.getNuIndex() ) {
+						notPassed.add(sub);
+					}
+				} */
 
-			}
+			} 
 			
 			in.close();
 		}catch(IOException e) {
@@ -82,6 +96,10 @@ public class SubjectsDatabase {
 	
 	public ArrayList<Subject> getSubjects() {
 		return subjects;
+	}
+	
+	public ArrayList<Subject> getSubjectsNotPassed() {
+		return notPassed;
 	}
 	
 	public int getColumnCount() {
@@ -113,6 +131,24 @@ public class SubjectsDatabase {
 		}
 	}
 	
+	public Object getValueAtNotPassed(int row, int col) {
+		Subject s=this.notPassed.get(row);
+		switch(col) {
+		case 0:
+			return s.getSubjectID();
+		case 1:
+			return s.getSubjectName();
+		case 2:
+			return s.getEspb();
+		case 3:
+			return s.getSubjectYear();
+		case 4:
+			return s.getSemestar();
+		default:
+			return null;
+		}
+	}
+	
 	public Subject getSubjById(String id) {
 		for (Subject s: subjects) {
 			if(String.valueOf(s.getSubjectID()).equals(id)) {
@@ -121,4 +157,15 @@ public class SubjectsDatabase {
 		}
 		return null;
 	}
+	
+	public void deleteSubject(int id) {
+		for(Subject s: subjects) {
+			if(s.getSubjectID()==id) {
+				subjects.remove(s);
+				//mora da sadrzi i brisanje prof sa predmeta
+				break;
+			}
+		}
+	}
+	
 }
