@@ -26,7 +26,9 @@ import javax.swing.event.DocumentListener;
 
 import controller.ProfessorsController;
 import model.Address;
+import model.Professor;
 import model.Professor.Title;
+import model.ProfessorsDatabase;
 
 public class AddProfessorDialog extends JDialog{
 	
@@ -551,6 +553,12 @@ public class AddProfessorDialog extends JDialog{
 			String numbersReg="[0-9]+";
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				boolean exists = false;
+				for(Professor p : ProfessorsDatabase.getInstance().getProfessors()) {
+					if(p.getId().equals(idTF.getText().trim())) {
+						exists = true;
+					}
+				}
 				if(!nameTF.getText().trim().matches(nameSurnameReg)){
 					JOptionPane.showMessageDialog(null, "Ime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!surnameTF.getText().trim().matches(nameSurnameReg)){
@@ -581,6 +589,8 @@ public class AddProfessorDialog extends JDialog{
 					JOptionPane.showMessageDialog(null, "Broj licne karte nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!validateJavaDate(dateOfBirthTF.getText())) {
 					JOptionPane.showMessageDialog(null, "Datum nije pravilno unet (dd.MM.yy)","",JOptionPane.ERROR_MESSAGE);
+				}else if (exists){
+					JOptionPane.showMessageDialog(null, "Vec postoji profesor sa unetim brojem licne karte!","",JOptionPane.ERROR_MESSAGE);
 				}else {
 				String [] date = dateOfBirthTF.getText().split("\\.");
 				LocalDate dOB = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));

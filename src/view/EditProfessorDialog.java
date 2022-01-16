@@ -657,6 +657,18 @@ public class EditProfessorDialog extends JDialog{
 		odustanakPotvrda.add(potvrdi);
 		odustanakPotvrda.add(odustani);
 		
+		JPanel pr = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JButton proba1 = new JButton("Proba");
+		pr.add(proba1);
+		proba1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				 AddSubjToProfDialog addS = new  AddSubjToProfDialog();
+				addS.setVisible(true);
+				}
+		});
+		
 		Box pattern = Box.createVerticalBox();
 		pattern.add(Box.createVerticalStrut(10));
 		pattern.add(name);
@@ -670,6 +682,7 @@ public class EditProfessorDialog extends JDialog{
 		pattern.add(yearsOT);
 		pattern.add(title);
 		pattern.add(odustanakPotvrda);
+		pattern.add(pr);
 		pattern.add(Box.createGlue());
 		
 		JTabbedPane tabs= new JTabbedPane();

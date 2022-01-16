@@ -86,7 +86,7 @@ public class Student extends User{
 		this.averageGrade = averageGrade;
 	}
 
-	public List<Subject> getPassed() {
+	public ArrayList<Subject> getPassed() {
 		return passed;
 	}
 
@@ -94,7 +94,7 @@ public class Student extends User{
 		this.passed = passed;
 	}
 
-	public List<Subject> getNotPassed() {
+	public ArrayList<Subject> getNotPassed() {
 		return notPassed;
 	}
 
@@ -112,6 +112,9 @@ public class Student extends User{
 		if (status==0) this.status = Status.B;
 		else this.status = Status.S;
 		
+	}
+	public void addNotPassedSubject(Subject s) {
+		this.notPassed.add(s);
 	}
 
 	@Override

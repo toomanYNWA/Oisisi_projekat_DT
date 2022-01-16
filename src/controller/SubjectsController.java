@@ -23,4 +23,8 @@ private static SubjectsController instance = null;
 		SubjectsDatabase.getInstance().deleteSubject(subj.getSubjectID());
 		TabbedPane.getInstance().updateSubjects();
     }
+	 public Subject getSubject(int rowSelectedIndex) {
+		 Subject subj = SubjectsDatabase.getInstance().getRow(rowSelectedIndex);
+		 return subj;
+	 }
 }

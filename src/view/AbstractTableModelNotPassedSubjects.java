@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.table.AbstractTableModel;
 
+import model.StudentDatabase;
 import model.SubjectsDatabase;
 
 public class AbstractTableModelNotPassedSubjects extends AbstractTableModel {
@@ -10,7 +11,6 @@ public class AbstractTableModelNotPassedSubjects extends AbstractTableModel {
 	public int getRowCount() {
 		return SubjectsDatabase.getInstance().getSubjectsNotPassed().size();
 	}
-
 	@Override
 	public int getColumnCount() {
 		return SubjectsDatabase.getInstance().getColumnCount();

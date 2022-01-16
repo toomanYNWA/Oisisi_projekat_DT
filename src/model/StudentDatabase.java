@@ -3,7 +3,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Student.Status;
+import controller.StudentsController;
+import view.TabbedPane;
+
 
 
 
@@ -21,6 +23,7 @@ public class StudentDatabase {
 	
 	private ArrayList<Student> students;
 	private List<String> columns;
+	private ArrayList<Subject> nPS;
 	
 	private StudentDatabase() {
 		this.students = new ArrayList<Student>();
@@ -101,10 +104,18 @@ public class StudentDatabase {
 				
 		
 	}
+	
+	public void addNotPassedSubjects(Subject sub) {
+		for(Student s:students) {
+			ArrayList<String> nP = sub.getStudentsNotPassed();
+			for(String str:nP) {
+				if(s.getNuIndex().equals(str)) 
+					s.addNotPassedSubject(sub);
+			}
+		}
 	}
-	
-	
-	
+
+}
 	
 	
 	

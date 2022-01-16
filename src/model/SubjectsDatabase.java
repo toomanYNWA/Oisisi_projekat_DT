@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import controller.ProfessorsController;
+
 import controller.StudentsController;
 import model.Subject.Semestar;
 import view.TabbedPane;
@@ -77,14 +77,7 @@ public class SubjectsDatabase {
 				
 				subjects.add(new Subject(sId ,column[1].trim(),s,sY,p,espb, indexP, indexNP));
 				
-				/*Student stud = StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
-				for(Subject sub:subjects) {
-					ArrayList<String> nP = sub.getStudentsNotPassed();
-					for(String str:nP)
-						if(str==stud.getNuIndex() ) {
-						notPassed.add(sub);
-					}
-				} */
+					
 
 			} 
 			
@@ -97,10 +90,11 @@ public class SubjectsDatabase {
 	public ArrayList<Subject> getSubjects() {
 		return subjects;
 	}
+
 	
 	public ArrayList<Subject> getSubjectsNotPassed() {
 		return notPassed;
-	}
+	} 
 	
 	public int getColumnCount() {
 		return 5;
@@ -132,7 +126,9 @@ public class SubjectsDatabase {
 	}
 	
 	public Object getValueAtNotPassed(int row, int col) {
-		Subject s=this.notPassed.get(row);
+		//Student stud = new Student(StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
+		Student stud = new Student(StudentDatabase.getInstance().getRow(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
+		Subject s=stud.getNotPassed().get(row);
 		switch(col) {
 		case 0:
 			return s.getSubjectID();
@@ -147,7 +143,7 @@ public class SubjectsDatabase {
 		default:
 			return null;
 		}
-	}
+	} 
 	
 	public Subject getSubjById(String id) {
 		for (Subject s: subjects) {
@@ -167,5 +163,14 @@ public class SubjectsDatabase {
 			}
 		}
 	}
+	
+	/*public void annulGrade(int id) {
+		for(Subject s: subjects) {
+			if(s.getSubjectID()==id) {
+				
+				break;
+			}
+		}
+	} */
 	
 }

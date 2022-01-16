@@ -27,4 +27,8 @@ public class NotPassedSubjectsPanel extends JPanel{
 		JScrollPane subjectsPane=new JScrollPane(tableSubjects);
 		add(subjectsPane, BorderLayout.CENTER);
 	}
+	
+	public JTable getTable() {
+		return (NotPassedSubjectsTable)tableSubjects;
+	}
 }
