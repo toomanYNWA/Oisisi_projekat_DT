@@ -1,28 +1,30 @@
 package view;
 
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
+import model.ExamsPassedDatabase;
 import model.SubjectsDatabase;
 
-public class AbstractTableModelPassedSubjects implements TableModel {
+public class AbstractTableModelPassedSubjects extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return SubjectsDatabase.getInstance().getPassed().size();
+		return ExamsPassedDatabase.getInstance().getRowCount();
 
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return ExamsPassedDatabase.getInstance().getColumnCount();
 	}
 
 	@Override
 	public String getColumnName(int columnIndex) {
 		// TODO Auto-generated method stub
-		return null;
+		return ExamsPassedDatabase.getInstance().getColumnName(columnIndex);
 	}
 
 	@Override
@@ -40,7 +42,7 @@ public class AbstractTableModelPassedSubjects implements TableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
-		return null;
+		return ExamsPassedDatabase.getInstance().getValueAt(rowIndex,columnIndex);
 	}
 
 	@Override

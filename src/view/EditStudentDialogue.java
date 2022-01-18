@@ -576,7 +576,7 @@ public class EditStudentDialogue extends JDialog{
 		pattern.add(Box.createGlue());
 		
 		JTabbedPane tabs= new JTabbedPane();
-		JPanel subjs= new JPanel();
+		PassedSubjectsPanel subjs= new PassedSubjectsPanel();
 		
 		subjs2= new NotPassedSubjectsPanel();
 		tabs.add("Informacije", pattern);
