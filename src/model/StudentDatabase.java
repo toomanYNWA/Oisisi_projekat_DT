@@ -23,10 +23,11 @@ public class StudentDatabase {
 	
 	private ArrayList<Student> students;
 	private List<String> columns;
-	private ArrayList<Subject> nPS;
+	private ArrayList<Subject> notPassed;
 	
 	private StudentDatabase() {
 		this.students = new ArrayList<Student>();
+		this.notPassed = new ArrayList<Subject>();
 		this.columns = new ArrayList<String>();
 		this.columns.add("BROJ INDEKSA");
 		this.columns.add("IME");
@@ -79,6 +80,7 @@ public class StudentDatabase {
 	}
 	public void addStudent(String nuIndex, int currentYear,int status, String name, String surname, LocalDate dateOfBirth, Address address,String email,int yearOfEnrollment,String phone) {
 		this.students.add(new Student(nuIndex, currentYear, status,  name,  surname, dateOfBirth,  address, email,yearOfEnrollment,phone));
+		setNotPassedSubjects();
 	}
 	public void deleteStudent(int indexNu) {
 		students.remove(indexNu);
@@ -105,16 +107,44 @@ public class StudentDatabase {
 		
 	}
 	
-	public void addNotPassedSubjects(Subject sub) {
-		for(Student s:students) {
-			ArrayList<String> nP = sub.getStudentsNotPassed();
-			for(String str:nP) {
-				if(s.getNuIndex().equals(str)) 
-					s.addNotPassedSubject(sub);
+	public void setNotPassedSubjects() {
+		ArrayList<Subject> allSubj = SubjectsDatabase.getInstance().getSubjects();
+		for(Student s: students) {
+			for(Subject subj:allSubj) {
+				ArrayList<String> nP = subj.getStudentsNotPassed();
+				for(String temp : nP) {
+					if(s.getNuIndex().equals(temp)) {
+						notPassed.add(subj);
+					}
+				}
+			}
+			s.setNotPassed(notPassed);
+		}
+	}
+	
+	public ArrayList<Subject> getSubjectsNotPassed() {
+		Student stud= StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
+		return stud.getNotPassed();
+	} 
+	
+	public void passExam(int sId) {
+		notPassed = getSubjectsNotPassed();
+		for(Subject s: notPassed) {
+			if(s.getSubjectID()==sId) {
+				notPassed.remove(s);
+				//passed.add(s);
 			}
 		}
 	}
-
+	/*public void passExam(int sId) {
+		Passed = getSubjectsPassed();
+		for(Subject s: passed) {
+			if(s.getSubjectID()==sId) {
+				passed.remove(s);
+				notPassed.add(s);
+			}
+		}
+	} */
 }
 	
 	

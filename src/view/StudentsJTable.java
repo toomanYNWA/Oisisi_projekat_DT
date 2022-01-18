@@ -6,6 +6,8 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 
 
@@ -30,6 +32,7 @@ public class StudentsJTable extends JTable{
 		   } 
 		 return c;
 		   }
+		
 		
 	}
 

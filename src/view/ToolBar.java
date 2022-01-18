@@ -65,7 +65,6 @@ public class ToolBar extends JToolBar{
 		btnSearch.setIcon(new ImageIcon("icons/searchh.png"));
 		add(btnSearch);
 		
-		
 		setFloatable(false);
 	}
 

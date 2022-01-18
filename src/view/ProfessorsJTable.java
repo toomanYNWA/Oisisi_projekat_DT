@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class ProfessorsJTable extends JTable {
 	
@@ -16,6 +18,7 @@ public class ProfessorsJTable extends JTable {
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelProfessors());
+		this.setAutoCreateRowSorter(true);
 		
 	}
 	
@@ -28,6 +31,11 @@ public class ProfessorsJTable extends JTable {
 			c.setBackground(Color.WHITE);
 		}
 		return c;
+	}
+	
+	public void sorter() {
+		TableRowSorter<TableModel> sorter=new TableRowSorter<TableModel>(this.getModel());
+		this.setRowSorter(sorter);
 	}
 	
 }

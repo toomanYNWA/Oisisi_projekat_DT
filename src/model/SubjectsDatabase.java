@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +26,6 @@ public class SubjectsDatabase {
 	}
 
 	private ArrayList<Subject> subjects;
-	private ArrayList<Subject> notPassed;
 	private List<String> columns;
 
 	private SubjectsDatabase() {
@@ -39,7 +39,6 @@ public class SubjectsDatabase {
 	}
 	private void initsubjects() {
 		this.subjects = new ArrayList<Subject>();
-		this.notPassed = new ArrayList<Subject>();
 		
 		String next=null;
 		String[] column=null;
@@ -92,9 +91,20 @@ public class SubjectsDatabase {
 	}
 
 	
-	public ArrayList<Subject> getSubjectsNotPassed() {
-		return notPassed;
-	} 
+	/*public ArrayList<Subject> getSubjectsNotPassed() {
+		/*Student stud= StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
+		String idstud = stud.getNuIndex();
+		for(Subject s:subjects) {
+			ArrayList<String> studnp= s.getStudentsNotPassed();
+			for(String temp:studnp) {
+				if(idstud.equals(temp)) {
+					notPassed.add(s);
+					break;
+				}
+			}
+		}
+		return notPassed; 
+	} */
 	
 	public int getColumnCount() {
 		return 5;
@@ -126,9 +136,7 @@ public class SubjectsDatabase {
 	}
 	
 	public Object getValueAtNotPassed(int row, int col) {
-		//Student stud = new Student(StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
-		Student stud = new Student(StudentDatabase.getInstance().getRow(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
-		Subject s=stud.getNotPassed().get(row);
+		Subject s = StudentDatabase.getInstance().getSubjectsNotPassed().get(row);
 		switch(col) {
 		case 0:
 			return s.getSubjectID();
@@ -164,6 +172,15 @@ public class SubjectsDatabase {
 		}
 	}
 	
+	/*public void passExam(int sId) {
+		ArrayList<Subject> nPS = StudentDatabase.getInstance().getSubjectsNotPassed();
+		for(Subject s: nPS) {
+			if(s.getSubjectID()==sId) {
+				notPassed.remove(s);
+			}
+		}
+	} */
+	
 	/*public void annulGrade(int id) {
 		for(Subject s: subjects) {
 			if(s.getSubjectID()==id) {
@@ -173,4 +190,7 @@ public class SubjectsDatabase {
 		}
 	} */
 	
+	public void addProfOnSubj(Subject s, Professor p) {
+		s.setProfessor(p);
+	}
 }

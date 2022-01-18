@@ -2,6 +2,8 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -22,6 +24,16 @@ public class NotPassedSubjectsPanel extends JPanel{
 		buttons.add(exam);
 		add(buttons, BorderLayout.WEST);
 		
+		exam.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(NotPassedSubjectsTable.rowSelectedIndex>=0) {
+				 AddGradeDialog addG = new  AddGradeDialog();
+				addG.setVisible(true);
+				}
+			}
+		});
 		
 		tableSubjects=new NotPassedSubjectsTable();
 		JScrollPane subjectsPane=new JScrollPane(tableSubjects);

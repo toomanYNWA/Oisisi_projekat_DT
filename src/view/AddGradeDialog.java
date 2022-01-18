@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.swing.Box;
@@ -20,14 +21,19 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
+import controller.ProfessorsController;
 import controller.SubjectsController;
 import model.Subject;
+import model.Professor.Title;
 
 public class AddGradeDialog extends JDialog{
 	public static JTextField idTF;
 	public static JTextField nameTF;
 	public static JTextField dateTF;
+	public static String gradeP;
 	public JButton yes;
 	
 	public AddGradeDialog() {
@@ -81,6 +87,30 @@ public class AddGradeDialog extends JDialog{
 		dateTF.setPreferredSize(new Dimension(200,25));
 		dateTF.setToolTipText("Datum polaganja ispita");
 		
+		dateTF.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+				check();
+				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				check();
+			}
+			
+		});
+		
 		date.add(dateL);
 		date.add(dateTF);
 		
@@ -94,7 +124,25 @@ public class AddGradeDialog extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				if(!validateJavaDate(dateTF.getText())) {
 					JOptionPane.showMessageDialog(null, "Datum nije pravilno unet (dd.MM.yy)","",JOptionPane.ERROR_MESSAGE);
-				} else {} 
+				} else {
+					String [] date = dateTF.getText().split("\\.");
+					LocalDate examDate = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
+					gradeP=(String)gradeCB.getSelectedItem();
+					int grade;
+
+					if(gradeP.equals("10"))
+						grade = 10;
+					else if (gradeP.equals("9"))
+						grade = 9;
+					else if (gradeP.equals("8"))
+						grade = 8;
+					else if (gradeP.equals("7"))
+						grade = 7;
+					else 
+						grade = 6;
+					SubjectsController.getInstance().passExam(NotPassedSubjectsTable.rowSelectedIndex, grade, examDate);
+					dispose();
+				} 
 			}
 			public boolean validateJavaDate(String strDate)
 			   {
@@ -131,13 +179,16 @@ public class AddGradeDialog extends JDialog{
 		yesNo.add(yes);
 		yesNo.add(no);
 		
-		//Subject subj=new Subject(SubjectsController.getInstance().getSubject())
+		Subject subj = new Subject(SubjectsController.getInstance().getSubject(NotPassedSubjectsTable.rowSelectedIndex));
+		idTF.setText(String.valueOf(subj.getSubjectID()));
+		nameTF.setText(subj.getSubjectName());
 		
 		Box pattern = Box.createVerticalBox();
 		pattern.add(Box.createVerticalStrut(10));
 		pattern.add(id);
 		pattern.add(name);
 		pattern.add(grade);
+		pattern.add(date);
 		pattern.add(yesNo);
 		pattern.add(Box.createGlue());
 		

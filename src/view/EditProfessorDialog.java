@@ -660,14 +660,22 @@ public class EditProfessorDialog extends JDialog{
 		JPanel pr = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JButton proba1 = new JButton("Proba");
 		pr.add(proba1);
-		proba1.addActionListener(new ActionListener() {
+		/*proba1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				 ChooseProfessorDialog cP = new  ChooseProfessorDialog();
+				cP.setVisible(true);
+				}
+		}); */
+		/*proba1.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				 AddSubjToProfDialog addS = new  AddSubjToProfDialog();
 				addS.setVisible(true);
 				}
-		});
+		}); */
 		
 		Box pattern = Box.createVerticalBox();
 		pattern.add(Box.createVerticalStrut(10));

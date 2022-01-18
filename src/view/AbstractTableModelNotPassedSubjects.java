@@ -9,7 +9,7 @@ public class AbstractTableModelNotPassedSubjects extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return SubjectsDatabase.getInstance().getSubjectsNotPassed().size();
+		return StudentDatabase.getInstance().getSubjectsNotPassed().size();
 	}
 	@Override
 	public int getColumnCount() {

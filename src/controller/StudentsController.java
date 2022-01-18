@@ -1,10 +1,12 @@
 package controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import model.Address;
 import model.Student;
 import model.StudentDatabase;
+import model.Subject;
 import model.Student.Status;
 import view.MainFrame;
 import view.StudentsTablePanel;
