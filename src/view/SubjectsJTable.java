@@ -29,6 +29,7 @@ public class SubjectsJTable extends JTable{
 		}
 		return c;
 	}
+	
 	public void sorter() {
 		TableRowSorter<TableModel> sorter=new TableRowSorter<TableModel>(this.getModel());
 		this.setRowSorter(sorter);

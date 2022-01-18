@@ -2,8 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -19,7 +17,6 @@ public class ProfessorsJTable extends JTable {
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelProfessors());
 		this.setAutoCreateRowSorter(true);
-		
 	}
 	
 	@Override
