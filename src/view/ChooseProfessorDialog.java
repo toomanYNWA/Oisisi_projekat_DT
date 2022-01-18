@@ -27,6 +27,7 @@ import model.Subject;
 import model.SubjectsDatabase;
 
 public class ChooseProfessorDialog extends JDialog{
+	public static String fullname;
 	public ChooseProfessorDialog() {
 		setModal(true);
 		setSize(300,300);
@@ -74,17 +75,15 @@ public class ChooseProfessorDialog extends JDialog{
 					JOptionPane.showMessageDialog(null,"Nije oznacen profesor za dodavanje","",JOptionPane.ERROR_MESSAGE);
 				}else {
 					String [] trimmed = null;
-					int index = TabbedPane.getInstance().getTableSubjects().getSelectedRow();
 					String selected = list.getSelectedValue();
 					trimmed = selected.split("\\ ");
 					String trimmedName = trimmed[0];
 					String trimmedSurname = trimmed[1];
-					
+					dispose();
 					for(Professor p : ProfessorsDatabase.getInstance().getProfessors()) {
 						if(p.getName().equals(trimmedName) && p.getSurname().equals(trimmedSurname))
-							SubjectsController.getInstance().addProfOnSubj(index, p);
+							fullname = p.getName()+" "+p.getSurname();
 					}
-					dispose();
 				}
 
 			}
@@ -92,6 +91,10 @@ public class ChooseProfessorDialog extends JDialog{
 		
 		this.add(listScroller,BorderLayout.CENTER);
 		this.add(yesNo,BorderLayout.SOUTH);
+	}
+	
+	public String nameP() {
+		return fullname;
 	}
 
 }

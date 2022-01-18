@@ -196,6 +196,11 @@ public class SubjectsDatabase {
 	public void addProfOnSubj(Subject s, Professor p) {
 		s.setProfessor(p);
 	}
+	
+	public void removeProfessor(Subject s) {
+		s.setProfessor(null);
+	}
+	
 	public void addSubject(int subjectID, String subjectName,int semestar, int subjectYear, int espb ) {
 		this.subjects.add(new Subject( subjectID,  subjectName, semestar, subjectYear, espb));
 	}

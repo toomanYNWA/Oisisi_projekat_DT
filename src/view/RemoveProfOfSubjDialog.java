@@ -15,8 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.SubjectsController;
+import model.Professor;
+import model.Subject;
 
 public class RemoveProfOfSubjDialog extends JDialog{
+	public boolean answer;
 	public RemoveProfOfSubjDialog() {
 		
 		setModal(true);
@@ -37,7 +40,9 @@ public class RemoveProfOfSubjDialog extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SubjectsController.getInstance().removeProfessor();
+				//Subject s = SubjectsController.getInstance().getSubject(TabbedPane.getInstance().getTableSubjects().getSelectedRow());
+				//SubjectsController.getInstance().removeProfessor(s);
+				answer = true;
 				dispose();
 			}
 		}); 
@@ -48,6 +53,7 @@ public class RemoveProfOfSubjDialog extends JDialog{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
+				answer = false;
 				dispose();
 
 			}
@@ -59,5 +65,8 @@ public class RemoveProfOfSubjDialog extends JDialog{
 		pattern.add(message);
 		pattern.add(yesNo);
 		this.add(pattern,BorderLayout.CENTER);
+	}
+	public boolean yes() {
+		return answer;
 	}
 }

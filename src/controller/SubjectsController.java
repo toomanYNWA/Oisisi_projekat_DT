@@ -59,8 +59,9 @@ private static SubjectsController instance = null;
 		 
 	 }
 	 
-	 public void removeProfessor() {
-		 
+	 public void removeProfessor(Subject s) {
+		 SubjectsDatabase.getInstance().removeProfessor(s);
+		 TabbedPane.getInstance().updateSubjects();
 	 }
 	 
 	 public void addSubject(int subjectID, String subjectName,int semestar, int subjectYear,  int espb) {
