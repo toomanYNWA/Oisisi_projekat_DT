@@ -1,27 +1,25 @@
 package controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import model.Address;
 import model.Student;
 import model.StudentDatabase;
-import model.Subject;
-import model.Student.Status;
-import view.MainFrame;
-import view.StudentsTablePanel;
 import view.TabbedPane;
 
 public class StudentsController {
 
 		private static StudentsController instance = null;
-		
+		private boolean found = false;
 		public static StudentsController getInstance() {
 			if(instance==null) {
 				instance = new StudentsController();
 			}
 			return instance;
 		}
+		
 		private StudentsController() {}
 		
 		public void addStudent(String nuIndex,int currentYear,int status, String name, String surname,LocalDate date,Address address,String email,int yearOfEnrollment,String phone) {
@@ -56,6 +54,44 @@ public class StudentsController {
 		public Student getStudent(int rowSelectedIndex) {
 			Student student = StudentDatabase.getInstance().getRow(rowSelectedIndex);
 			return student;
+		}
+		
+		public void studentsBySurname(String surname) {
+			found = StudentDatabase.getInstance().findBySur(surname);
+			if(found) {
+				//StudentDatabase.getInstance().switchBetweenFoundAndAll();
+				TabbedPane.getInstance().getStudentsTable().patchView();
+			} else {
+				JOptionPane.showMessageDialog(null, "Prezime ne postoji u bazi podataka!");
+			}
+		}
+		
+		public void studentsByIndexAndNameAndSurname(String index, String name, String surname) {
+			found = StudentDatabase.getInstance().findByNuInAndNameAndSur(index, name, surname);
+			if(found) {
+				//StudentDatabase.getInstance().switchBetweenFoundAndAll();
+				TabbedPane.getInstance().getStudentsTable().patchView();
+			} else {
+				JOptionPane.showMessageDialog(null, "Ne postoji student sa datim indeksom, imenom i prezimenom!");
+			}
+		}
+		
+		public void studentsBySurAndName(String surname, String name) {
+			found = StudentDatabase.getInstance().findBySurAndName(surname, name);
+			if(found) {
+				//StudentDatabase.getInstance().switchBetweenFoundAndAll();
+				TabbedPane.getInstance().getStudentsTable().patchView();
+			} else {
+				JOptionPane.showMessageDialog(null, "Ne postoji student sa datim imenom i prezimenom!");
+			}
+		}
+
+		public boolean isFound() {
+			return found;
+		}
+
+		public void setFound(boolean found) {
+			this.found = found;
 		}
 		
 }

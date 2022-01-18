@@ -21,9 +21,9 @@ public class PassedSubjectsPanel extends JPanel{
 		tableSubjects=new PassedSubjectsTable();
 		JScrollPane subjectsPane=new JScrollPane(tableSubjects);
 		add(subjectsPane, BorderLayout.CENTER);
-		
+		setVisible(true);
 	}
-	public JTable getTable() {
-		return (PassedSubjectsTable) tableSubjects;
-	}
+//	public JTable getTable() {
+//		return (PassedSubjectsTable) tableSubjects;
+//	}
 }

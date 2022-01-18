@@ -110,7 +110,7 @@ public class Subject {
 		this.espb = espb;
 	}
 
-	public List<String> getStudentsPassed() {
+	public ArrayList<String> getStudentsPassed() {
 		return indexPassed;
 	}
 

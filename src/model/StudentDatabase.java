@@ -33,12 +33,17 @@ public class StudentDatabase {
 	private List<String> columns;
 	private ArrayList<Subject> notPassed;
 	private ArrayList<Subject> returnNotPassed;
-	
+	private ArrayList<Grade> passed;
+	private ArrayList<Grade> returnPassed;
+	private ArrayList<Student> foundStudent = new ArrayList<Student>();
+	private ArrayList<Student> allStudents;
 	private StudentDatabase() {
 		
 		this.students = new ArrayList<Student>();
 		this.notPassed = new ArrayList<Subject>();
 		this.returnNotPassed = new ArrayList<Subject>();
+		this.passed = new ArrayList<Grade>();
+		this.returnPassed = new ArrayList<Grade>();
 		this.columns = new ArrayList<String>();
 		this.columns.add("BROJ INDEKSA");
 		this.columns.add("IME");
@@ -47,6 +52,7 @@ public class StudentDatabase {
 		this.columns.add("STATUS");
 		this.columns.add("PROSEK");
 		initstudents();
+		allStudents = students;
 		
 		
 	}
@@ -148,6 +154,7 @@ public class StudentDatabase {
 	}
 	public void addStudent(String nuIndex, int currentYear,int status, String name, String surname, LocalDate dateOfBirth, Address address,String email,int yearOfEnrollment,String phone) {
 		this.students.add(new Student(nuIndex, currentYear, status,  name,  surname, dateOfBirth,  address, email,yearOfEnrollment,phone));
+		this.allStudents.add(new Student(nuIndex, currentYear, status,  name,  surname, dateOfBirth,  address, email,yearOfEnrollment,phone));
 		setNotPassedSubjects();
 	}
 	public void deleteStudent(int indexNu) {
@@ -198,6 +205,7 @@ public class StudentDatabase {
 		return returnNotPassed;
 	} 
 	
+	
 	public void passExam(int sId) {
 		notPassed = getSubjectsNotPassed();
 		for(Subject s: notPassed) {
@@ -207,6 +215,14 @@ public class StudentDatabase {
 			}
 		}
 	}
+//	public void nullifyExam(int sId) {
+//		passed = getSubjectsPassed();
+//		for(Subject s : passed) {
+//			if(s.getSubjectID()== sId) {
+//				
+//			}
+//		}
+//	}
 	/*public void passExam(int sId) {
 		Passed = getSubjectsPassed();
 		for(Subject s: passed) {
@@ -216,6 +232,62 @@ public class StudentDatabase {
 			}
 		}
 	} */
+	
+	public boolean findBySur(String surname) {
+		boolean found = false;
+		ArrayList<Student> fs = new ArrayList<Student>();
+		for (Student stud : students) {
+			
+			if(stud.getSurname().toUpperCase().contains(surname.toUpperCase())) {
+				foundStudent.add(stud);
+				fs.add(stud);
+				found = true;
+			}
+		}
+		students = fs;
+		return found;
+	}
+	public boolean findBySurAndName(String surname, String name) {
+		boolean found = false;
+		ArrayList<Student> fs = new ArrayList<Student>();
+		for(Student stud : students) {
+			
+			if(stud.getSurname().toUpperCase().contains(surname.toUpperCase()) && stud.getName().toUpperCase().contains(name.toUpperCase())) {
+				foundStudent.add(stud);
+				fs.add(stud);
+				found = true;
+			}
+		}
+		students = fs;
+		return found;
+	}
+	
+	public boolean findByNuInAndNameAndSur(String index, String name, String surname) {
+		boolean found = false;
+		ArrayList<Student> fs = new ArrayList<Student>();
+		for(Student stud : students) {
+			
+			if(stud.getNuIndex().toUpperCase().contains(index.toUpperCase()) && stud.getName().toUpperCase().contains(name.toUpperCase()) 
+					&& stud.getSurname().toUpperCase().contains(surname.toUpperCase())) {
+				foundStudent.add(stud);
+				fs.add(stud);
+				found = true;
+			}
+		}
+		students = fs;
+		return found;
+	}
+	
+	public void switchBetweenFoundAndAll() {
+		ArrayList<Student> pom = new ArrayList<Student>();
+		pom = students;
+		students = foundStudent;
+		foundStudent = pom;
+		
+	}
+	public void emS() {
+		students = allStudents;
+	}
 }
 	
 	
