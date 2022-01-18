@@ -40,8 +40,6 @@ public class RemoveProfOfSubjDialog extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Subject s = SubjectsController.getInstance().getSubject(TabbedPane.getInstance().getTableSubjects().getSelectedRow());
-				//SubjectsController.getInstance().removeProfessor(s);
 				answer = true;
 				dispose();
 			}
