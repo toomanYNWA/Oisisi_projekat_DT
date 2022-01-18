@@ -5,15 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-import controller.StudentsController;
 import model.Subject.Semestar;
-import view.TabbedPane;
 
 public class SubjectsDatabase {
 	private static SubjectsDatabase instance = null;
@@ -26,6 +22,8 @@ public class SubjectsDatabase {
 	}
 
 	private ArrayList<Subject> subjects;
+	private ArrayList<Subject> passed;
+
 	private List<String> columns;
 
 	private SubjectsDatabase() {
@@ -104,8 +102,13 @@ public class SubjectsDatabase {
 			}
 		}
 		return notPassed; 
-	} */
-	
+	} */ 
+	public ArrayList<Subject> getPassed() {
+		return passed;
+	}
+	public void setPassed(ArrayList<Subject> passed) {
+		this.passed = passed;
+	}
 	public int getColumnCount() {
 		return 5;
 	}
@@ -192,5 +195,21 @@ public class SubjectsDatabase {
 	
 	public void addProfOnSubj(Subject s, Professor p) {
 		s.setProfessor(p);
+	}
+	public void addSubject(int subjectID, String subjectName,int semestar, int subjectYear, int espb ) {
+		this.subjects.add(new Subject( subjectID,  subjectName, semestar, subjectYear, espb));
+	}
+	public Subject gback(int r) {
+		return subjects.get(r); 
+	}
+	public void editSubject(int rowSelectedIndex,int subjectID, String subjectName,int semestar, int subjectYear, int espb ) {
+			Subject s = gback(rowSelectedIndex);
+			
+				s.setSubjectID(subjectID);
+				s.setSubjectName(subjectName);
+				s.setSemestar(semestar);
+				s.setSubjectYear(subjectYear);
+				s.setEspb(espb);
+		
 	}
 }

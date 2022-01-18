@@ -3,11 +3,13 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Student.Status;
+
 public class Subject {
 	
 	public enum Semestar{
-		SUMMER,
-		WINTER
+		WINTER,
+		SUMMER
 	}
 	private int subjectID;
 	private String subjectName;
@@ -17,6 +19,8 @@ public class Subject {
 	private Semestar semestar;
 	private ArrayList<String> indexPassed ;
 	private ArrayList<String> indexNotPassed ;
+	
+	public Subject() {}
 	
 	public Subject(int subjectID, String subjectName,Semestar semestar, int subjectYear, Professor professor, int espb, ArrayList<String> studentsPassed,
 			ArrayList<String> studentsNotPassed) {
@@ -30,6 +34,19 @@ public class Subject {
 		this.indexNotPassed = studentsNotPassed;
 	}
 	
+	public Subject(int subjectID, String subjectName,int semestar, int subjectYear,int espb) {
+		this.subjectID = subjectID;
+		this.subjectName = subjectName;
+		this.subjectYear = subjectYear;
+		this.espb = espb;
+		
+		if(semestar==0) {
+			this.semestar=Semestar.WINTER;
+		}else {
+			this.semestar=Semestar.SUMMER;
+		}
+	}
+	
 	public Subject(Subject s) {
 		this.subjectID = s.subjectID;
 		this.subjectName = s.subjectName;
@@ -40,17 +57,22 @@ public class Subject {
 		this.indexPassed = s.indexPassed;
 		this.indexNotPassed = s.indexNotPassed;
 	}
+	
 	public int getSubjectID() {
 		return subjectID;
 	}
 
-	public Semestar getSemestar() {
-		return semestar;
+	public String getSemestar() {
+		if(this.semestar == Semestar.WINTER) {
+			return "WINTER";
+		} else return "SUMMER";
 	}
 
-	public void setSemestar(Semestar semestar) {
-		this.semestar = semestar;
+	public void setSemestar(int semestar) {
+		if(semestar == 0 ) this.semestar = Semestar.WINTER;
+		else this.semestar = Semestar.SUMMER;
 	}
+
 
 	public void setSubjectID(int subjectID) {
 		this.subjectID = subjectID;

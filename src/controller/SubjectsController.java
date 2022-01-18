@@ -1,10 +1,8 @@
 package controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import model.Professor;
-import model.Student;
 import model.StudentDatabase;
 import model.Subject;
 import model.SubjectsDatabase;
@@ -64,4 +62,24 @@ private static SubjectsController instance = null;
 	 public void removeProfessor() {
 		 
 	 }
+	 
+	 public void addSubject(int subjectID, String subjectName,int semestar, int subjectYear,  int espb) {
+		 	
+			SubjectsDatabase.getInstance().addSubject(subjectID,  subjectName, semestar, subjectYear, espb);
+			
+			TabbedPane.getInstance().updateSubjects();
+		}
+	 
+	 public void editSubject(int rowSelectedIndex,int subjectID, String subjectName,int semestar, int subjectYear,  int espb) {
+			 
+			if (rowSelectedIndex < 0) {
+				 return;
+			 }
+			//Student student = StudentDatabase.getInstance().getRow(rowSelectedIndex);
+			SubjectsDatabase.getInstance().editSubject(rowSelectedIndex,subjectID,  subjectName, semestar, subjectYear, espb);
+			TabbedPane.getInstance().updateSubjects();
+			
+		}
 }
+		
+

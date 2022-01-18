@@ -26,6 +26,7 @@ import javax.swing.event.DocumentListener;
 import controller.StudentsController;
 import model.Address;
 import model.Student;
+import model.StudentDatabase;
 
 public class EditStudentDialogue extends JDialog{
 
@@ -477,16 +478,26 @@ public class EditStudentDialogue extends JDialog{
 		});
 		
 		doo.addActionListener(new ActionListener() {
-			String nameSurnameReg="[A-Ž][a-ž]+";
+			String nameSurnameReg="([A-Ž][a-ž]+[' ']?)+";
 			String addressNumReg = "[0-9a-z]+";
 			String addressReg="[a-žA-Ž ]+"; 
 			String emailReg="[a-zA-Z0-9._]+@[a-zA-Z]+[.][a-zA-Z]+[.]?[a-zA-Z]*";
-			String numbersReg="[0-9]+";
+			String numbersReg="[0-9]+[/]?[0-9]+[-]?[0-9]+";
 			String indReg = "[a-žA-Ž]+[0-9]+[/][0-9]+";
 			String dateReg = "[0-9]{2}[.][0-9]{2}[.][0-9]{4}[.]";
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+//				boolean exists = false;
+//				for(Student s : StudentDatabase.getInstance().getStudents()) {
+//					if(s.getNuIndex().equals(indexNTF.getText().trim())) {
+//						if(!s.getName().equals(nameTF.getText().trim()) ) {
+//							exists = true;
+//						 }else if(s.getSurname().equals(surnameTF.getText().trim())) {
+//							 exists = false;
+//						 }
+//					}
+//				}
 				 if(!nameTF.getText().trim().matches(nameSurnameReg)){
 					JOptionPane.showMessageDialog(null, "Ime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!surnameTF.getText().trim().matches(nameSurnameReg)){
@@ -509,7 +520,11 @@ public class EditStudentDialogue extends JDialog{
 					JOptionPane.showMessageDialog(null, "Broj indeksa nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!dateOfBirthTF.getText().matches(dateReg)) {
 					JOptionPane.showMessageDialog(null, "Datum nije pravilno unet (dd.MM.yy.)","",JOptionPane.ERROR_MESSAGE);
-				}else {	
+				}
+//				else if (exists){
+//					JOptionPane.showMessageDialog(null, "Vec postoji student sa unetim brojem indeksa!","",JOptionPane.ERROR_MESSAGE);
+//				}
+				else {
 				
 				String [] date = dateOfBirthTF.getText().split("\\.");
 				LocalDate dateOB = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));

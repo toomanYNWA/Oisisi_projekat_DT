@@ -16,7 +16,7 @@ public class Student extends User{
 	private int currentYear;
 	private float averageGrade;
 	private Status status;
-	private ArrayList<Subject> passed;
+	private ArrayList<Grade> passed;
 	private ArrayList<Subject> notPassed ;
 	
 	public Student(String nuIndex, int currentYear,int status, String name, String surname, LocalDate dateOfBirth, Address address,String email,int yearOfEnrollment,String phone) {
@@ -86,11 +86,11 @@ public class Student extends User{
 		this.averageGrade = averageGrade;
 	}
 
-	public ArrayList<Subject> getPassed() {
+	public ArrayList<Grade> getPassed() {
 		return passed;
 	}
 
-	public void setPassed(ArrayList<Subject> passed) {
+	public void setPassed(ArrayList<Grade> passed) {
 		this.passed = passed;
 	}
 

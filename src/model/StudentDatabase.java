@@ -1,9 +1,17 @@
 package model;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import controller.StudentsController;
+import model.Student.Status;
+import model.Subject.Semestar;
 import view.TabbedPane;
 
 
@@ -24,10 +32,13 @@ public class StudentDatabase {
 	private ArrayList<Student> students;
 	private List<String> columns;
 	private ArrayList<Subject> notPassed;
+	private ArrayList<Subject> returnNotPassed;
 	
 	private StudentDatabase() {
+		
 		this.students = new ArrayList<Student>();
 		this.notPassed = new ArrayList<Subject>();
+		this.returnNotPassed = new ArrayList<Subject>();
 		this.columns = new ArrayList<String>();
 		this.columns.add("BROJ INDEKSA");
 		this.columns.add("IME");
@@ -35,8 +46,65 @@ public class StudentDatabase {
 		this.columns.add("GODINA STUDIJA");
 		this.columns.add("STATUS");
 		this.columns.add("PROSEK");
+		initstudents();
 		
 		
+	}
+	private void initstudents() {
+		this.students = new ArrayList<Student>();
+		//this. = new ArrayList<Subject>();
+		
+		String next=null;
+		String[] column=null;
+		BufferedReader in=null;
+		String [] date = null;
+		String [] adr=null;
+		try {
+			in=new BufferedReader(new InputStreamReader(new FileInputStream("resources/Students.txt")));
+		}catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			while((next=in.readLine())!=null) {
+				if(next.equals("")) {
+					continue;
+				}
+				
+				column=next.split("\\|[' ']*");
+			  
+			    
+			    date = column[2].split("\\.");
+			    adr=column[4].split("\\,");
+			 
+				int st = -1 ;
+				if(column[9].trim().equals("B")) {
+					st = 0;
+				} else if(column[9].trim().equals("S")) st = 1;
+				
+				int c=0 ;
+				if(column[8].trim().equals("I"))
+					c=1;
+				else if(column[8].trim().equals("II"))
+					c=2;
+				else if(column[8].trim().equals("III"))
+					c=3;
+				else if(column[8].trim().equals("IV"))
+					c=4;
+				else if(column[8].trim().equals("V")) c = 5;
+				Address a = new Address(adr[0], adr[1], adr[2], adr[3]);
+				LocalDate dt = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
+				int yoe= Integer.parseInt(column[7].trim());
+				Student stu = new Student(column[0].trim(),c,st,column[5].trim(),column[1].trim(),dt,a,column[6].trim(),yoe,column[3].trim());
+				students.add(stu);
+				//			String nuIndex, int currentYear,int status, String name, String surname, LocalDate dateOfBirth, Address address,String email,int yearOfEnrollment,String phone
+//													
+				//			Tomislav|Andric |05.04.2000. |0611535796 | Pavla Stosa,3,Subotic,Srbija|ra170/2019|tooman00@gmail.com|2019|I|B
+			} 
+			
+			in.close();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -124,7 +192,10 @@ public class StudentDatabase {
 	
 	public ArrayList<Subject> getSubjectsNotPassed() {
 		Student stud= StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
-		return stud.getNotPassed();
+		if(stud.getNotPassed()!=null) {
+			returnNotPassed = stud.getNotPassed();
+		}
+		return returnNotPassed;
 	} 
 	
 	public void passExam(int sId) {
