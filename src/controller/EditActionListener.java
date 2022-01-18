@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import view.EditProfessorDialog;
 import view.EditStudentDialogue;
+import view.EditSubjectsDialogue;
 import view.TabbedPane;
 
 public class EditActionListener implements ActionListener{
@@ -21,6 +22,12 @@ public class EditActionListener implements ActionListener{
 			if(TabbedPane.getInstance().getTableProfessors().getSelectedRow()>=0) {
 				EditProfessorDialog editP = new EditProfessorDialog();
 				editP.setVisible(true);
+			}
+		}
+		else if(TabbedPane.position == 2) {
+			if(TabbedPane.getInstance().getTableSubjects().getSelectedRow()>=0) {
+				EditSubjectsDialogue editSu = new EditSubjectsDialogue();
+				editSu.setVisible(true);
 			}
 		}
 		

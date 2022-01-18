@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +27,10 @@ public class SubjectsDatabase {
 
 	private ArrayList<Subject> subjects;
 	private ArrayList<Subject> notPassed;
+	private ArrayList<Subject> passed;
+	
+	
+
 	private List<String> columns;
 
 	private SubjectsDatabase() {
@@ -95,7 +100,12 @@ public class SubjectsDatabase {
 	public ArrayList<Subject> getSubjectsNotPassed() {
 		return notPassed;
 	} 
-	
+	public ArrayList<Subject> getPassed() {
+		return passed;
+	}
+	public void setPassed(ArrayList<Subject> passed) {
+		this.passed = passed;
+	}
 	public int getColumnCount() {
 		return 5;
 	}
@@ -127,8 +137,9 @@ public class SubjectsDatabase {
 	
 	public Object getValueAtNotPassed(int row, int col) {
 		//Student stud = new Student(StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
-		Student stud = new Student(StudentDatabase.getInstance().getRow(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
-		Subject s=stud.getNotPassed().get(row);
+		//Student stud = new Student(StudentDatabase.getInstance().getRow(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
+		//Subject s=stud.getNotPassed().get(row);
+		Subject s = subjects.get(row);
 		switch(col) {
 		case 0:
 			return s.getSubjectID();
@@ -139,7 +150,10 @@ public class SubjectsDatabase {
 		case 3:
 			return s.getSubjectYear();
 		case 4:
-			return s.getSemestar();
+			if(s.getSemestar()=="WINTER") {
+			 System.out.println(s.getSemestar());
+				return "WINTER";
+			} else return "SUMMER";
 		default:
 			return null;
 		}
@@ -172,5 +186,22 @@ public class SubjectsDatabase {
 			}
 		}
 	} */
+	
+	public void addSubject(int subjectID, String subjectName,int semestar, int subjectYear, int espb ) {
+		this.subjects.add(new Subject( subjectID,  subjectName, semestar, subjectYear, espb));
+	}
+	public Subject gback(int r) {
+		return subjects.get(r); 
+	}
+	public void editSubject(int rowSelectedIndex,int subjectID, String subjectName,int semestar, int subjectYear, int espb ) {
+			Subject s = gback(rowSelectedIndex);
+			
+				s.setSubjectID(subjectID);
+				s.setSubjectName(subjectName);
+				s.setSemestar(semestar);
+				s.setSubjectYear(subjectYear);
+				s.setEspb(espb);
+		
+	}
 	
 }
