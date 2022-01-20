@@ -18,10 +18,6 @@ public class SearchSubjectsController {
 	public void findSubjsByName(String name) {
 		SubjectsController.getInstance().findByName(name);
 	}
-	//public void findSubjsById(int id) {
-		//StudentsController.getInstance().studentsBySurname(surname);
-		//ProfessorsController.getInstance().profsBySurname(surname);
-	//}
 	public void findSubjsByNameAndId(String name, String id) {
 		SubjectsController.getInstance().findByNameAndId(name, id);
 	}
