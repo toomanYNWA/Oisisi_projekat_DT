@@ -48,7 +48,7 @@ public class EditStudentDialogue extends JDialog{
 	public JButton doo;
 	public EditStudentDialogue() {
 		setModal(true);
-		setSize(450,500);
+		setSize(500,500);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);

@@ -2,27 +2,26 @@ package view;
 
 import javax.swing.table.AbstractTableModel;
 
-import model.StudentDatabase;
-import model.SubjectsDatabase;
+import model.NotPassedSubjectsDatabase;
 
 public class AbstractTableModelNotPassedSubjects extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return StudentDatabase.getInstance().getSubjectsNotPassed().size();
+		return NotPassedSubjectsDatabase.getInstance().getNotPassed().size();
 	}
 	@Override
 	public int getColumnCount() {
-		return SubjectsDatabase.getInstance().getColumnCount();
+		return NotPassedSubjectsDatabase.getInstance().getColumnCount();
 	}
 	@Override
 	public String getColumnName(int column) {
-		return SubjectsDatabase.getInstance().getColumnName(column);
+		return NotPassedSubjectsDatabase.getInstance().getColumnName(column);
 	}
 	
 	@Override
 	public Object getValueAt(int row, int col) {
-		return SubjectsDatabase.getInstance().getValueAtNotPassed(row, col);
+		return NotPassedSubjectsDatabase.getInstance().getValueAt(row, col);
 	} 
 
 }

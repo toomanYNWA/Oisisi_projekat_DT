@@ -14,6 +14,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.SubjectsController;
+import model.ExamsPassedDatabase;
+import model.SubjectsDatabase;
+
 
 public class AnnulGradeDialog extends JDialog {
 	AnnulGradeDialog(){
@@ -46,7 +50,9 @@ public class AnnulGradeDialog extends JDialog {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-			    //SubjectsController.getInstance().annulGrade();
+				int subjId = (int) ExamsPassedDatabase.getInstance().getValueAt(PassedSubjectsTable.rowSelectedIndex, 0);
+				System.out.println(subjId);
+			    SubjectsController.getInstance().annulGrade(subjId);
 				dispose();
 
 			}

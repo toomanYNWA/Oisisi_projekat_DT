@@ -26,7 +26,9 @@ import javax.swing.event.DocumentListener;
 
 import controller.ProfessorsController;
 import controller.SubjectsController;
+import model.NotPassedSubjectsDatabase;
 import model.Subject;
+import model.SubjectsDatabase;
 import model.Professor.Title;
 
 public class AddGradeDialog extends JDialog{
@@ -140,7 +142,9 @@ public class AddGradeDialog extends JDialog{
 						grade = 7;
 					else 
 						grade = 6;
-					SubjectsController.getInstance().passExam(NotPassedSubjectsTable.rowSelectedIndex, grade, examDate);
+					int SubjId = (int) NotPassedSubjectsDatabase.getInstance().getValueAt(NotPassedSubjectsTable.rowSelectedIndex, 0);
+					//int SubjId = (int) SubjectsDatabase.getInstance().getValueAtNotPassed(NotPassedSubjectsTable.rowSelectedIndex, 0);
+					SubjectsController.getInstance().passExam(SubjId, grade, examDate);
 					dispose();
 				} 
 			}

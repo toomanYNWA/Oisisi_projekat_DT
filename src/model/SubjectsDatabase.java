@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import controller.StudentsController;
 import model.Subject.Semestar;
+import view.TabbedPane;
 
 public class SubjectsDatabase {
 	private static SubjectsDatabase instance = null;
@@ -23,7 +25,8 @@ public class SubjectsDatabase {
 
 	private ArrayList<Subject> subjects;
 	private ArrayList<Subject> passed;
-
+	private ArrayList<Subject> foundSubj = new ArrayList<Subject>();
+	private ArrayList<Subject> allSubjs;
 	private List<String> columns;
 
 	private SubjectsDatabase() {
@@ -34,10 +37,11 @@ public class SubjectsDatabase {
 		this.columns.add("ESPB");
 		this.columns.add("Godina");
 		this.columns.add("Semestar");
+		allSubjs = subjects;
 	}
 	private void initsubjects() {
 		this.subjects = new ArrayList<Subject>();
-		
+		//this.allSubjs = new ArrayList<Subject>();
 		String next=null;
 		String[] column=null;
 		BufferedReader in=null;
@@ -73,8 +77,7 @@ public class SubjectsDatabase {
 				Professor p = ProfessorsDatabase.getInstance().getProfById(column[4].trim());
 				
 				subjects.add(new Subject(sId ,column[1].trim(),s,sY,p,espb, indexP, indexNP));
-				
-					
+				//allSubjs.add(new Subject(sId ,column[1].trim(),s,sY,p,espb, indexP, indexNP));
 
 			} 
 			
@@ -88,21 +91,6 @@ public class SubjectsDatabase {
 		return subjects;
 	}
 
-	
-	/*public ArrayList<Subject> getSubjectsNotPassed() {
-		/*Student stud= StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
-		String idstud = stud.getNuIndex();
-		for(Subject s:subjects) {
-			ArrayList<String> studnp= s.getStudentsNotPassed();
-			for(String temp:studnp) {
-				if(idstud.equals(temp)) {
-					notPassed.add(s);
-					break;
-				}
-			}
-		}
-		return notPassed; 
-	} */ 
 	public ArrayList<Subject> getPassed() {
 		return passed;
 	}
@@ -137,28 +125,20 @@ public class SubjectsDatabase {
 			return null;
 		}
 	}
-	
-	public Object getValueAtNotPassed(int row, int col) {
-		Subject s = StudentDatabase.getInstance().getSubjectsNotPassed().get(row);
-		switch(col) {
-		case 0:
-			return s.getSubjectID();
-		case 1:
-			return s.getSubjectName();
-		case 2:
-			return s.getEspb();
-		case 3:
-			return s.getSubjectYear();
-		case 4:
-			return s.getSemestar();
-		default:
-			return null;
-		}
-	} 
+
 	
 	public Subject getSubjById(String id) {
 		for (Subject s: subjects) {
 			if(String.valueOf(s.getSubjectID()).equals(id)) {
+				return s;
+			} 
+		}
+		return null;
+	}
+	
+	public Subject getSubjectById(int id) {
+		for (Subject s: subjects) {
+			if(s.getSubjectID()==id) {
 				return s;
 			} 
 		}
@@ -175,24 +155,6 @@ public class SubjectsDatabase {
 		}
 	}
 	
-	/*public void passExam(int sId) {
-		ArrayList<Subject> nPS = StudentDatabase.getInstance().getSubjectsNotPassed();
-		for(Subject s: nPS) {
-			if(s.getSubjectID()==sId) {
-				notPassed.remove(s);
-			}
-		}
-	} */
-	
-	/*public void annulGrade(int id) {
-		for(Subject s: subjects) {
-			if(s.getSubjectID()==id) {
-				
-				break;
-			}
-		}
-	} */
-	
 	public void addProfOnSubj(Subject s, Professor p) {
 		s.setProfessor(p);
 	}
@@ -202,7 +164,8 @@ public class SubjectsDatabase {
 	}
 	
 	public void addSubject(int subjectID, String subjectName,int semestar, int subjectYear, int espb ) {
-		this.subjects.add(new Subject( subjectID,  subjectName, semestar, subjectYear, espb));
+		//this.subjects.add(new Subject( subjectID,  subjectName, semestar, subjectYear, espb));
+		this.allSubjs.add(new Subject( subjectID,  subjectName, semestar, subjectYear, espb));
 	}
 	public Subject gback(int r) {
 		return subjects.get(r); 
@@ -217,4 +180,59 @@ public class SubjectsDatabase {
 				s.setEspb(espb);
 		
 	}
+	
+	public boolean findByName(String name) {
+		boolean found = false;
+		ArrayList<Subject> fs = new ArrayList<Subject>();
+		for (Subject subj: subjects) {
+			
+			if(subj.getSubjectName().toUpperCase().contains(name.toUpperCase())) {
+				foundSubj.add(subj);
+				fs.add(subj);
+				found = true;
+			}
+		}
+		subjects = fs;
+		return found;
+	}
+	public boolean findById(String id) {
+		boolean found = false;
+		ArrayList<Subject> fs = new ArrayList<Subject>();
+		for (Subject subj: subjects) {
+			String Sid = String.valueOf(subj.getSubjectID());
+			if(Sid.toUpperCase().contains(id.toUpperCase())) {
+				foundSubj.add(subj);
+				fs.add(subj);
+				found = true;
+			}
+		}
+		subjects = fs;
+		return found;
+	}
+	
+	public boolean findByNameAndId(String name, String id){
+		boolean found = false;
+		ArrayList<Subject> fs = new ArrayList<Subject>();
+		for (Subject subj: subjects) {
+			String Sid = String.valueOf(subj.getSubjectID());
+			if(subj.getSubjectName().toUpperCase().contains(name.toUpperCase()) && Sid.toUpperCase().contains(id.toUpperCase())) {
+				foundSubj.add(subj);
+				fs.add(subj);
+				found = true;
+			}
+		}
+		subjects = fs;
+		return found;
+	}
+	
+	public void switchBetweenFoundAndAll() {
+		ArrayList<Subject> temp = new ArrayList<Subject>();
+		temp = subjects;
+		subjects = foundSubj;
+		foundSubj = temp;
+		
+	}
+	public void emptySearch() {
+		subjects = allSubjs;
+	} 
 }

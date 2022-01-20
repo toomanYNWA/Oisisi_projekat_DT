@@ -125,6 +125,14 @@ public class Subject {
 	public void setStudentsNotPassed(ArrayList<String> indexNotPassed) {
 		this.indexNotPassed = indexNotPassed;
 	}
+	public void removePassedExam(String index) {
+		indexNotPassed.remove(index);
+		indexPassed.add(index);
+	}
+	public void addAnnuledExam(String index) {
+		indexPassed.remove(index);
+		indexNotPassed.add(index);
+	}
 
 	@Override
 	public String toString() {

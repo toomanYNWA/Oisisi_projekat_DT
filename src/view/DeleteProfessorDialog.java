@@ -38,7 +38,7 @@ public class DeleteProfessorDialog extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ProfessorsController.getInstance().deleteProfessor(TabbedPane.getInstance().getTableProfessors().getSelectedRow());
+				ProfessorsController.getInstance().deleteProfessor(TabbedPane.getInstance().getTableProfessors().convertRowIndexToModel(TabbedPane.getInstance().getTableProfessors().getSelectedRow()));
 				dispose();
 			}
 		}); 

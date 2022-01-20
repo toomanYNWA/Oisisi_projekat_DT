@@ -23,6 +23,8 @@ public class ProfessorsDatabase {
 
 	private ArrayList<Professor> professors;
 	private List<String> columns;
+	private ArrayList<Professor> foundProf = new ArrayList<Professor>();
+	private ArrayList<Professor> allProfs;
 
 	private ProfessorsDatabase() {
 		initProfessor();
@@ -31,10 +33,12 @@ public class ProfessorsDatabase {
 		this.columns.add("Prezime");
 		this.columns.add("Email");
 		this.columns.add("Zvanje");
+		allProfs = professors;
 	}
 	private void initProfessor() {
 		
 		this.professors = new ArrayList<Professor>();
+		//this.allProfs = new ArrayList<Professor>();
 
 		String next = null;
 		String [] column = null;
@@ -97,6 +101,7 @@ public class ProfessorsDatabase {
 				// ime, prz, datumrodj, telefon, mejl, adresa, adrsa kanc, id, staz, titula, predmeti
 				//prof.setSubjects(subjects); //PROVALI STO NE RADI(subj mi je null zato)
 				professors.add(prof);
+				//allProfs.add(prof);
 			}
 			in.close();
 		} catch (IOException e) {
@@ -139,7 +144,8 @@ public class ProfessorsDatabase {
 	
 	public void addProfessor(String name, String surname, LocalDate dateofbirth, String phone, String email,
 			Address address, Address officeAdress, String id, int yearsOfTrail, Title title) {
-		this.professors.add(new Professor(name, surname, dateofbirth, phone, email, address, officeAdress, id, yearsOfTrail, title));
+		//this.professors.add(new Professor(name, surname, dateofbirth, phone, email, address, officeAdress, id, yearsOfTrail, title));
+		this.allProfs.add(new Professor(name, surname, dateofbirth, phone, email, address, officeAdress, id, yearsOfTrail, title));
 	}
 	
 	public void editProfessor(String id,String name, String surname, LocalDate dateofbirth, String phone, String email,
@@ -177,5 +183,57 @@ public class ProfessorsDatabase {
 		}
 		return null;
 	}
+	public boolean findByName(String name) {
+		boolean found = false;
+		ArrayList<Professor> fp = new ArrayList<Professor>();
+		for (Professor prof: professors) {
+			
+			if(prof.getName().toUpperCase().contains(name.toUpperCase())) {
+				foundProf.add(prof);
+				fp.add(prof);
+				found = true;
+			}
+		}
+		professors = fp;
+		return found;
+	}
+	public boolean findBySurname(String surname) {
+		boolean found = false;
+		ArrayList<Professor> fp = new ArrayList<Professor>();
+		for (Professor prof: professors) {
+			if(prof.getSurname().toUpperCase().contains(surname.toUpperCase())) {
+				foundProf.add(prof);
+				fp.add(prof);
+				found = true;
+			}
+		}
+		professors = fp;
+		return found;
+	}
+	
+	public boolean findBySurnameAndName(String surname, String name){
+		boolean found = false;
+		ArrayList<Professor> fp = new ArrayList<Professor>();
+		for (Professor prof: professors) {
+			if(prof.getSurname().toUpperCase().contains(surname.toUpperCase()) && prof.getName().toUpperCase().contains(name.toUpperCase())) {
+				foundProf.add(prof);
+				fp.add(prof);
+				found = true;
+			}
+		}
+		professors = fp;
+		return found;
+	}
+	
+	public void switchBetweenFoundAndAll() {
+		ArrayList<Professor> temp = new ArrayList<Professor>();
+		temp = professors;
+		professors = foundProf;
+		foundProf = temp;
+		
+	}
+	public void emptySearch() {
+		professors = allProfs;
+	} 
 	
 }

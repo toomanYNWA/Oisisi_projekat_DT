@@ -14,8 +14,12 @@ import javax.swing.SwingConstants;
 import controller.AddActionListener;
 import controller.DeleteActionListener;
 import controller.EditActionListener;
+import controller.ProfessorsController;
 import controller.SearchController;
+import controller.SearchProfessorsController;
+import controller.SearchSubjectsController;
 import controller.StudentsController;
+import controller.SubjectsController;
 
 
 public class ToolBar extends JToolBar{
@@ -118,8 +122,62 @@ public class ToolBar extends JToolBar{
     					SearchController.getInstance().emptySea();
     				}
     			}
+    			 if(TabbedPane.position == 1) {
+    				if(!search1.equals("")) {
+    					String[] split = search1.split(",");
+    					if(split.length == 1) {
+    						
+    						SearchProfessorsController.getInstance().findProfsBySurname(search1);
+    						//SearchProfessorsController.getInstance().findProfsByName(search1);
+    						
+    						if(!ProfessorsController.getInstance().isFound()) {
+    							search.setText("");
+    							search1 = "";
+    						}
+    					}
+    					else if(split.length == 2) {
+    						split[0] = split[0].trim();
+    						split[1] = split[1].trim();
+    						SearchProfessorsController.getInstance().findProfsBySurnameAndName(split[0], split[1]);
+    						
+    						if(!ProfessorsController.getInstance().isFound()) {
+    							search.setText("");
+    							search1 = "";
+    						}
+    					}
+    				}
+    				else {
+    					
+    					SearchProfessorsController.getInstance().emptySearch();
+    				}
     		}
-			
+    			 if(TabbedPane.position == 2) {
+     				if(!search1.equals("")) {
+     					String[] split = search1.split(",");
+     					if(split.length == 1) {
+     						SearchSubjectsController.getInstance().findSubjsByName(search1);
+     						if(!SubjectsController.getInstance().isFound()) {
+     							search.setText("");
+     							search1 = "";
+     						}
+     					}
+     					else if(split.length == 2) {
+     						split[0] = split[0].trim();
+     						split[1] = split[1].trim();
+     						SearchSubjectsController.getInstance().findSubjsByNameAndId(split[0], split[1]);
+     						
+     						if(!SubjectsController.getInstance().isFound()) {
+     							search.setText("");
+     							search1 = "";
+     						}
+     					}
+     				}
+     				else {
+     					
+     					SearchSubjectsController.getInstance().emptySearch();
+     				}
+     		}
+		}
 	});
 	}
 

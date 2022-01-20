@@ -284,8 +284,8 @@ public class EditSubjectsDialogue extends JDialog{
 //					JOptionPane.showMessageDialog(null, "Vec postoji predmet sa unetim ID-jem!","",JOptionPane.ERROR_MESSAGE);
 //				}
 				else {
-				int index = TabbedPane.getInstance().getTableSubjects().getSelectedRow();
-				SubjectsController.getInstance().editSubject(TabbedPane.getInstance().getTableSubjects().getSelectedRow(),Integer.parseInt(idTF.getText()),nameTF.getText(),semCB.getSelectedIndex(),Integer.parseInt(yearTF.getText()),Integer.parseInt(espbTF.getText()));
+				int index = TabbedPane.getInstance().getTableSubjects().convertRowIndexToModel(TabbedPane.getInstance().getTableSubjects().getSelectedRow());
+				SubjectsController.getInstance().editSubject(TabbedPane.getInstance().getTableSubjects().convertRowIndexToModel(TabbedPane.getInstance().getTableSubjects().getSelectedRow()),Integer.parseInt(idTF.getText()),nameTF.getText(),semCB.getSelectedIndex(),Integer.parseInt(yearTF.getText()),Integer.parseInt(espbTF.getText()));
 
 				String [] trimmed = null;
 				String selected = nameP;
@@ -318,7 +318,7 @@ public class EditSubjectsDialogue extends JDialog{
 			}
 		});
 		
-		Subject subject = new Subject(SubjectsController.getInstance().getSubject(TabbedPane.getInstance().getTableSubjects().getSelectedRow()));
+		Subject subject = new Subject(SubjectsController.getInstance().getSubject(TabbedPane.getInstance().getTableSubjects().convertRowIndexToModel(TabbedPane.getInstance().getTableSubjects().getSelectedRow())));
 		idTF.setText(String.valueOf(subject.getSubjectID()));
 		nameTF.setText(subject.getSubjectName());
 		yearTF.setText(String.valueOf(subject.getSubjectYear()));

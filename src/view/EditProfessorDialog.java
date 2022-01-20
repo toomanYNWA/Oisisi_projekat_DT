@@ -606,7 +606,7 @@ public class EditProfessorDialog extends JDialog{
 					t = Title.ASSOCIATE_PROFESSOR;
 				else
 					t = Title.PROFESSOR;
-				ProfessorsController.getInstance().editProfessor(TabbedPane.getInstance().getTableProfessors().getSelectedRow(), nameTF.getText(), surnameTF.getText(), dOB, phoneTF.getText(), emailTF.getText(), a, aO, idTF.getText(), Integer.parseInt(yearsOfTrailTF.getText()), t);
+				ProfessorsController.getInstance().editProfessor(TabbedPane.getInstance().getTableProfessors().convertRowIndexToModel(TabbedPane.getInstance().getTableProfessors().getSelectedRow()), nameTF.getText(), surnameTF.getText(), dOB, phoneTF.getText(), emailTF.getText(), a, aO, idTF.getText(), Integer.parseInt(yearsOfTrailTF.getText()), t);
 				dispose();
 				}
 			}
@@ -633,7 +633,7 @@ public class EditProfessorDialog extends JDialog{
 			   }
 
 		}); 
-		Professor prof = new Professor(ProfessorsController.getInstance().getProfessor(TabbedPane.getInstance().getTableProfessors().getSelectedRow()));
+		Professor prof = new Professor(ProfessorsController.getInstance().getProfessor(TabbedPane.getInstance().getTableProfessors().convertRowIndexToModel(TabbedPane.getInstance().getTableProfessors().getSelectedRow())));
 		nameTF.setText(prof.getName());
 		surnameTF.setText(prof.getSurname());
 		dateOfBirthTF.setText(prof.getDateofbirth().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));

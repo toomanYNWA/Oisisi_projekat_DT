@@ -2,6 +2,8 @@ package controller;
 
 import java.time.LocalDate;
 
+import javax.swing.JOptionPane;
+
 import model.Address;
 import model.Professor;
 import model.Professor.Title;
@@ -10,6 +12,7 @@ import view.TabbedPane;
 
 public class ProfessorsController {
 	private static ProfessorsController instance = null;
+	private boolean found = false;
 	
 	public static ProfessorsController getInstance() {
 		if(instance==null) {
@@ -47,4 +50,39 @@ public class ProfessorsController {
 		 Professor prof = ProfessorsDatabase.getInstance().getRow(rowSelectedIndex);
 		 return prof;
 	 }
+	 public void findBySurname(String surname) {
+			found = ProfessorsDatabase.getInstance().findBySurname(surname);
+			if(found) {
+				TabbedPane.getInstance().updateProfessors();
+			} else {
+				JOptionPane.showMessageDialog(null, "Ne postoji profesor sa unetim prezimenom");
+				TabbedPane.getInstance().updateProfessors();
+			}
+		}
+	 public void findByName(String name) {
+			found = ProfessorsDatabase.getInstance().findByName(name);
+			if(found) {
+				TabbedPane.getInstance().updateProfessors();
+			} else {
+				JOptionPane.showMessageDialog(null, "Ne postoji profesor sa unetim imenom");
+				TabbedPane.getInstance().updateProfessors();
+			}
+		}
+	 public void findBySurnameAndName(String surname, String name) {
+			found = ProfessorsDatabase.getInstance().findBySurnameAndName(surname, name);
+			if(found) {
+				TabbedPane.getInstance().updateProfessors();
+			} else {
+				JOptionPane.showMessageDialog(null, "Ne postoji profesor sa unetim imenom i prezimenom!");
+				TabbedPane.getInstance().updateProfessors();
+			}
+		}
+
+	 public boolean isFound() {
+			return found;
+		}
+
+	 public void setFound(boolean found) {
+			this.found = found;
+		}
 }

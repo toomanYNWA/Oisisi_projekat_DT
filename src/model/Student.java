@@ -17,7 +17,7 @@ public class Student extends User{
 	private float averageGrade;
 	private Status status;
 	private ArrayList<Grade> passed;
-	private ArrayList<Subject> notPassed ;
+	private ArrayList<Subject> notPassed = new ArrayList<Subject>();
 	
 	public Student(String nuIndex, int currentYear,int status, String name, String surname, LocalDate dateOfBirth, Address address,String email,int yearOfEnrollment,String phone) {
 		super(name, surname, dateOfBirth, phone, email, address);
@@ -117,6 +117,9 @@ public class Student extends User{
 		this.notPassed.add(s);
 	}
 
+	public void removeNotPassedSubject(Subject s) {
+		this.notPassed.remove(s);
+	} 
 	@Override
 	public String toString() {
 		return "Student [nuIndex=" + nuIndex + ", year=" + yearOfEnrollment + ", currentYear=" + currentYear + ", averageGrade="

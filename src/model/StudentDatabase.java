@@ -6,12 +6,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import controller.StudentsController;
-import model.Student.Status;
-import model.Subject.Semestar;
 import view.TabbedPane;
 
 
@@ -32,18 +29,12 @@ public class StudentDatabase {
 	private ArrayList<Student> students;
 	private List<String> columns;
 	private ArrayList<Subject> notPassed;
-	private ArrayList<Subject> returnNotPassed;
-	private ArrayList<Grade> passed;
-	private ArrayList<Grade> returnPassed;
 	private ArrayList<Student> foundStudent = new ArrayList<Student>();
 	private ArrayList<Student> allStudents;
 	private StudentDatabase() {
 		
 		this.students = new ArrayList<Student>();
 		this.notPassed = new ArrayList<Subject>();
-		this.returnNotPassed = new ArrayList<Subject>();
-		this.passed = new ArrayList<Grade>();
-		this.returnPassed = new ArrayList<Grade>();
 		this.columns = new ArrayList<String>();
 		this.columns.add("BROJ INDEKSA");
 		this.columns.add("IME");
@@ -53,7 +44,7 @@ public class StudentDatabase {
 		this.columns.add("PROSEK");
 		initstudents();
 		allStudents = students;
-		
+		setNotPassedSubjects();
 		
 	}
 	private void initstudents() {
@@ -116,6 +107,7 @@ public class StudentDatabase {
 	
 	public ArrayList<Student> getStudents(){
 		return students;
+		//return allStudents;
 	}
 	public void setStudenti(ArrayList<Student> students) {
 		this.students = students;
@@ -153,12 +145,12 @@ public class StudentDatabase {
 		}
 	}
 	public void addStudent(String nuIndex, int currentYear,int status, String name, String surname, LocalDate dateOfBirth, Address address,String email,int yearOfEnrollment,String phone) {
-		this.students.add(new Student(nuIndex, currentYear, status,  name,  surname, dateOfBirth,  address, email,yearOfEnrollment,phone));
+		//this.students.add(new Student(nuIndex, currentYear, status,  name,  surname, dateOfBirth,  address, email,yearOfEnrollment,phone));
 		this.allStudents.add(new Student(nuIndex, currentYear, status,  name,  surname, dateOfBirth,  address, email,yearOfEnrollment,phone));
-		setNotPassedSubjects();
 	}
 	public void deleteStudent(int indexNu) {
 		students.remove(indexNu);
+		//remove sa mape
 		
 	}
 	public Student gback(int r) {
@@ -178,60 +170,32 @@ public class StudentDatabase {
 				s.setEmail(email);
 				s.setPhone(phone);
 				s.setYear(yearOfEnrollment);
-				
-		
+			
 	}
 	
 	public void setNotPassedSubjects() {
 		ArrayList<Subject> allSubj = SubjectsDatabase.getInstance().getSubjects();
-		for(Student s: students) {
+		notPassed.clear();
+		for(Student s: allStudents) {
 			for(Subject subj:allSubj) {
 				ArrayList<String> nP = subj.getStudentsNotPassed();
 				for(String temp : nP) {
 					if(s.getNuIndex().equals(temp)) {
-						notPassed.add(subj);
+						s.addNotPassedSubject(subj);
 					}
 				}
 			}
-			s.setNotPassed(notPassed);
 		}
-	}
-	
-	public ArrayList<Subject> getSubjectsNotPassed() {
-		Student stud= StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
-		if(stud.getNotPassed()!=null) {
-			returnNotPassed = stud.getNotPassed();
-		}
-		return returnNotPassed;
 	} 
 	
-	
-	public void passExam(int sId) {
-		notPassed = getSubjectsNotPassed();
-		for(Subject s: notPassed) {
-			if(s.getSubjectID()==sId) {
-				notPassed.remove(s);
-				//passed.add(s);
-			}
+	public Student getStudentById(String id) {
+		for (Student s: allStudents) {
+			if(s.getNuIndex().equals(id)) {
+				return s;
+			} 
 		}
+		return null;
 	}
-//	public void nullifyExam(int sId) {
-//		passed = getSubjectsPassed();
-//		for(Subject s : passed) {
-//			if(s.getSubjectID()== sId) {
-//				
-//			}
-//		}
-//	}
-	/*public void passExam(int sId) {
-		Passed = getSubjectsPassed();
-		for(Subject s: passed) {
-			if(s.getSubjectID()==sId) {
-				passed.remove(s);
-				notPassed.add(s);
-			}
-		}
-	} */
 	
 	public boolean findBySur(String surname) {
 		boolean found = false;
@@ -287,6 +251,10 @@ public class StudentDatabase {
 	}
 	public void emS() {
 		students = allStudents;
+	} 
+	
+	public Student getSelectedStudent() {
+		return StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
 	}
 }
 	
