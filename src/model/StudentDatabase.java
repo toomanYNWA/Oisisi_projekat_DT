@@ -109,6 +109,10 @@ public class StudentDatabase {
 		return students;
 		//return allStudents;
 	}
+	public Student getStudentByRow(int row) {
+		Student stu = students.get(row);
+		return stu;
+	}
 	public void setStudenti(ArrayList<Student> students) {
 		this.students = students;
     }
@@ -196,6 +200,26 @@ public class StudentDatabase {
 		}
 		return null;
 	}
+	/*public ArrayList<Grade> getSubjectsPassed(){
+	
+		Student stud = StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
+		if(stud.getPassed()!=null) {
+			returnPassed = stud.getPassed();
+		} 
+		return returnPassed;
+	} */
+	
+	/*public void passExam(int sId) {
+		notPassed = getSubjectsNotPassed();
+		for(Subject s: notPassed) {
+			if(s.getSubjectID()==sId) {
+				notPassed.remove(s);
+				//passed.add(s);
+			}
+>>>>>>> e53adbd45ea530837a774f4c84e490c188511eaf
+		}
+		return null;
+	} */
 	
 	public boolean findBySur(String surname) {
 		boolean found = false;
@@ -242,7 +266,7 @@ public class StudentDatabase {
 		return found;
 	}
 	
-	public void switchBetweenFoundAndAll() {
+	public void resetSearch() {
 		ArrayList<Student> pom = new ArrayList<Student>();
 		pom = students;
 		students = foundStudent;
@@ -256,6 +280,7 @@ public class StudentDatabase {
 	public Student getSelectedStudent() {
 		return StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
 	}
+	
 }
 	
 	

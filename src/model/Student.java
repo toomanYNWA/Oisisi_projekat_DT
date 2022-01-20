@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
+
 public class Student extends User{
 	
 	public enum Status {
@@ -16,7 +18,7 @@ public class Student extends User{
 	private int currentYear;
 	private float averageGrade;
 	private Status status;
-	private ArrayList<Grade> passed;
+	private ArrayList<Grade> passed = new ArrayList<Grade>();
 	private ArrayList<Subject> notPassed = new ArrayList<Subject>();
 	
 	public Student(String nuIndex, int currentYear,int status, String name, String surname, LocalDate dateOfBirth, Address address,String email,int yearOfEnrollment,String phone) {
@@ -113,6 +115,10 @@ public class Student extends User{
 		else this.status = Status.S;
 		
 	}
+	public void addPassed(Grade g) {
+		this.passed.add(g);
+	}
+	
 	public void addNotPassedSubject(Subject s) {
 		this.notPassed.add(s);
 	}
@@ -120,6 +126,9 @@ public class Student extends User{
 	public void removeNotPassedSubject(Subject s) {
 		this.notPassed.remove(s);
 	} 
+	public void addAnnuledExam(Grade g) {
+		this.passed.remove(g);
+	}
 	@Override
 	public String toString() {
 		return "Student [nuIndex=" + nuIndex + ", year=" + yearOfEnrollment + ", currentYear=" + currentYear + ", averageGrade="

@@ -43,7 +43,7 @@ public class SubjectsController {
 	 public void passExam(int subjId, int grade, LocalDate examDate) {
 			Subject subj = SubjectsDatabase.getInstance().getSubjectById(subjId);
 			Student stud= StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
-			NotPassedSubjectsDatabase.getInstance().removePassedExam(subj);
+			NotPassedSubjectsDatabase.getInstance().removePassedExam(subj, stud.getNuIndex());
 			ExamsPassedDatabase.getInstance().passExam(stud, subj, grade, examDate);
 			NotPassedSubjectsTable.updateNotPassed();
 			PassedSubjectsTable.updatePassed(); 
@@ -111,6 +111,13 @@ public class SubjectsController {
 	 public void setFound(boolean found) {
 			this.found = found;
 		}
+
+	 
+	public String[] findNonUsedSubject(int selectedRowStudent) {
+		return SubjectsDatabase.getInstance().findNonUsedSubject(selectedRowStudent);
+		
+	}
+	
 }
 		
 

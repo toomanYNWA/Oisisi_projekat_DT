@@ -235,4 +235,31 @@ public class SubjectsDatabase {
 	public void emptySearch() {
 		subjects = allSubjs;
 	} 
+	public String[] findNonUsedSubject(int selectedRowStudent ) {
+		
+		ArrayList<Subject> allSubjects = subjects;
+		
+		ArrayList<Subject> notPassed = StudentDatabase.getInstance().getStudentByRow(selectedRowStudent).getNotPassed();
+		ArrayList<Grade> passedGrade = StudentDatabase.getInstance().getStudentByRow(selectedRowStudent).getPassed();
+		
+		ArrayList<Subject> subjPassedFromGrade = new ArrayList<Subject>();
+		
+		for(Grade gr: passedGrade) {
+			subjPassedFromGrade.add(gr.getSubject());
+		}
+		
+		String[] leftoverSubj = new String[allSubjects.size()- (notPassed.size() + subjPassedFromGrade.size())];
+		
+		int iterator = 0 ;
+		for(Subject subject : allSubjects) {
+			if(!notPassed.contains(subject)) {
+				if(!subjPassedFromGrade.contains(subject)){
+					leftoverSubj[iterator]= subject.toString();
+					iterator++;
+				}
+			}
+		
+		}
+		return leftoverSubj;
+	}
 }

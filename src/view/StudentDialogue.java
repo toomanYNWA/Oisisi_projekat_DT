@@ -475,6 +475,7 @@ public class StudentDialogue extends JDialog{
 		doo.addActionListener(new ActionListener() {
 			String nameSurnameReg="([A-Ž][a-ž]+[' ']?)+";
 			String addressNumReg = "[0-9a-z]+";
+			String regNum = "[0-9]+";
 			String addressReg="[a-žA-Ž ]+"; 
 			String emailReg="[a-zA-Z0-9._]+@[a-zA-Z]+[.][a-zA-Z]+[.]?[a-zA-Z]*";
 			String numbersReg="[0-9]+[/]?[0-9]+[-]?[0-9]+";
@@ -494,8 +495,8 @@ public class StudentDialogue extends JDialog{
 					JOptionPane.showMessageDialog(null, "Ime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!surnameTF.getText().trim().matches(nameSurnameReg)){
 					JOptionPane.showMessageDialog(null, "Prezime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
-				}else if(!yearOfEnrollmentTF.getText().trim().matches(numbersReg)){
-					JOptionPane.showMessageDialog(null, "Godine radnog staza nisu pravilno unete!","",JOptionPane.ERROR_MESSAGE);
+				}else if(!yearOfEnrollmentTF.getText().trim().matches(regNum)){
+					JOptionPane.showMessageDialog(null, "Godina upisa nije dobro uneta!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!streetTF.getText().trim().matches(addressReg)) {
 					JOptionPane.showMessageDialog(null, "Ulica nije pravilno uneta! ","",JOptionPane.ERROR_MESSAGE);
 				}else if(!numTF.getText().trim().matches(addressNumReg)) {

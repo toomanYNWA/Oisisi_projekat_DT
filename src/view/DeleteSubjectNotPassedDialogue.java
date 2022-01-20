@@ -12,32 +12,40 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.SubjectsController;
-import model.ExamsPassedDatabase;
-import model.SubjectsDatabase;
+import model.NotPassedSubjectsDatabase;
 
-
-public class AnnulGradeDialog extends JDialog {
-	AnnulGradeDialog(){
+public class DeleteSubjectNotPassedDialogue extends JDialog {
+	public DeleteSubjectNotPassedDialogue() {
 		setModal(true);
 		setSize(300,150);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setTitle("Ponistavanje ocene");
+		setTitle("Brisanje predmeta");
 		Image img = kit.getImage("icons/trash.png");
 		setIconImage(img);
-		
 		JPanel message = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JLabel messageL=new JLabel("Da li ste sigurni da zelite da ponistite ocenu?");
+		JLabel messageL=new JLabel("Da li ste sigurni da zelite da uklonite predmet?");
 		message.add(messageL);
 		JPanel yesNo = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JButton yes = new JButton("Da");
-		JButton no = new JButton("Ne");
+		JButton doo = new JButton("Da");
+		JButton dont = new JButton("Ne");
+		doo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+					//
+					dispose();
+				
+			}
+		});
 		
-		no.addActionListener(new ActionListener() {
+		
+		dont.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -46,25 +54,12 @@ public class AnnulGradeDialog extends JDialog {
 
 			}
 		});
-		yes.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				int subjId = (int) ExamsPassedDatabase.getInstance().getValueAt(PassedSubjectsTable.rowSelectedIndex, 0);
-			    SubjectsController.getInstance().annulGrade(subjId);
-				dispose();
-
-			}
-		});
-		
-		yesNo.add(yes);
-		yesNo.add(no);
+		yesNo.add(doo);
+		yesNo.add(dont);
 		Box pattern = Box.createVerticalBox();
 		pattern.add(Box.createVerticalStrut(10));
 		pattern.add(message);
 		pattern.add(yesNo);
 		this.add(pattern,BorderLayout.CENTER);
 	}
-	
-
 }

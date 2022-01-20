@@ -27,9 +27,8 @@ public class NotPassedSubjectsTable extends JTable {
 				if(notPassedTable.getSelectedRow()!=-1) {
 					rowSelectedIndex = notPassedTable.convertRowIndexToModel(notPassedTable.getSelectedRow());
 				}
-
 			}
-			});
+			}); 
 	}
 	
 	@Override

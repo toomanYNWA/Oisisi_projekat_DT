@@ -66,8 +66,10 @@ public class NotPassedSubjectsDatabase {
 		}
 	}
 	
-	public void removePassedExam(Subject s) {
+	public void removePassedExam(Subject s, String indexS) {
 		notPassedSubjects.remove(s);
+		s.removePassedExam(indexS);
+		
 	}
 	
 	public void addAnnuledExam(int sId) {

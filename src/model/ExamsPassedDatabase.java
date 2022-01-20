@@ -109,7 +109,9 @@ public class ExamsPassedDatabase {
 	}
 	
 	public void passExam(Student st,Subject s, int grade, LocalDate examDate) {
-		this.subGr.add(new Grade(st,s,grade,examDate));
+		Grade g = new Grade(st,s,grade,examDate);
+		this.subGr.add(g);
+		st.addPassed(g);
 	}  
 	
 	public void annulGrade(int id) {
@@ -117,6 +119,7 @@ public class ExamsPassedDatabase {
 			if(g.getSubject().getSubjectID()==id) {
 				subGr.remove(g);
 				g.getSubject().addAnnuledExam(g.getStudentPassed().getNuIndex());
+				g.getStudentPassed().addAnnuledExam(g);
 				break;
 			}
 		

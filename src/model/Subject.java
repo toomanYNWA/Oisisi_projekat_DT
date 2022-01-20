@@ -136,9 +136,7 @@ public class Subject {
 
 	@Override
 	public String toString() {
-		return "Subject [subjectID=" + subjectID + ", subjectName=" + subjectName + ", subjectYear=" + subjectYear
-				+ ", professor=" + professor + ", espb=" + espb + ", semestar=" + semestar + ", indexPassed="
-				+ indexPassed + ", indexNotPassed=" + indexNotPassed + "]";
+		return	 this.subjectID+"-"+this.subjectName;
 	}	
 	
 }

@@ -142,8 +142,8 @@ public class AddGradeDialog extends JDialog{
 						grade = 7;
 					else 
 						grade = 6;
-					int SubjId = (int) NotPassedSubjectsDatabase.getInstance().getValueAt(NotPassedSubjectsTable.rowSelectedIndex, 0);
-					//int SubjId = (int) SubjectsDatabase.getInstance().getValueAtNotPassed(NotPassedSubjectsTable.rowSelectedIndex, 0);
+					Subject s = NotPassedSubjectsDatabase.getInstance().getRow(NotPassedSubjectsTable.rowSelectedIndex);
+					int SubjId = s.getSubjectID();
 					SubjectsController.getInstance().passExam(SubjId, grade, examDate);
 					dispose();
 				} 
@@ -183,7 +183,7 @@ public class AddGradeDialog extends JDialog{
 		yesNo.add(yes);
 		yesNo.add(no);
 		
-		Subject subj = new Subject(SubjectsController.getInstance().getSubject(NotPassedSubjectsTable.rowSelectedIndex));
+		Subject subj = new Subject(NotPassedSubjectsDatabase.getInstance().getRow(NotPassedSubjectsTable.rowSelectedIndex));
 		idTF.setText(String.valueOf(subj.getSubjectID()));
 		nameTF.setText(subj.getSubjectName());
 		

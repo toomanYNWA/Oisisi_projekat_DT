@@ -37,7 +37,6 @@ public class StudentsController {
 			if (rowSelectedIndex < 0) {
 				 return;
 			 }
-			//Student student = StudentDatabase.getInstance().getRow(rowSelectedIndex);
 			StudentDatabase.getInstance().editStudent(rowSelectedIndex, nuIndex,  yearOfEnrollment, currentYear, status, name, surname, dateofbirth, phone, email, address);
 			TabbedPane.getInstance().getStudentsTable().patchView();
 			
@@ -59,30 +58,36 @@ public class StudentsController {
 		public void studentsBySurname(String surname) {
 			found = StudentDatabase.getInstance().findBySur(surname);
 			if(found) {
-				//StudentDatabase.getInstance().switchBetweenFoundAndAll();
 				TabbedPane.getInstance().getStudentsTable().patchView();
 			} else {
 				JOptionPane.showMessageDialog(null, "Prezime ne postoji u bazi podataka!");
+				TabbedPane.getInstance().getStudentsTable().patchView();
 			}
 		}
 		
 		public void studentsByIndexAndNameAndSurname(String index, String name, String surname) {
 			found = StudentDatabase.getInstance().findByNuInAndNameAndSur(index, name, surname);
 			if(found) {
-				//StudentDatabase.getInstance().switchBetweenFoundAndAll();
+				
 				TabbedPane.getInstance().getStudentsTable().patchView();
 			} else {
+				
 				JOptionPane.showMessageDialog(null, "Ne postoji student sa datim indeksom, imenom i prezimenom!");
+				TabbedPane.getInstance().getStudentsTable().patchView();
 			}
 		}
 		
 		public void studentsBySurAndName(String surname, String name) {
+			
 			found = StudentDatabase.getInstance().findBySurAndName(surname, name);
+			
 			if(found) {
-				//StudentDatabase.getInstance().switchBetweenFoundAndAll();
+				
 				TabbedPane.getInstance().getStudentsTable().patchView();
 			} else {
+				
 				JOptionPane.showMessageDialog(null, "Ne postoji student sa datim imenom i prezimenom!");
+				TabbedPane.getInstance().getStudentsTable().patchView();
 			}
 		}
 
