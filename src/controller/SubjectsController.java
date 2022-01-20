@@ -81,6 +81,13 @@ private static SubjectsController instance = null;
 			TabbedPane.getInstance().updateSubjects();
 			
 		}
+
+	 
+	public String[] findNonUsedSubject(int selectedRowStudent) {
+		return SubjectsDatabase.getInstance().findNonUsedSubject(selectedRowStudent);
+		
+	}
+	
 }
 		
 

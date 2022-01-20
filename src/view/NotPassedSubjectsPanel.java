@@ -34,8 +34,27 @@ public class NotPassedSubjectsPanel extends JPanel{
 				}
 			}
 		});
-		
 		tableSubjects=new NotPassedSubjectsTable();
+		add.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				ChooseSubjectDialogue suD = new ChooseSubjectDialogue(tableSubjects);
+				suD.setVisible(true);
+				
+			}
+		});
+		delete.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				DeleteSubjectNotPassedDialogue suDel = new DeleteSubjectNotPassedDialogue();
+				suDel.setVisible(true);
+			}
+		});
+		
 		JScrollPane subjectsPane=new JScrollPane(tableSubjects);
 		add(subjectsPane, BorderLayout.CENTER);
 	}
@@ -43,4 +62,6 @@ public class NotPassedSubjectsPanel extends JPanel{
 	public JTable getTable() {
 		return (NotPassedSubjectsTable)tableSubjects;
 	}
+	
+	
 }

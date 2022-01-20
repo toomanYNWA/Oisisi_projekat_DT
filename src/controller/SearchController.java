@@ -29,7 +29,7 @@ public class SearchController {
 		StudentsController.getInstance().studentsByIndexAndNameAndSurname(index, name, surname);
 	}
 	public void studentsSearchEmpty() {
-		StudentDatabase.getInstance().switchBetweenFoundAndAll();
+		StudentDatabase.getInstance().resetSearch();
 		TabbedPane.getInstance().getStudentsTable().patchView();
 	}
 	public void emptySea() {

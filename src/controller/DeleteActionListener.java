@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import view.DeleteProfessorDialog;
 import view.DeleteStudent;
 import view.DeleteSubjectDialog;
+import view.DeleteSubjectNotPassedDialogue;
 import view.TabbedPane;
 
 public class DeleteActionListener implements ActionListener {

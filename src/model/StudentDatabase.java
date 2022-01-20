@@ -117,6 +117,11 @@ public class StudentDatabase {
 	public ArrayList<Student> getStudents(){
 		return students;
 	}
+	public Student getStudentByRow(int row) {
+		Student stu = students.get(row);
+		
+		return stu;
+	}
 	public void setStudenti(ArrayList<Student> students) {
 		this.students = students;
     }
@@ -153,7 +158,6 @@ public class StudentDatabase {
 		}
 	}
 	public void addStudent(String nuIndex, int currentYear,int status, String name, String surname, LocalDate dateOfBirth, Address address,String email,int yearOfEnrollment,String phone) {
-		this.students.add(new Student(nuIndex, currentYear, status,  name,  surname, dateOfBirth,  address, email,yearOfEnrollment,phone));
 		this.allStudents.add(new Student(nuIndex, currentYear, status,  name,  surname, dateOfBirth,  address, email,yearOfEnrollment,phone));
 		setNotPassedSubjects();
 	}
@@ -205,6 +209,14 @@ public class StudentDatabase {
 		return returnNotPassed;
 	} 
 	
+	public ArrayList<Grade> getSubjectsPassed(){
+	
+		Student stud = StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
+		if(stud.getPassed()!=null) {
+			returnPassed = stud.getPassed();
+		} 
+		return returnPassed;
+	}
 	
 	public void passExam(int sId) {
 		notPassed = getSubjectsNotPassed();
@@ -278,7 +290,7 @@ public class StudentDatabase {
 		return found;
 	}
 	
-	public void switchBetweenFoundAndAll() {
+	public void resetSearch() {
 		ArrayList<Student> pom = new ArrayList<Student>();
 		pom = students;
 		students = foundStudent;
@@ -288,6 +300,7 @@ public class StudentDatabase {
 	public void emS() {
 		students = allStudents;
 	}
+	
 }
 	
 	
