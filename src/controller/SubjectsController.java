@@ -44,10 +44,7 @@ public class SubjectsController {
 			Subject subj = SubjectsDatabase.getInstance().getSubjectById(subjId);
 			Student stud= StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
 			NotPassedSubjectsDatabase.getInstance().removePassedExam(subj);
-			//StudentDatabase.getInstance().removePassedExam(subj, stud);
 			ExamsPassedDatabase.getInstance().passExam(stud, subj, grade, examDate);
-			//System.out.println(stud.getNotPassed());
-			//System.out.println(subj.getStudentsNotPassed());  -->radi sve
 			NotPassedSubjectsTable.updateNotPassed();
 			PassedSubjectsTable.updatePassed(); 
 	 }
