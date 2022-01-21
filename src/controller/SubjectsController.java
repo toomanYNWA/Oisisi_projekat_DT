@@ -43,9 +43,7 @@ public class SubjectsController {
 	 public void passExam(int subjId, int grade, LocalDate examDate) {
 			Subject subj = SubjectsDatabase.getInstance().getSubjectById(subjId);
 			Student stud= StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
-			//promeni ovo iznad kad toma uradi sort
 			NotPassedSubjectsDatabase.getInstance().removePassedExam(subj, stud.getNuIndex());
-			//ovo vrv brise i sa studenta zbog one set fje za dod 
 			ExamsPassedDatabase.getInstance().passExam(stud, subj, grade, examDate);
 			NotPassedSubjectsTable.updateNotPassed();
 			PassedSubjectsTable.updatePassed(); 

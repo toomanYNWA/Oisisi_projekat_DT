@@ -1,3 +1,0 @@
-Marko|Markovic|17.06.1975|062123456|markomarkovic@uns.ac.rs|Laze Kostica, 11, Novi Sad, Srbija|Dositeja Obradovica, 6, Novi Sad, Srbija|000011|10|PROFESSOR|03#
-Dunja|Popovic|26.04.1985|062125456|dunjapopovic@uns.ac.rs|Safarikova, 11, Novi Sad, Srbija|Dositeja Obradovica, 6, Novi Sad, Srbija|000022|7|PROFESSOR|02#
-Petar|Petrovic|13.12.1973|0658765432|petar_petrovic@uns.ac.rs|Novosadskog Sajma, 3, Novi Sad, Srbija|Dositeja Obradovica, 6,Novi Sad, Srbija|000033|8|PROFESSOR|01#

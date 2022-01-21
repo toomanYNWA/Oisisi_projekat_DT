@@ -41,6 +41,7 @@ public class EditSubjectsDialogue extends JDialog{
 	public static JTextField espbTF;
 	public static JTextField semesTF;
 	public String nameP;
+	public Professor selP;
 //	public static JTextField passedTF;
 //	public static JTextField notPassedTF;
 	
@@ -294,18 +295,16 @@ public class EditSubjectsDialogue extends JDialog{
 				String trimmedName = trimmed[0];
 				String trimmedSurname = trimmed[1];
 				for(Professor p : ProfessorsDatabase.getInstance().getProfessors()) {
-					if(p.getName().equals(trimmedName) && p.getSurname().equals(trimmedSurname))
+					if(p.getName().equals(trimmedName) && p.getSurname().equals(trimmedSurname)) {
 						SubjectsController.getInstance().addProfOnSubj(index, p);
-					} 
-				} else {
+					}
+				}
+				}else {	
 					Subject s = SubjectsController.getInstance().getSubject(index);
 					SubjectsController.getInstance().removeProfessor(s);
-				}
+					}
 				dispose(); 						
-				
-			}
-		
-			
+				}
 			}	
 		});
 		

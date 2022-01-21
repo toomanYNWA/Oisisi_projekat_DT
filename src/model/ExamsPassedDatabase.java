@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public class ExamsPassedDatabase {
 	}
 	
 	private ArrayList<Grade> subGr = new ArrayList<Grade>();
-	private ArrayList<Grade> studsGr = new ArrayList<Grade>();
+	private ArrayList<Grade> allGrades = new ArrayList<Grade>();
 	private ArrayList<String> col;
 
 	public ExamsPassedDatabase() {
@@ -34,18 +35,19 @@ public class ExamsPassedDatabase {
 		col.add("ESPB");
 		col.add("OCENA");
 		col.add("DATUM");
-		//initialize();
+		initialize();
+		loadPassed();
+		getPassed();
 		
 	}
-	/*public void initialize() {
+	public void initialize() {
 		String next=null;
 		String[] column=null;
 		String [] date = null;
 		BufferedReader in=null;
-		
 		try {
-			in=new BufferedReader(new InputStreamReader(new FileInputStream("resources/Grades.txt")));
-		}catch(FileNotFoundException e) {
+			in=new BufferedReader(new InputStreamReader(new FileInputStream("resources/Grades.txt"),"utf-8"));
+		}catch(UnsupportedEncodingException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -62,10 +64,8 @@ public class ExamsPassedDatabase {
 				LocalDate ld = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
 				Student s = StudentDatabase.getInstance().getStudentById(studentId);
 				Subject sub = SubjectsDatabase.getInstance().getSubjectById(subjectId);
-				System.out.println(sub);
-				System.out.println(s);
 				Grade grade = new Grade(s,sub,value,ld);
-				subGr.add(grade);
+				allGrades.add(grade);
 				
 			} 
 			
@@ -74,7 +74,7 @@ public class ExamsPassedDatabase {
 			e.printStackTrace();
 		}
 			
-	} */
+	} 
 	public int getRowCount() {
 		return subGr.size();
 	}
@@ -105,6 +105,19 @@ public class ExamsPassedDatabase {
 		
 		default:
 			return null;
+		}
+	}
+	public ArrayList<Grade> getPassed() {
+		subGr = StudentDatabase.getInstance().getSelectedStudent().getPassed();
+		return subGr;
+	}
+
+	public void loadPassed(){
+		for(Student s:StudentDatabase.getInstance().getStudents()) {
+			for(Grade g:allGrades) {
+				if(g.getStudentPassed()==s) 
+					s.addPassed(g);
+			}
 		}
 	}
 	

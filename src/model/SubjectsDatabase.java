@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import controller.StudentsController;
+import controller.SubjectsController;
 import model.Subject.Semestar;
 import view.StudentsJTable;
 import view.StudentsTablePanel;
@@ -171,6 +172,7 @@ public class SubjectsDatabase {
 	
 	public void removeProfessor(Subject s) {
 		s.setProfessor(null);
+		
 	}
 	
 	public void addSubject(int subjectID, String subjectName,int semestar, int subjectYear, int espb ) {

@@ -24,7 +24,7 @@ public class NotPassedSubjectsDatabase {
 		this.columns.add("ESPB");
 		this.columns.add("Godina");
 		this.columns.add("Semestar");
-		//setNotPassedSubjects();
+		loadNotPassedSubjects();
 		getNotPassed();
 		getSubjects();
 	}
@@ -83,21 +83,6 @@ public class NotPassedSubjectsDatabase {
 				}
 			}}
 	}
-	
-	/*public void setNotPassedSubjects() {
-		ArrayList<Subject> allSubj = SubjectsDatabase.getInstance().getSubjects();
-		ArrayList<Student> allStud = StudentDatabase.getInstance().getStudents();
-		for(Student s: allStud) {
-			for(Subject subj:allSubj) {
-				ArrayList<String> nP = subj.getStudentsNotPassed();
-				for(String temp : nP) {
-					if(s.getNuIndex().equals(temp)) {
-						s.addNotPassedSubject(subj);
-					}
-				}
-			}
-		}
-	} */
 	
 	public void removePassedExam(Subject s, String indexS) {
 		notPassedSubjects.remove(s);

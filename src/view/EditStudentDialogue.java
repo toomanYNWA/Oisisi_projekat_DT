@@ -544,10 +544,17 @@ public class EditStudentDialogue extends JDialog{
 		surnameTF.setText(student.getSurname());
 		dateOfBirthTF.setText(student.getDateofbirth().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
 		Address adr = student.getAddress();
-		streetTF.setText(adr.getStreet());
-		numTF.setText(adr.getNumber());
-		cityTF.setText(adr.getCity());
-		countryTF.setText(adr.getState());
+		if(adr==null) {
+			streetTF.setText("");
+			numTF.setText("");
+			cityTF.setText("");
+			countryTF.setText("");
+		} else {
+			streetTF.setText(adr.getStreet());
+			numTF.setText(adr.getNumber());
+			cityTF.setText(adr.getCity());
+			countryTF.setText(adr.getState());
+		}
 		indexNTF.setText(student.getNuIndex());
 		phoneTF.setText(student.getPhone());
 		emailTF.setText(student.getEmail());

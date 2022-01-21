@@ -1,6 +1,4 @@
 package main;
-
-import model.StudentDatabase;
 import view.MainFrame;
 
 public class MyApp {
@@ -11,7 +9,6 @@ public class MyApp {
 	
 		MainFrame frame = new MainFrame();
 		frame.setVisible(true);
-		StudentDatabase.getInstance();
 		
 	}
 

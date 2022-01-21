@@ -180,5 +180,6 @@ public class ToolBar extends JToolBar{
 		}
 	});
 	}
+	public void init() {}
 
 }

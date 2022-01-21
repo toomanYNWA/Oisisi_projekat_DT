@@ -18,7 +18,7 @@ public class Professor extends User {
 	private String id;
 	private int yearsOfTrail;
 	private Title title;
-	private ArrayList<Subject> subjects;
+	private ArrayList<Subject> subjects = new ArrayList<Subject>();
 	
 
 	public Professor(String name, String surname, LocalDate dateofbirth, String phone, String email,
@@ -87,6 +87,10 @@ public class Professor extends User {
 	public void setSubjects(ArrayList<Subject> subjects) {
 		this.subjects = subjects;
 	}
+	public void removeSubj(Subject s) {
+		this.subjects.remove(s);
+	}
+	
 	@Override
 	public String toString() {
 		return "Professor [officeAdress=" + officeAdress + ", id=" + id + ", yearsOfTrail=" + yearsOfTrail + ", title="
