@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.util.Comparator;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -17,6 +18,7 @@ public class SubjectsJTable extends JTable{
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelSubjects());
 		this.setAutoCreateRowSorter(true);
+		
 	}
 	
 	@Override
@@ -34,4 +36,7 @@ public class SubjectsJTable extends JTable{
 		TableRowSorter<TableModel> sorter=new TableRowSorter<TableModel>(this.getModel());
 		this.setRowSorter(sorter);
 	}
+	
+	
 }
+

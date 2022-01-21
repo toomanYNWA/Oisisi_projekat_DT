@@ -21,6 +21,8 @@ import javax.swing.JTable;
 import javax.swing.border.Border;
 
 import controller.SubjectsController;
+import model.NotPassedSubjectsDatabase;
+import model.Student;
 import model.StudentDatabase;
 import model.Subject;
 import model.SubjectsDatabase;
@@ -28,7 +30,7 @@ import model.SubjectsDatabase;
 public class ChooseSubjectDialogue extends JDialog {
 	
 	
-	public static String subjIdName;
+//	public static String subjIdName;
 	public ChooseSubjectDialogue(JTable table) {
 		
 		setModal(true);
@@ -77,6 +79,7 @@ public class ChooseSubjectDialogue extends JDialog {
 							
 							int t=TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow();
 							StudentDatabase.getInstance().getRow(t).addNotPassedSubject(s);
+							NotPassedSubjectsDatabase.getInstance().setNotPassed(StudentDatabase.getInstance().getRow(t).getNotPassed());
 							
 					}
 						AbstractTableModelNotPassedSubjects model = (AbstractTableModelNotPassedSubjects) table.getModel();
@@ -99,12 +102,12 @@ public class ChooseSubjectDialogue extends JDialog {
 		this.add(listScroller,BorderLayout.CENTER);
 		this.add(dd,BorderLayout.SOUTH);
 	}
-	public static String getSubjIdName() {
-		return subjIdName;
-	}
-	public static void setSubjIdName(String subjIdName) {
-		ChooseSubjectDialogue.subjIdName = subjIdName;
-	}
+//	public static String getSubjIdName() {
+//		return subjIdName;
+//	}
+//	public static void setSubjIdName(String subjIdName) {
+//		ChooseSubjectDialogue.subjIdName = subjIdName;
+//	}
 	
 	
 }

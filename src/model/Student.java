@@ -129,6 +129,7 @@ public class Student extends User{
 	public void addAnnuledExam(Grade g) {
 		this.passed.remove(g);
 	}
+	
 	@Override
 	public String toString() {
 		return "Student [nuIndex=" + nuIndex + ", year=" + yearOfEnrollment + ", currentYear=" + currentYear + ", averageGrade="

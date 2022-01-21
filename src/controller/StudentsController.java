@@ -5,8 +5,10 @@ import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 import model.Address;
+import model.NotPassedSubjectsDatabase;
 import model.Student;
 import model.StudentDatabase;
+import model.Subject;
 import view.TabbedPane;
 
 public class StudentsController {
@@ -99,4 +101,7 @@ public class StudentsController {
 			this.found = found;
 		}
 		
+//		public void deleteSubjectNotPassed(int sub,int stud) {
+//			NotPassedSubjectsDatabase.getInstance().deleteSubjectNotPassed(sub);
+//		}
 }

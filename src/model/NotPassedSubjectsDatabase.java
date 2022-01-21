@@ -34,9 +34,9 @@ public class NotPassedSubjectsDatabase {
 	public ArrayList<Subject> getNotPassed() {
 		return StudentDatabase.getInstance().getSelectedStudent().getNotPassed();
 	}
-	/*public void setNotPassed(ArrayList<Subject> notPassed) {
-		this.passed = passed;
-	} */
+	public void setNotPassed(ArrayList<Subject> notPassed) {
+		this.notPassedSubjects = notPassed;
+	} 
 	public int getColumnCount() {
 		return 5;
 	}
@@ -72,10 +72,18 @@ public class NotPassedSubjectsDatabase {
 		
 	}
 	
+	public void removeNotPassedExam(Subject s, String indexS) {
+		
+	}
+	
 	public void addAnnuledExam(int sId) {
 		for(Subject s: subjects)
 			if(s.getSubjectID()==sId)
 				notPassedSubjects.add(s);
 	}
-	
+	public void deleteSubjectNotPassed(Subject sub, Student stud) {
+		stud.removeNotPassedSubject(sub);
+		notPassedSubjects.remove(sub);
+		
+	}
 }
