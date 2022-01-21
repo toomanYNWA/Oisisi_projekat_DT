@@ -17,7 +17,7 @@ public class ProfessorSubjectDatabase {
 		return instance;		
 	}
 	
-	private ArrayList<Subject> subjects;
+	private ArrayList<Subject> subjects = new ArrayList<Subject>();
 	private ArrayList<Subject> professorsSubjects;
 	private List<String> columns;
 	private Professor p = new Professor();
@@ -92,5 +92,12 @@ public class ProfessorSubjectDatabase {
 	}
 	public Subject getRow(int rowIndex) {
 		return this.professorsSubjects.get(rowIndex);
+	}
+
+	public void deleteSP(Subject selSubject, Professor professor) {
+		
+		professor.removeSubj(selSubject);
+		subjects.remove(selSubject);
+		
 	}
 }

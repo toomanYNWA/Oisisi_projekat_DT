@@ -156,7 +156,7 @@ public class StudentDatabase {
 				 return "B";
 			 } else return "S";
 		case 5:
-			return student.getAverageGrade();
+			return student.calculate();
 		default:
 			return null;
 		}

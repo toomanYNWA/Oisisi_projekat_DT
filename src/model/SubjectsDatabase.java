@@ -282,4 +282,22 @@ public class SubjectsDatabase {
 		}
 		return leftoverSubj;
 	}
+	public String[] findNonUsedSubjectInProfessor(int selectedRowProfessor ) {
+		
+		ArrayList<Subject> allSubjects = subjects;
+		ArrayList<Subject> professorsSubjects = ProfessorSubjectDatabase.getInstance().getProfessor().getSubjects();
+		ArrayList<Subject> filtered = new ArrayList<Subject>();
+		
+		for(Subject subject : allSubjects) {
+			if(!professorsSubjects.contains(subject)) {
+				filtered.add(subject);
+			}	
+		
+		}
+		String[] list = new String[filtered.size()];
+		for(int i = 0; i<filtered.size();i++) {
+			list[i]= filtered.get(i).getSubjectID()+"-"+filtered.get(i).getSubjectName();
+		}
+		return list ;
+	}
 }

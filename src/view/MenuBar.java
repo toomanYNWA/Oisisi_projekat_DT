@@ -151,12 +151,38 @@ public class MenuBar extends JMenuBar {
 			help2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, ActionEvent.CTRL_MASK));
 			help2.setIcon(new ImageIcon("icons/interrogation.png"));
 			help.add(help2);
+			
+			help2.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					
+					HelpDialogue c = new HelpDialogue();
+					
+					c.setVisible(true);
+					
+				}
+					
+
+			});
 			//about = new JMenuItem(MainFrame.getInstance().getResourcesBundle().getString("aboutMB"));
 			about = new JMenuItem("About");
 			about.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 			about.setIcon(new ImageIcon("icons/info.png"));
 			help.add(about);
-			
+			about.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					
+					AboutDialogue c = new AboutDialogue();
+					
+					c.setVisible(true);
+					
+				}
+					
+
+			});
 			students.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, ActionEvent.CTRL_MASK));
 			professor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
 			sub.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));

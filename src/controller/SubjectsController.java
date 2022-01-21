@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import model.ExamsPassedDatabase;
 import model.NotPassedSubjectsDatabase;
 import model.Professor;
+import model.ProfessorSubjectDatabase;
 import model.Student;
 import model.StudentDatabase;
 import model.Subject;
@@ -117,8 +118,16 @@ public class SubjectsController {
 		return SubjectsDatabase.getInstance().findNonUsedSubject(selectedRowStudent);
 		
 	}
+	public String[] findNonUsedSubjectInProfessor(int selectedRowStudent) {
+		return SubjectsDatabase.getInstance().findNonUsedSubjectInProfessor(selectedRowStudent);
+		
+	}
 	public void deleteSubjectNotPassed(Subject selSubject ,Student selStudent) {
 		NotPassedSubjectsDatabase.getInstance().deleteSubjectNotPassed(selSubject,selStudent);
+	}
+	
+	public void deleteSP(Subject selSubject ,Professor professor) {
+		ProfessorSubjectDatabase.getInstance().deleteSP(selSubject,professor);
 	}
 }
 		
