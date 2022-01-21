@@ -41,7 +41,7 @@ public class NotPassedSubjectsPanel extends JPanel{
 				}
 			}
 		});
-		tableSubjects=new NotPassedSubjectsTable();
+		tableSubjects = new NotPassedSubjectsTable();
 		add.addActionListener(new ActionListener() {
 			
 			@Override

@@ -54,6 +54,7 @@ public class TabbedPane extends JTabbedPane {
                    case 2:
                        st.getStatusLabel().setText(" Studentska služba - Predmeti ");
                        break;
+                 
                }
             }
             @Override
@@ -68,7 +69,7 @@ public class TabbedPane extends JTabbedPane {
 		studentPanel=new StudentsTablePanel();
 		JPanel professorPanel=new JPanel();
 		JPanel subjectPanel=new JPanel();
-		
+
 		
 		
 		tableSubjects=new SubjectsJTable();
@@ -82,7 +83,7 @@ public class TabbedPane extends JTabbedPane {
 		add("Studenti", studentPanel);
 		add("Profesori", professorPanel);
 		add("Predmeti", subjectPanel);
-		
+	
 		addChangeListener((ChangeListener) new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
        

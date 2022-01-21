@@ -8,11 +8,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import controller.AddActionListener;
 import controller.DeleteActionListener;
 import controller.EditActionListener;
+import model.Professor;
+import model.ProfessorsDatabase;
 
 
 
@@ -47,6 +50,21 @@ public class MenuBar extends JMenuBar {
 			open.add(sub);
 			JMenuItem cat = new JMenuItem("Cathedra");
 			open.add(cat);
+			
+			cat.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					
+					CatDialogue c = new CatDialogue();
+					
+					c.setVisible(true);
+					
+				}
+					
+
+			});
+			
 			professor.setIcon(new ImageIcon("icons/female.png"));
 			students.setIcon(new ImageIcon("icons/reading.png"));
 			file.add(open);

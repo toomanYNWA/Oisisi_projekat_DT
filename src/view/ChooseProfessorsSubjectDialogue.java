@@ -20,18 +20,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.Border;
 
-import controller.SubjectsController;
 import model.NotPassedSubjectsDatabase;
-import model.Student;
+import model.Professor;
+import model.ProfessorSubjectDatabase;
+import model.ProfessorsDatabase;
 import model.StudentDatabase;
 import model.Subject;
 import model.SubjectsDatabase;
 
-public class ChooseSubjectDialogue extends JDialog {
-	
-	
-//	public static String subjIdName;
-	public ChooseSubjectDialogue(JTable table) {
+public class ChooseProfessorsSubjectDialogue extends JDialog{
+		
+	public ChooseProfessorsSubjectDialogue(JTable table) {
 		
 		setModal(true);
 		setSize(300,300);
@@ -42,14 +41,16 @@ public class ChooseSubjectDialogue extends JDialog {
 		Image img = kit.getImage("icons/new.png");
 		setIconImage(img);
 		
+		DefaultListModel<String> subj = new DefaultListModel<String>(); 
 		
-		int selected = TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow();
-		String [] ss = SubjectsController.getInstance().findNonUsedSubject(selected);
+		int i = 0;
+		for(Subject s : SubjectsDatabase.getInstance().getSubjects()) {
+			subj.add(i++,s.getSubjectID()+"-"+s.getSubjectName());
+			}
 		
-		
-		JList<String> list = new JList<String>(ss);
+		JList<String> list = new JList<String>(subj);
 		list.setPreferredSize(new Dimension(100,100));
-		JScrollPane listScroller = new JScrollPane();
+		JScrollPane listScroller = new JScrollPane(list);
 		listScroller.setViewportView(list);
 		listScroller.createVerticalScrollBar();
 		Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 100, 10);
@@ -77,17 +78,17 @@ public class ChooseSubjectDialogue extends JDialog {
 					for(Subject s : SubjectsDatabase.getInstance().getSubjects()) {
 						if(s.getSubjectID()==(trimmedid)) {
 							
-							int t=TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow();
-							StudentDatabase.getInstance().getRow(t).addNotPassedSubject(s);
-							NotPassedSubjectsDatabase.getInstance().setNotPassed(StudentDatabase.getInstance().getRow(t).getNotPassed());
+							int t=TabbedPane.getInstance().getTableProfessors().getSelectedRow();
+							ProfessorsDatabase.getInstance().getRow(t).addSubject(s);
+							ProfessorSubjectDatabase.getInstance().setProfessorsSubjects(ProfessorsDatabase.getInstance().getRow(t).getSubjects());
 							
 					}
-						AbstractTableModelNotPassedSubjects model = (AbstractTableModelNotPassedSubjects) table.getModel();
+						AbstractTableModelProfessorSubject model = (AbstractTableModelProfessorSubject) table.getModel();
 						model.fireTableDataChanged();
 						validate();
-				}
+					}
 					
-				} 
+					} 
 			}
 		});
 		
@@ -102,13 +103,6 @@ public class ChooseSubjectDialogue extends JDialog {
 		});
 		this.add(listScroller,BorderLayout.CENTER);
 		this.add(dd,BorderLayout.SOUTH);
-	}
-//	public static String getSubjIdName() {
-//		return subjIdName;
-//	}
-//	public static void setSubjIdName(String subjIdName) {
-//		ChooseSubjectDialogue.subjIdName = subjIdName;
-//	}
-	
-	
-}
+
+			}
+		}
