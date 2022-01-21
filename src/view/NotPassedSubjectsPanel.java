@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.sql.RowSetListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -12,10 +13,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import model.NotPassedSubjectsDatabase;
+import model.Student;
+import model.StudentDatabase;
+import model.Subject;
 
 public class NotPassedSubjectsPanel extends JPanel{
 	
-	private JTable tableSubjects;
+	private NotPassedSubjectsTable tableSubjects;
 	NotPassedSubjectsPanel(){
 		
 		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -44,6 +48,7 @@ public class NotPassedSubjectsPanel extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				
 				ChooseSubjectDialogue suD = new ChooseSubjectDialogue(tableSubjects);
+				
 				suD.setVisible(true);
 				
 			}
@@ -55,7 +60,9 @@ public class NotPassedSubjectsPanel extends JPanel{
 				if(NotPassedSubjectsTable.rowSelectedIndex == -1) {
 					JOptionPane.showMessageDialog(null,"Nije oznacen predmet za uklanjanje!","",JOptionPane.ERROR_MESSAGE);
 				}else {
-				DeleteSubjectNotPassedDialogue suDel = new DeleteSubjectNotPassedDialogue();
+				Student stud = StudentDatabase.getInstance().getRow(TabbedPane.getInstance().getStudentsTable().getTable().convertRowIndexToModel(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
+				Subject subj = NotPassedSubjectsDatabase.getInstance().getRow(NotPassedSubjectsTable.rowSelectedIndex);
+				DeleteSubjectNotPassedDialogue suDel = new DeleteSubjectNotPassedDialogue(subj, stud);
 				suDel.setVisible(true);
 				}
 			}

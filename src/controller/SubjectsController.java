@@ -119,7 +119,9 @@ public class SubjectsController {
 		return SubjectsDatabase.getInstance().findNonUsedSubject(selectedRowStudent);
 		
 	}
-	
+	public void deleteSubjectNotPassed(Subject selSubject ,Student selStudent) {
+		NotPassedSubjectsDatabase.getInstance().deleteSubjectNotPassed(selSubject,selStudent);
+	}
 }
 		
 

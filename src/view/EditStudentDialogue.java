@@ -532,14 +532,14 @@ public class EditStudentDialogue extends JDialog{
 				
 				Address adr = new Address(streetTF.getText(), numTF.getText(), cityTF.getText(), countryTF.getText());
 				
-				StudentsController.getInstance().editStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow(),indexNTF.getText(),Integer.parseInt(yearOfEnrollmentTF.getText()),cyCB.getSelectedIndex(),statusCB.getSelectedIndex(),nameTF.getText(),surnameTF.getText(), dateOB, phoneTF.getText(),emailTF.getText(),adr);
+				StudentsController.getInstance().editStudent(TabbedPane.getInstance().getStudentsTable().getTable().convertRowIndexToModel(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()),indexNTF.getText(),Integer.parseInt(yearOfEnrollmentTF.getText()),cyCB.getSelectedIndex(),statusCB.getSelectedIndex(),nameTF.getText(),surnameTF.getText(), dateOB, phoneTF.getText(),emailTF.getText(),adr);
 				dispose();
 				}
 			}
 
 		});
 
-		Student student = new Student(StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
+		Student student = new Student(StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().convertRowIndexToModel(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow())));
 		nameTF.setText(student.getName());
 		surnameTF.setText(student.getSurname());
 		dateOfBirthTF.setText(student.getDateofbirth().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
@@ -577,7 +577,7 @@ public class EditStudentDialogue extends JDialog{
 		
 		JTabbedPane tabs= new JTabbedPane();
 		PassedSubjectsPanel subjs= new PassedSubjectsPanel();
-		
+//		TabbedPane.getInstance().getStudentsTable().getTable().convertRowIndexToModel(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow())
 		subjs2= new NotPassedSubjectsPanel();
 		tabs.add("Informacije", pattern);
 		tabs.add("Polozeni", subjs);

@@ -292,7 +292,9 @@ public class StudentDatabase {
 	public Student getSelectedStudent() {
 		return StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
 	}
-	
+	public Student getSelectedStudent(int in) {
+		return students.get(in);
+	}
 }
 	
 	

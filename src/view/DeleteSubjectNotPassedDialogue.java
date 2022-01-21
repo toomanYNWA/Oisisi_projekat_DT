@@ -12,14 +12,14 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.SubjectsController;
-import model.NotPassedSubjectsDatabase;
+import model.Student;
+import model.Subject;
 
 public class DeleteSubjectNotPassedDialogue extends JDialog {
-	public DeleteSubjectNotPassedDialogue() {
+	public DeleteSubjectNotPassedDialogue(Subject subject,Student student) {
 		setModal(true);
 		setSize(300,150);
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -34,12 +34,19 @@ public class DeleteSubjectNotPassedDialogue extends JDialog {
 		JPanel yesNo = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JButton doo = new JButton("Da");
 		JButton dont = new JButton("Ne");
+		
+		//int selectedSubject = NotPassedSubjectsTable.rowSelectedIndex;
+	
 		doo.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 					//
+				SubjectsController.getInstance().deleteSubjectNotPassed(subject, student);
+				NotPassedSubjectsTable.updateNotPassed();
+
 					dispose();
+					
 				
 			}
 		});

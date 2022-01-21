@@ -12,6 +12,8 @@ import java.util.List;
 
 import controller.StudentsController;
 import model.Subject.Semestar;
+import view.StudentsJTable;
+import view.StudentsTablePanel;
 import view.TabbedPane;
 
 public class SubjectsDatabase {
@@ -139,7 +141,7 @@ public class SubjectsDatabase {
 		}
 		return null;
 	}
-	
+
 	public Subject getSubjectById(int id) {
 		for (Subject s: subjects) {
 			if(s.getSubjectID()==id) {
@@ -147,6 +149,10 @@ public class SubjectsDatabase {
 			} 
 		}
 		return null;
+	}
+	
+	public Subject getSelectedSubject(int index) {
+		return subjects.get(index);
 	}
 	
 	public void deleteSubject(int id) {
@@ -242,7 +248,12 @@ public class SubjectsDatabase {
 	public String[] findNonUsedSubject(int selectedRowStudent ) {
 		
 		ArrayList<Subject> allSubjects = subjects;
-		
+		ArrayList<Subject> filteredSubjectsByYear = new ArrayList<Subject>();
+		for(Subject s : allSubjects) {
+			if(s.getSubjectYear() <= StudentDatabase.getInstance().getRow(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()).getCurrentYear()) {
+				filteredSubjectsByYear.add(s);
+			}
+		}
 		ArrayList<Subject> notPassed = StudentDatabase.getInstance().getStudentByRow(selectedRowStudent).getNotPassed();
 		ArrayList<Grade> passedGrade = StudentDatabase.getInstance().getStudentByRow(selectedRowStudent).getPassed();
 		
@@ -251,18 +262,21 @@ public class SubjectsDatabase {
 		for(Grade gr: passedGrade) {
 			subjPassedFromGrade.add(gr.getSubject());
 		}
-		
-		String[] leftoverSubj = new String[allSubjects.size()- (notPassed.size() + subjPassedFromGrade.size())];
-		
-		int iterator = 0 ;
-		for(Subject subject : allSubjects) {
-			if(!notPassed.contains(subject)) {
-				if(!subjPassedFromGrade.contains(subject)){
-					leftoverSubj[iterator]= subject.toString();
-					iterator++;
-				}
+		ArrayList<Subject> finalList = new ArrayList<Subject>();
+		for(Subject subject : filteredSubjectsByYear) {
+			if((!notPassed.contains(subject)) && (!subjPassedFromGrade.contains(subject))) {
+				
+					finalList.add(subject);
 			}
 		
+		}
+		
+		String[] leftoverSubj = new String[finalList.size()];
+		
+		int iterator = 0 ;
+		for(Subject subject : finalList) {
+			leftoverSubj[iterator] = subject.toString();
+			iterator++;
 		}
 		return leftoverSubj;
 	}
