@@ -14,6 +14,13 @@ import javax.swing.SwingConstants;
 import controller.AddActionListener;
 import controller.DeleteActionListener;
 import controller.EditActionListener;
+import controller.ProfessorsController;
+import controller.SearchController;
+import controller.SearchProfessorsController;
+import controller.SearchSubjectsController;
+import controller.StudentsController;
+import controller.SubjectsController;
+
 
 public class ToolBar extends JToolBar{
 	
@@ -54,6 +61,8 @@ public class ToolBar extends JToolBar{
 		
 		add(Box.createHorizontalGlue());
 		
+		
+        
 		JTextField search = new JTextField();
 		search.setPreferredSize(new Dimension(170,30));
 		search.setMaximumSize(search.getPreferredSize());
@@ -65,8 +74,112 @@ public class ToolBar extends JToolBar{
 		btnSearch.setIcon(new ImageIcon("icons/searchh.png"));
 		add(btnSearch);
 		
-		
 		setFloatable(false);
+		
+		
+		
+		btnSearch.addActionListener(new ActionListener(){
+			@Override
+    		public void actionPerformed(ActionEvent e) {
+    			String search1 = search.getText();
+    			
+    			if(TabbedPane.position == 0) {
+    				if(!search1.equals("")) {
+    					String[] split = search1.split(",");
+    					if(split.length == 1) {
+    						
+    						SearchController.getInstance().findStudentsBySurname(search1);
+    						
+    						if(!StudentsController.getInstance().isFound()) {
+    							search.setText("");
+    							search1 = "";
+    						}
+    					}
+    					else if(split.length == 2) {
+    						split[0] = split[0].trim();
+    						split[1] = split[1].trim();
+    						SearchController.getInstance().findStudentsBySurnameAndName(split[0], split[1]);;
+    						
+    						if(!StudentsController.getInstance().isFound()) {
+    							search.setText("");
+    							search1 = "";
+    						}
+    					}
+    					else if(split.length == 3) {
+    						split[0] = split[0].trim();
+    						split[1] = split[1].trim();
+    						split[2] = split[2].trim();
+    						SearchController.getInstance().findStudentsByIndexNameAndSurname(split[0], split[1], split[2]);;
+    					
+    						if(!StudentsController.getInstance().isFound()) {
+    							search.setText("");
+    							search1 = "";
+    						}
+    					}
+    				}
+    				else {
+    					
+    					SearchController.getInstance().emptySea();
+    				}
+    			}
+    			 if(TabbedPane.position == 1) {
+    				if(!search1.equals("")) {
+    					String[] split = search1.split(",");
+    					if(split.length == 1) {
+    						
+    						SearchProfessorsController.getInstance().findProfsBySurname(search1);
+    						//SearchProfessorsController.getInstance().findProfsByName(search1);
+    						
+    						if(!ProfessorsController.getInstance().isFound()) {
+    							search.setText("");
+    							search1 = "";
+    						}
+    					}
+    					else if(split.length == 2) {
+    						split[0] = split[0].trim();
+    						split[1] = split[1].trim();
+    						SearchProfessorsController.getInstance().findProfsBySurnameAndName(split[0], split[1]);
+    						
+    						if(!ProfessorsController.getInstance().isFound()) {
+    							search.setText("");
+    							search1 = "";
+    						}
+    					}
+    				}
+    				else {
+    					
+    					SearchProfessorsController.getInstance().emptySearch();
+    				}
+    		}
+    			 if(TabbedPane.position == 2) {
+     				if(!search1.equals("")) {
+     					String[] split = search1.split(",");
+     					if(split.length == 1) {
+     						SearchSubjectsController.getInstance().findSubjsByName(search1);
+     						if(!SubjectsController.getInstance().isFound()) {
+     							search.setText("");
+     							search1 = "";
+     						}
+     					}
+     					else if(split.length == 2) {
+     						split[0] = split[0].trim();
+     						split[1] = split[1].trim();
+     						SearchSubjectsController.getInstance().findSubjsByNameAndId(split[0], split[1]);
+     						
+     						if(!SubjectsController.getInstance().isFound()) {
+     							search.setText("");
+     							search1 = "";
+     						}
+     					}
+     				}
+     				else {
+     					
+     					SearchSubjectsController.getInstance().emptySearch();
+     				}
+     		}
+		}
+	});
 	}
+	public void init() {}
 
 }

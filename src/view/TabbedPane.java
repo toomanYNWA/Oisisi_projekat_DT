@@ -18,6 +18,7 @@ public class TabbedPane extends JTabbedPane {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTable tableProfessors;
+	private JTable tableSubjects;
 	private static TabbedPane instance = null;
 	private static StatusBar st;
 	public static TabbedPane getInstance() {
@@ -53,6 +54,7 @@ public class TabbedPane extends JTabbedPane {
                    case 2:
                        st.getStatusLabel().setText(" Studentska služba - Predmeti ");
                        break;
+                 
                }
             }
             @Override
@@ -67,10 +69,10 @@ public class TabbedPane extends JTabbedPane {
 		studentPanel=new StudentsTablePanel();
 		JPanel professorPanel=new JPanel();
 		JPanel subjectPanel=new JPanel();
+
 		
 		
-		
-		SubjectsJTable tableSubjects=new SubjectsJTable();
+		tableSubjects=new SubjectsJTable();
 		JScrollPane subjectsPane=new JScrollPane(tableSubjects);
 		subjectPanel.add(subjectsPane);
 		
@@ -81,7 +83,7 @@ public class TabbedPane extends JTabbedPane {
 		add("Studenti", studentPanel);
 		add("Profesori", professorPanel);
 		add("Predmeti", subjectPanel);
-		
+	
 		addChangeListener((ChangeListener) new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
        
@@ -102,6 +104,18 @@ public class TabbedPane extends JTabbedPane {
 		validate();
 		
 	}
+	
+	public void updateSubjects() {
+		AbstractTableModelSubjects model=(AbstractTableModelSubjects)tableSubjects.getModel();
+		model.fireTableDataChanged();
+		validate();
+		
+	}
+	
+	public JTable getTableSubjects() {
+		return tableSubjects;
+	} 
+	
 	public StudentsTablePanel getStudentsTable() {
 		return studentPanel;
 	}

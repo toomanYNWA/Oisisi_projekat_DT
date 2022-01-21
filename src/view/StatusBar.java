@@ -60,6 +60,7 @@ public class StatusBar extends JMenuBar {
 	public JLabel getStatusLabel() {
 		return statusLabel;
 	}
+	public void init() {}
 	
 }
 

@@ -8,6 +8,13 @@ public class Cathedra {
 	private Professor cathedraChief;
 	private ArrayList<Professor> professors ;
 	
+	public Cathedra(String cathedraID, String cathedraName, Professor cathedraChief) {
+		super();
+		this.cathedraID = cathedraID;
+		this.cathedraName = cathedraName;
+		this.cathedraChief = cathedraChief;
+	}
+	
 	public Cathedra(String cathedraID, String cathedraName, Professor cathedraChief, ArrayList<Professor> professors) {
 		super();
 		this.cathedraID = cathedraID;

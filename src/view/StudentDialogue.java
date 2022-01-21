@@ -22,6 +22,8 @@ import javax.swing.event.DocumentListener;
 
 import controller.StudentsController;
 import model.Address;
+import model.Student;
+import model.StudentDatabase;
 
 public class StudentDialogue extends JDialog{
 	
@@ -137,7 +139,7 @@ public class StudentDialogue extends JDialog{
 		dateOfBirthTF.setPreferredSize(new Dimension(200,25));
 		//dateOfBirthTF.setName("txtRequired");
 		//dateOfBirthTF.addFocusListener(focus);
-		dateOfBirthTF.setToolTipText("uneti u formatu dd.MM.yyyy (npr. 17.08.2000)");
+		dateOfBirthTF.setToolTipText("uneti u formatu dd.MM.yyyy. (npr. 17.08.2000.)");
 		
 		
 		date.add(dateL);
@@ -300,7 +302,7 @@ public class StudentDialogue extends JDialog{
 		phoneTF.setPreferredSize(new Dimension(200,25));
 		//phoneTF.setName("txtRequired");
 		//phoneTF.addFocusListener(focus);
-		phoneTF.setToolTipText("npr. 066/224/342 ");
+		phoneTF.setToolTipText("npr. 066/224-342 ");
 		
 		phone.add(phoneL);
 		phone.add(phoneTF);
@@ -442,7 +444,7 @@ public class StudentDialogue extends JDialog{
 		JPanel cy= new JPanel(new FlowLayout(FlowLayout.LEFT,30,0));
 		JLabel cyL=new JLabel("Trenutna godina studija: *");
 		cyL.setPreferredSize(dim);
-		String[] cyS= {"I", "II","III", "IV","Master"};
+		String[] cyS= {"I", "II","III", "IV","V"};
 		JComboBox<Object> cyCB=new JComboBox<Object>(cyS);
 		cyCB.setPreferredSize(new Dimension(200,25));
 		cyCB.setMaximumSize(cyCB.getPreferredSize());
@@ -471,21 +473,30 @@ public class StudentDialogue extends JDialog{
 		doo.setEnabled(false);
 
 		doo.addActionListener(new ActionListener() {
-			String nameSurnameReg="[A-Ž][a-ž]+";
+			String nameSurnameReg="([A-Ž][a-ž]+[' ']?)+";
 			String addressNumReg = "[0-9a-z]+";
+			String regNum = "[0-9]+";
 			String addressReg="[a-žA-Ž ]+"; 
 			String emailReg="[a-zA-Z0-9._]+@[a-zA-Z]+[.][a-zA-Z]+[.]?[a-zA-Z]*";
-			String numbersReg="[0-9]+";
+			String numbersReg="[0-9]+[/]?[0-9]+[-]?[0-9]+";
 			String indReg = "[a-žA-Ž]+[0-9]+[/][0-9]+";
 			String dateReg = "[0-9]{2}[.][0-9]{2}[.][0-9]{4}[.]";
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				
+				boolean exists = false;
+				for(Student s : StudentDatabase.getInstance().getStudents()) {
+					if(s.getNuIndex().equals(indexNTF.getText().trim())) {
+					 
+					exists = true;
+					}
+				}
 				 if(!nameTF.getText().trim().matches(nameSurnameReg)){
 					JOptionPane.showMessageDialog(null, "Ime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!surnameTF.getText().trim().matches(nameSurnameReg)){
 					JOptionPane.showMessageDialog(null, "Prezime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
-				}else if(!yearOfEnrollmentTF.getText().trim().matches(numbersReg)){
-					JOptionPane.showMessageDialog(null, "Godine radnog staza nisu pravilno unete!","",JOptionPane.ERROR_MESSAGE);
+				}else if(!yearOfEnrollmentTF.getText().trim().matches(regNum)){
+					JOptionPane.showMessageDialog(null, "Godina upisa nije dobro uneta!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!streetTF.getText().trim().matches(addressReg)) {
 					JOptionPane.showMessageDialog(null, "Ulica nije pravilno uneta! ","",JOptionPane.ERROR_MESSAGE);
 				}else if(!numTF.getText().trim().matches(addressNumReg)) {
@@ -502,7 +513,9 @@ public class StudentDialogue extends JDialog{
 					JOptionPane.showMessageDialog(null, "Broj indeksa nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!dateOfBirthTF.getText().matches(dateReg)) {
 					JOptionPane.showMessageDialog(null, "Datum nije pravilno unet (dd.MM.yy)","",JOptionPane.ERROR_MESSAGE);
-				}else {
+				}else if (exists){
+						JOptionPane.showMessageDialog(null, "Vec postoji student sa unetim brojem indeksa!","",JOptionPane.ERROR_MESSAGE);
+					}else {
 				String [] date = dateOfBirthTF.getText().split("\\.");
 				LocalDate dateOB = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
 				

@@ -3,9 +3,12 @@ package view;
 import java.awt.Color;
 import java.awt.Component;
 
+
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class SubjectsJTable extends JTable{
 	
@@ -14,6 +17,8 @@ public class SubjectsJTable extends JTable{
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelSubjects());
+		this.setAutoCreateRowSorter(true);
+		
 	}
 	
 	@Override
@@ -26,4 +31,12 @@ public class SubjectsJTable extends JTable{
 		}
 		return c;
 	}
+	
+	public void sorter() {
+		TableRowSorter<TableModel> sorter=new TableRowSorter<TableModel>(this.getModel());
+		this.setRowSorter(sorter);
+	}
+	
+	
 }
+

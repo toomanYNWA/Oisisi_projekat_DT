@@ -64,6 +64,12 @@ public class Grade {
 		}
 		 this.value = value;
 	}
+
+	@Override
+	public String toString() {
+		return "Grade [studentPassed=" + studentPassed + ", subject=" + subject + ", value=" + value + ", dateofExam="
+				+ dateofExam + "]";
+	}
 	
 	
 	

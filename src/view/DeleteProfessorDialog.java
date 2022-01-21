@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.ProfessorsController;
@@ -39,7 +38,7 @@ public class DeleteProfessorDialog extends JDialog{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ProfessorsController.getInstance().deleteProfessor(TabbedPane.getInstance().getTableProfessors().getSelectedRow());
+				ProfessorsController.getInstance().deleteProfessor(TabbedPane.getInstance().getTableProfessors().convertRowIndexToModel(TabbedPane.getInstance().getTableProfessors().getSelectedRow()));
 				dispose();
 			}
 		}); 
