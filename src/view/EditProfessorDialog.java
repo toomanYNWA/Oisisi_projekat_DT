@@ -557,6 +557,7 @@ public class EditProfessorDialog extends JDialog{
 			String addressReg="[a-žA-Ž ]+"; 
 			String emailReg="[a-zA-Z0-9._]+@[a-zA-Z]+[.][a-zA-Z]+[.]?[a-zA-Z]*";
 			String numbersReg="[0-9]+";
+			String phoneReg="[0-9]+[/]?[0-9]+[-]?[0-9]+";
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!nameTF.getText().trim().matches(nameSurnameReg)){
@@ -581,7 +582,7 @@ public class EditProfessorDialog extends JDialog{
 					JOptionPane.showMessageDialog(null, "Grad kancelarije nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!stateOTF.getText().trim().matches(addressReg)) {
 					JOptionPane.showMessageDialog(null, "Drzava kancelarije nije pravilno uneta!","",JOptionPane.ERROR_MESSAGE);
-				}else if(!phoneTF.getText().matches(numbersReg)) {
+				}else if(!phoneTF.getText().matches(phoneReg)) {
 					JOptionPane.showMessageDialog(null, "Telefon nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!emailTF.getText().matches(emailReg)) {
 					JOptionPane.showMessageDialog(null, "Email nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
@@ -606,7 +607,7 @@ public class EditProfessorDialog extends JDialog{
 					t = Title.ASSOCIATE_PROFESSOR;
 				else
 					t = Title.PROFESSOR;
-				ProfessorsController.getInstance().editProfessor(TabbedPane.getInstance().getTableProfessors().getSelectedRow(), nameTF.getText(), surnameTF.getText(), dOB, phoneTF.getText(), emailTF.getText(), a, aO, idTF.getText(), Integer.parseInt(yearsOfTrailTF.getText()), t);
+				ProfessorsController.getInstance().editProfessor(TabbedPane.getInstance().getTableProfessors().convertRowIndexToModel(TabbedPane.getInstance().getTableProfessors().getSelectedRow()), nameTF.getText(), surnameTF.getText(), dOB, phoneTF.getText(), emailTF.getText(), a, aO, idTF.getText(), Integer.parseInt(yearsOfTrailTF.getText()), t);
 				dispose();
 				}
 			}
@@ -633,7 +634,7 @@ public class EditProfessorDialog extends JDialog{
 			   }
 
 		}); 
-		Professor prof = new Professor(ProfessorsController.getInstance().getProfessor(TabbedPane.getInstance().getTableProfessors().getSelectedRow()));
+		Professor prof = new Professor(ProfessorsController.getInstance().getProfessor(TabbedPane.getInstance().getTableProfessors().convertRowIndexToModel(TabbedPane.getInstance().getTableProfessors().getSelectedRow())));
 		nameTF.setText(prof.getName());
 		surnameTF.setText(prof.getSurname());
 		dateOfBirthTF.setText(prof.getDateofbirth().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
@@ -657,6 +658,7 @@ public class EditProfessorDialog extends JDialog{
 		odustanakPotvrda.add(potvrdi);
 		odustanakPotvrda.add(odustani);
 		
+		
 		Box pattern = Box.createVerticalBox();
 		pattern.add(Box.createVerticalStrut(10));
 		pattern.add(name);
@@ -673,7 +675,7 @@ public class EditProfessorDialog extends JDialog{
 		pattern.add(Box.createGlue());
 		
 		JTabbedPane tabs= new JTabbedPane();
-		JPanel subjs= new JPanel();
+		JPanel subjs= new ProfessorSubjectPanel();
 		tabs.add("Info", pattern);
 		tabs.add("Predmeti", subjs);
 		this.add(tabs);

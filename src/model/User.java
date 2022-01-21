@@ -27,6 +27,9 @@ public abstract class User {
 	
 	}
 
+	public User() {
+		super();
+	}
 	public User(User u) {
 		this.name = u.name;
 		this.surname = u.surname;

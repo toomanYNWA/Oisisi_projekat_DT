@@ -3,11 +3,13 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Student.Status;
+
 public class Subject {
 	
 	public enum Semestar{
-		SUMMER,
-		WINTER
+		WINTER,
+		SUMMER
 	}
 	private int subjectID;
 	private String subjectName;
@@ -15,9 +17,19 @@ public class Subject {
 	private Professor professor;
 	private int espb;
 	private Semestar semestar;
-	private ArrayList<String> indexPassed ;
-	private ArrayList<String> indexNotPassed ;
+	private ArrayList<String> indexPassed = new ArrayList<String>();
+	private ArrayList<String> indexNotPassed = new ArrayList<String>();
 	
+	public Subject() {}
+	
+	public Subject(int subjectID, String subjectName,Semestar semestar, int subjectYear, Professor professor, int espb) {
+		this.subjectID = subjectID;
+		this.subjectName = subjectName;
+		this.semestar = semestar;
+		this.subjectYear = subjectYear;
+		this.professor = professor;
+		this.espb = espb;
+	}
 	public Subject(int subjectID, String subjectName,Semestar semestar, int subjectYear, Professor professor, int espb, ArrayList<String> studentsPassed,
 			ArrayList<String> studentsNotPassed) {
 		this.subjectID = subjectID;
@@ -30,6 +42,19 @@ public class Subject {
 		this.indexNotPassed = studentsNotPassed;
 	}
 	
+	public Subject(int subjectID, String subjectName,int semestar, int subjectYear,int espb) {
+		this.subjectID = subjectID;
+		this.subjectName = subjectName;
+		this.subjectYear = subjectYear;
+		this.espb = espb;
+		
+		if(semestar==0) {
+			this.semestar=Semestar.WINTER;
+		}else {
+			this.semestar=Semestar.SUMMER;
+		}
+	}
+	
 	public Subject(Subject s) {
 		this.subjectID = s.subjectID;
 		this.subjectName = s.subjectName;
@@ -40,17 +65,22 @@ public class Subject {
 		this.indexPassed = s.indexPassed;
 		this.indexNotPassed = s.indexNotPassed;
 	}
+	
 	public int getSubjectID() {
 		return subjectID;
 	}
 
-	public Semestar getSemestar() {
-		return semestar;
+	public String getSemestar() {
+		if(this.semestar == Semestar.WINTER) {
+			return "WINTER";
+		} else return "SUMMER";
 	}
 
-	public void setSemestar(Semestar semestar) {
-		this.semestar = semestar;
+	public void setSemestar(int semestar) {
+		if(semestar == 0 ) this.semestar = Semestar.WINTER;
+		else this.semestar = Semestar.SUMMER;
 	}
+
 
 	public void setSubjectID(int subjectID) {
 		this.subjectID = subjectID;
@@ -88,7 +118,7 @@ public class Subject {
 		this.espb = espb;
 	}
 
-	public List<String> getStudentsPassed() {
+	public ArrayList<String> getStudentsPassed() {
 		return indexPassed;
 	}
 
@@ -99,16 +129,25 @@ public class Subject {
 	public ArrayList<String> getStudentsNotPassed() {
 		return indexNotPassed;
 	}
+	public void addStudentsNotPassed(String index) {
+		this.indexNotPassed.add(index);
+	}
 
 	public void setStudentsNotPassed(ArrayList<String> indexNotPassed) {
 		this.indexNotPassed = indexNotPassed;
 	}
+	public void removePassedExam(String index) {
+		indexNotPassed.remove(index);
+		indexPassed.add(index);
+	}
+	public void addAnnuledExam(String index) {
+		indexPassed.remove(index);
+		indexNotPassed.add(index);
+	}
 
 	@Override
 	public String toString() {
-		return "Subject [subjectID=" + subjectID + ", subjectName=" + subjectName + ", subjectYear=" + subjectYear
-				+ ", professor=" + professor + ", espb=" + espb + ", semestar=" + semestar + ", indexPassed="
-				+ indexPassed + ", indexNotPassed=" + indexNotPassed + "]";
+		return	 this.subjectID+"-"+this.subjectName;
 	}	
 	
 }

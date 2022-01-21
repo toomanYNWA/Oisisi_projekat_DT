@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import view.DeleteProfessorDialog;
 import view.DeleteStudent;
+import view.DeleteSubjectDialog;
+import view.DeleteSubjectNotPassedDialogue;
 import view.TabbedPane;
 
 public class DeleteActionListener implements ActionListener {
@@ -20,6 +22,11 @@ public class DeleteActionListener implements ActionListener {
 			if(TabbedPane.getInstance().getTableProfessors().getSelectedRow()>=0) {
 				DeleteProfessorDialog deleteP = new DeleteProfessorDialog();
 				deleteP.setVisible(true);
+			}
+		} else if(TabbedPane.position==2) {
+			if(TabbedPane.getInstance().getTableSubjects().getSelectedRow()>=0) {
+				DeleteSubjectDialog deleteS = new DeleteSubjectDialog();
+				deleteS.setVisible(true);
 			}
 		}
 	}

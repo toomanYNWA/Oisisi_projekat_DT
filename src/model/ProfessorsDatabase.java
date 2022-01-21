@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,8 @@ public class ProfessorsDatabase {
 
 	private ArrayList<Professor> professors;
 	private List<String> columns;
+	private ArrayList<Professor> foundProf = new ArrayList<Professor>();
+	private ArrayList<Professor> allProfs;
 
 	private ProfessorsDatabase() {
 		initProfessor();
@@ -31,10 +34,12 @@ public class ProfessorsDatabase {
 		this.columns.add("Prezime");
 		this.columns.add("Email");
 		this.columns.add("Zvanje");
+		allProfs = professors;
 	}
 	private void initProfessor() {
 		
 		this.professors = new ArrayList<Professor>();
+		//this.allProfs = new ArrayList<Professor>();
 
 		String next = null;
 		String [] column = null;
@@ -43,10 +48,9 @@ public class ProfessorsDatabase {
 		String [] officeAddress=null;
 		
 		BufferedReader in = null;
-		
 		try {
-			in = new BufferedReader(new InputStreamReader(new FileInputStream("resources/Professors.txt")));
-		} catch (FileNotFoundException e) {
+			in=new BufferedReader(new InputStreamReader(new FileInputStream("resources/Professors.txt"),"utf-8"));
+		}catch(UnsupportedEncodingException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -56,22 +60,9 @@ public class ProfessorsDatabase {
 				}
 				
 				column = next.split("\\|");
-				date = column[2].split("\\.");
+				date = column[4].split("\\.");
 				address=column[5].split("\\,");
-				officeAddress=column[6].split("\\,");
-
-				/*String[] subjectIds=column[11].split("\\#");
-				ArrayList<Subject> subjects=new ArrayList<Subject>();
-				Subject subj;
-				for(String subjsId:subjectIds) {
-					subj=SubjectsDatabase.getInstance().getSubjById(subjsId);
-					if(subj==null) {
-						System.out.println("subj je null");
-						//Ispisati nekako da je pogr predmet
-						continue;
-					}
-					subjects.add(subj);
-				}  */
+				officeAddress=column[8].split("\\,");
 				
 				LocalDate ld = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
 				
@@ -83,26 +74,25 @@ public class ProfessorsDatabase {
 				
 				Title t;
 
-				if(column[9].trim().equals("ASISTANT PROFESSOR"))
+				if(column[10].trim().equals("ASISTENT"))
 					t = Title.ASISTANT_PROFESSOR;
-				else if (column[10].equals("ASSOCIATE PROFESSOR"))
+				else if (column[10].equals("DOCENT"))
 					t = Title.ASSOCIATE_PROFESSOR;
 				else
 					t = Title.PROFESSOR;
 				
-				int yOt= Integer.parseInt(column[8].trim());
+				int yOt= Integer.parseInt(column[9].trim());
 				
 				
-				Professor prof=new Professor(column[0].trim(),column[1].trim(),ld, column[3].trim(), column[4].trim(), a, aO, column[7].trim(), yOt, t);
+				Professor prof=new Professor(column[2].trim(),column[3].trim(),ld, column[6].trim(), column[7].trim(), a, aO, column[1].trim(), yOt, t);
 				// ime, prz, datumrodj, telefon, mejl, adresa, adrsa kanc, id, staz, titula, predmeti
-				//prof.setSubjects(subjects); //PROVALI STO NE RADI(subj mi je null zato)
 				professors.add(prof);
 			}
 			in.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+			}
 	}
 	
 	public ArrayList<Professor> getProfessors() {
@@ -130,7 +120,15 @@ public class ProfessorsDatabase {
 		case 2:
 			return profesori.getEmail();
 		case 3:
-			return profesori.getTitle();
+			Title temp = profesori.getTitle();
+			String t;
+			if(temp==Title.ASISTANT_PROFESSOR)
+				t = "Asistent";
+			else if (temp==Title.ASSOCIATE_PROFESSOR)
+				t = "Docent";
+			else
+				t = "Profesor";
+			return t;
 		default:
 			return null;
 		}
@@ -139,7 +137,8 @@ public class ProfessorsDatabase {
 	
 	public void addProfessor(String name, String surname, LocalDate dateofbirth, String phone, String email,
 			Address address, Address officeAdress, String id, int yearsOfTrail, Title title) {
-		this.professors.add(new Professor(name, surname, dateofbirth, phone, email, address, officeAdress, id, yearsOfTrail, title));
+		//this.professors.add(new Professor(name, surname, dateofbirth, phone, email, address, officeAdress, id, yearsOfTrail, title));
+		this.allProfs.add(new Professor(name, surname, dateofbirth, phone, email, address, officeAdress, id, yearsOfTrail, title));
 	}
 	
 	public void editProfessor(String id,String name, String surname, LocalDate dateofbirth, String phone, String email,
@@ -177,5 +176,57 @@ public class ProfessorsDatabase {
 		}
 		return null;
 	}
+	public boolean findByName(String name) {
+		boolean found = false;
+		ArrayList<Professor> fp = new ArrayList<Professor>();
+		for (Professor prof: professors) {
+			
+			if(prof.getName().toUpperCase().contains(name.toUpperCase())) {
+				foundProf.add(prof);
+				fp.add(prof);
+				found = true;
+			}
+		}
+		professors = fp;
+		return found;
+	}
+	public boolean findBySurname(String surname) {
+		boolean found = false;
+		ArrayList<Professor> fp = new ArrayList<Professor>();
+		for (Professor prof: professors) {
+			if(prof.getSurname().toUpperCase().contains(surname.toUpperCase())) {
+				foundProf.add(prof);
+				fp.add(prof);
+				found = true;
+			}
+		}
+		professors = fp;
+		return found;
+	}
+	
+	public boolean findBySurnameAndName(String surname, String name){
+		boolean found = false;
+		ArrayList<Professor> fp = new ArrayList<Professor>();
+		for (Professor prof: professors) {
+			if(prof.getSurname().toUpperCase().contains(surname.toUpperCase()) && prof.getName().toUpperCase().contains(name.toUpperCase())) {
+				foundProf.add(prof);
+				fp.add(prof);
+				found = true;
+			}
+		}
+		professors = fp;
+		return found;
+	}
+	
+	public void switchBetweenFoundAndAll() {
+		ArrayList<Professor> temp = new ArrayList<Professor>();
+		temp = professors;
+		professors = foundProf;
+		foundProf = temp;
+		
+	}
+	public void emptySearch() {
+		professors = allProfs;
+	} 
 	
 }

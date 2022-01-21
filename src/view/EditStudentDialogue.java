@@ -1,17 +1,13 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -29,8 +25,9 @@ import javax.swing.event.DocumentListener;
 
 import controller.StudentsController;
 import model.Address;
+import model.ExamsPassedDatabase;
 import model.Student;
-import model.Student.Status;
+import model.StudentDatabase;
 
 public class EditStudentDialogue extends JDialog{
 
@@ -47,11 +44,12 @@ public class EditStudentDialogue extends JDialog{
 	public static JTextField yearOfEnrollmentTF;
 	public static JTextField currentYearTF;
 	public static JTextField statusTF;
+	private NotPassedSubjectsPanel subjs2;
 
 	public JButton doo;
 	public EditStudentDialogue() {
 		setModal(true);
-		setSize(450,500);
+		setSize(500,500);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -481,16 +479,26 @@ public class EditStudentDialogue extends JDialog{
 		});
 		
 		doo.addActionListener(new ActionListener() {
-			String nameSurnameReg="[A-Ž][a-ž]+";
+			String nameSurnameReg="([A-Ž][a-ž]+[' ']?)+";
 			String addressNumReg = "[0-9a-z]+";
 			String addressReg="[a-žA-Ž ]+"; 
 			String emailReg="[a-zA-Z0-9._]+@[a-zA-Z]+[.][a-zA-Z]+[.]?[a-zA-Z]*";
-			String numbersReg="[0-9]+";
+			String numbersReg="[0-9]+[/]?[0-9]+[-]?[0-9]+";
 			String indReg = "[a-žA-Ž]+[0-9]+[/][0-9]+";
 			String dateReg = "[0-9]{2}[.][0-9]{2}[.][0-9]{4}[.]";
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+//				boolean exists = false;
+//				for(Student s : StudentDatabase.getInstance().getStudents()) {
+//					if(s.getNuIndex().equals(indexNTF.getText().trim())) {
+//						if(!s.getName().equals(nameTF.getText().trim()) ) {
+//							exists = true;
+//						 }else if(s.getSurname().equals(surnameTF.getText().trim())) {
+//							 exists = false;
+//						 }
+//					}
+//				}
 				 if(!nameTF.getText().trim().matches(nameSurnameReg)){
 					JOptionPane.showMessageDialog(null, "Ime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!surnameTF.getText().trim().matches(nameSurnameReg)){
@@ -513,7 +521,11 @@ public class EditStudentDialogue extends JDialog{
 					JOptionPane.showMessageDialog(null, "Broj indeksa nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!dateOfBirthTF.getText().matches(dateReg)) {
 					JOptionPane.showMessageDialog(null, "Datum nije pravilno unet (dd.MM.yy.)","",JOptionPane.ERROR_MESSAGE);
-				}else {	
+				}
+//				else if (exists){
+//					JOptionPane.showMessageDialog(null, "Vec postoji student sa unetim brojem indeksa!","",JOptionPane.ERROR_MESSAGE);
+//				}
+				else {
 				
 				String [] date = dateOfBirthTF.getText().split("\\.");
 				LocalDate dateOB = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
@@ -521,22 +533,30 @@ public class EditStudentDialogue extends JDialog{
 				
 				Address adr = new Address(streetTF.getText(), numTF.getText(), cityTF.getText(), countryTF.getText());
 				
-				StudentsController.getInstance().editStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow(),indexNTF.getText(),Integer.parseInt(yearOfEnrollmentTF.getText()),cyCB.getSelectedIndex(),statusCB.getSelectedIndex(),nameTF.getText(),surnameTF.getText(), dateOB, phoneTF.getText(),emailTF.getText(),adr);
+				StudentsController.getInstance().editStudent(TabbedPane.getInstance().getStudentsTable().getTable().convertRowIndexToModel(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()),indexNTF.getText(),Integer.parseInt(yearOfEnrollmentTF.getText()),cyCB.getSelectedIndex(),statusCB.getSelectedIndex(),nameTF.getText(),surnameTF.getText(), dateOB, phoneTF.getText(),emailTF.getText(),adr);
 				dispose();
 				}
 			}
 
 		});
 
-		Student student = new Student(StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
+		Student student = new Student(StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().convertRowIndexToModel(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow())));
+		ExamsPassedDatabase.getInstance().initialize();
 		nameTF.setText(student.getName());
 		surnameTF.setText(student.getSurname());
 		dateOfBirthTF.setText(student.getDateofbirth().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));
 		Address adr = student.getAddress();
-		streetTF.setText(adr.getStreet());
-		numTF.setText(adr.getNumber());
-		cityTF.setText(adr.getCity());
-		countryTF.setText(adr.getState());
+		if(adr==null) {
+			streetTF.setText("");
+			numTF.setText("");
+			cityTF.setText("");
+			countryTF.setText("");
+		} else {
+			streetTF.setText(adr.getStreet());
+			numTF.setText(adr.getNumber());
+			cityTF.setText(adr.getCity());
+			countryTF.setText(adr.getState());
+		}
 		indexNTF.setText(student.getNuIndex());
 		phoneTF.setText(student.getPhone());
 		emailTF.setText(student.getEmail());
@@ -565,8 +585,9 @@ public class EditStudentDialogue extends JDialog{
 		pattern.add(Box.createGlue());
 		
 		JTabbedPane tabs= new JTabbedPane();
-		JPanel subjs= new JPanel();
-		JPanel subjs2= new JPanel();
+		PassedSubjectsPanel subjs= new PassedSubjectsPanel();
+//		TabbedPane.getInstance().getStudentsTable().getTable().convertRowIndexToModel(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow())
+		subjs2= new NotPassedSubjectsPanel();
 		tabs.add("Informacije", pattern);
 		tabs.add("Polozeni", subjs);
 		tabs.add("Nepolozeni",subjs2);

@@ -26,7 +26,9 @@ import javax.swing.event.DocumentListener;
 
 import controller.ProfessorsController;
 import model.Address;
+import model.Professor;
 import model.Professor.Title;
+import model.ProfessorsDatabase;
 
 public class AddProfessorDialog extends JDialog{
 	
@@ -549,8 +551,15 @@ public class AddProfessorDialog extends JDialog{
 			String addressReg="[a-žA-Ž ]+"; 
 			String emailReg="[a-zA-Z0-9._]+@[a-zA-Z]+[.][a-zA-Z]+[.]?[a-zA-Z]*";
 			String numbersReg="[0-9]+";
+			String phoneReg="[0-9]+[/]?[0-9]+[-]?[0-9]+";
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				boolean exists = false;
+				for(Professor p : ProfessorsDatabase.getInstance().getProfessors()) {
+					if(p.getId().equals(idTF.getText().trim())) {
+						exists = true;
+					}
+				}
 				if(!nameTF.getText().trim().matches(nameSurnameReg)){
 					JOptionPane.showMessageDialog(null, "Ime nije pravilno uneto!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!surnameTF.getText().trim().matches(nameSurnameReg)){
@@ -573,7 +582,7 @@ public class AddProfessorDialog extends JDialog{
 					JOptionPane.showMessageDialog(null, "Grad kancelarije nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!stateOTF.getText().trim().matches(addressReg)) {
 					JOptionPane.showMessageDialog(null, "Drzava kancelarije nije pravilno uneta!","",JOptionPane.ERROR_MESSAGE);
-				}else if(!phoneTF.getText().matches(numbersReg)) {
+				}else if(!phoneTF.getText().matches(phoneReg)) {
 					JOptionPane.showMessageDialog(null, "Telefon nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!emailTF.getText().matches(emailReg)) {
 					JOptionPane.showMessageDialog(null, "Email nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
@@ -581,6 +590,8 @@ public class AddProfessorDialog extends JDialog{
 					JOptionPane.showMessageDialog(null, "Broj licne karte nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!validateJavaDate(dateOfBirthTF.getText())) {
 					JOptionPane.showMessageDialog(null, "Datum nije pravilno unet (dd.MM.yy)","",JOptionPane.ERROR_MESSAGE);
+				}else if (exists){
+					JOptionPane.showMessageDialog(null, "Vec postoji profesor sa unetim brojem licne karte!","",JOptionPane.ERROR_MESSAGE);
 				}else {
 				String [] date = dateOfBirthTF.getText().split("\\.");
 				LocalDate dOB = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));

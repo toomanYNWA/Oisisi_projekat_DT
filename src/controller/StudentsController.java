@@ -2,24 +2,27 @@ package controller;
 
 import java.time.LocalDate;
 
+import javax.swing.JOptionPane;
+
 import model.Address;
+import model.NotPassedSubjectsDatabase;
 import model.Student;
 import model.StudentDatabase;
-import model.Student.Status;
-import view.MainFrame;
-import view.StudentsTablePanel;
+import view.NotPassedSubjectsTable;
+import view.PassedSubjectsTable;
 import view.TabbedPane;
 
 public class StudentsController {
 
 		private static StudentsController instance = null;
-		
+		private boolean found = false;
 		public static StudentsController getInstance() {
 			if(instance==null) {
 				instance = new StudentsController();
 			}
 			return instance;
 		}
+		
 		private StudentsController() {}
 		
 		public void addStudent(String nuIndex,int currentYear,int status, String name, String surname,LocalDate date,Address address,String email,int yearOfEnrollment,String phone) {
@@ -37,7 +40,6 @@ public class StudentsController {
 			if (rowSelectedIndex < 0) {
 				 return;
 			 }
-			//Student student = StudentDatabase.getInstance().getRow(rowSelectedIndex);
 			StudentDatabase.getInstance().editStudent(rowSelectedIndex, nuIndex,  yearOfEnrollment, currentYear, status, name, surname, dateofbirth, phone, email, address);
 			TabbedPane.getInstance().getStudentsTable().patchView();
 			
@@ -56,4 +58,51 @@ public class StudentsController {
 			return student;
 		}
 		
+		public void studentsBySurname(String surname) {
+			found = StudentDatabase.getInstance().findBySur(surname);
+			if(found) {
+				TabbedPane.getInstance().getStudentsTable().patchView();
+			} else {
+				JOptionPane.showMessageDialog(null, "Prezime ne postoji u bazi podataka!");
+				TabbedPane.getInstance().getStudentsTable().patchView();
+			}
+		}
+		
+		public void studentsByIndexAndNameAndSurname(String index, String name, String surname) {
+			found = StudentDatabase.getInstance().findByNuInAndNameAndSur(index, name, surname);
+			if(found) {
+				
+				TabbedPane.getInstance().getStudentsTable().patchView();
+			} else {
+				
+				JOptionPane.showMessageDialog(null, "Ne postoji student sa datim indeksom, imenom i prezimenom!");
+				TabbedPane.getInstance().getStudentsTable().patchView();
+			}
+		}
+		
+		public void studentsBySurAndName(String surname, String name) {
+			
+			found = StudentDatabase.getInstance().findBySurAndName(surname, name);
+			
+			if(found) {
+				
+				TabbedPane.getInstance().getStudentsTable().patchView();
+			} else {
+				
+				JOptionPane.showMessageDialog(null, "Ne postoji student sa datim imenom i prezimenom!");
+				TabbedPane.getInstance().getStudentsTable().patchView();
+			}
+		}
+
+		public boolean isFound() {
+			return found;
+		}
+
+		public void setFound(boolean found) {
+			this.found = found;
+		}
+		
+//		public void deleteSubjectNotPassed(int sub,int stud) {
+//			NotPassedSubjectsDatabase.getInstance().deleteSubjectNotPassed(sub);
+//		}
 }
