@@ -139,7 +139,7 @@ public class StudentDialogue extends JDialog{
 		dateOfBirthTF.setPreferredSize(new Dimension(200,25));
 		//dateOfBirthTF.setName("txtRequired");
 		//dateOfBirthTF.addFocusListener(focus);
-		dateOfBirthTF.setToolTipText("uneti u formatu dd.MM.yyyy (npr. 17.08.2000)");
+		dateOfBirthTF.setToolTipText("uneti u formatu dd.MM.yyyy. (npr. 17.08.2000.)");
 		
 		
 		date.add(dateL);
@@ -302,7 +302,7 @@ public class StudentDialogue extends JDialog{
 		phoneTF.setPreferredSize(new Dimension(200,25));
 		//phoneTF.setName("txtRequired");
 		//phoneTF.addFocusListener(focus);
-		phoneTF.setToolTipText("npr. 066/224/342 ");
+		phoneTF.setToolTipText("npr. 066/224-342 ");
 		
 		phone.add(phoneL);
 		phone.add(phoneTF);

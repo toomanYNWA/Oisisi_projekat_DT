@@ -675,7 +675,7 @@ public class EditProfessorDialog extends JDialog{
 		pattern.add(Box.createGlue());
 		
 		JTabbedPane tabs= new JTabbedPane();
-		JPanel subjs= new JPanel();
+		JPanel subjs= new ProfessorSubjectPanel();
 		tabs.add("Info", pattern);
 		tabs.add("Predmeti", subjs);
 		this.add(tabs);
