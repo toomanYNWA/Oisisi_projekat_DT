@@ -37,7 +37,7 @@ public class PassedSubjectsPanel extends JPanel{
 		add(subjectsPane, BorderLayout.CENTER);
 		setVisible(true);
 	}
-//	public JTable getTable() {
-//		return (PassedSubjectsTable) tableSubjects;
-//	}
+	/*public JTable getTable() {
+		return (PassedSubjectsTable) tableSubjects;
+	} */
 }

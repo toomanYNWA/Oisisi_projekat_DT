@@ -25,6 +25,7 @@ import javax.swing.event.DocumentListener;
 
 import controller.StudentsController;
 import model.Address;
+import model.ExamsPassedDatabase;
 import model.Student;
 import model.StudentDatabase;
 
@@ -540,6 +541,7 @@ public class EditStudentDialogue extends JDialog{
 		});
 
 		Student student = new Student(StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().convertRowIndexToModel(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow())));
+		ExamsPassedDatabase.getInstance().initialize();
 		nameTF.setText(student.getName());
 		surnameTF.setText(student.getSurname());
 		dateOfBirthTF.setText(student.getDateofbirth().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")));

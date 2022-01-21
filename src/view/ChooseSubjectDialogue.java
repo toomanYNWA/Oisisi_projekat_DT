@@ -77,7 +77,7 @@ public class ChooseSubjectDialogue extends JDialog {
 					for(Subject s : SubjectsDatabase.getInstance().getSubjects()) {
 						if(s.getSubjectID()==(trimmedid)) {
 							
-							int t=TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow();
+							int t=TabbedPane.getInstance().getStudentsTable().getTable().convertRowIndexToModel(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
 							StudentDatabase.getInstance().getRow(t).addNotPassedSubject(s);
 							NotPassedSubjectsDatabase.getInstance().setNotPassed(StudentDatabase.getInstance().getRow(t).getNotPassed());
 							

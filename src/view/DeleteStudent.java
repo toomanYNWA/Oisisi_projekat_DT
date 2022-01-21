@@ -49,7 +49,7 @@ public class DeleteStudent extends JDialog implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				StudentsController.getInstance().deleteStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
+				StudentsController.getInstance().deleteStudent(TabbedPane.getInstance().getStudentsTable().getTable().convertRowIndexToModel(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
 				dispose();
 
 			}

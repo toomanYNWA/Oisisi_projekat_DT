@@ -15,19 +15,14 @@ public class CatDialogue extends JDialog{
 	
 	public CatDialogue() {
 	setModal(true);
-	setSize(300,300);
+	setSize(500,500);
 	Toolkit kit = Toolkit.getDefaultToolkit();
 	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	setLocationRelativeTo(null);
-	setTitle("Odaberi ");
+	setTitle("Katedre");
 	Image img = kit.getImage("icons/new.png");
 	setIconImage(img);
-	
-//	CatJTable table=new CatJTable();
-//	Container c=getContentPane();
-//	c.setLayout(new FlowLayout());
-//	c.add(table);
-//    
+	    
 	JPanel subjectPanel=new JPanel();
 
 	JTable tableSubjects= new CatJTable();

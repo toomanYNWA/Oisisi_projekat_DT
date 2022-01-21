@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controller.StudentsController;
+import controller.SubjectsController;
 import model.Professor.Title;
 import view.PassedSubjectsTable;
 import view.TabbedPane;
@@ -45,7 +46,6 @@ public class StudentDatabase {
 		this.columns.add("PROSEK");
 		initstudents();
 		allStudents = students;
-		//setNotPassedSubjects();
 		
 	}
 	private void initstudents() {
@@ -203,6 +203,7 @@ public class StudentDatabase {
 			}
 		}
 	} */
+
 	
 	public Student getStudentById(String id) {
 		for (Student s: allStudents) {
@@ -290,7 +291,7 @@ public class StudentDatabase {
 	} 
 	
 	public Student getSelectedStudent() {
-		return StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow());
+		return StudentsController.getInstance().getStudent(TabbedPane.getInstance().getStudentsTable().getTable().convertRowIndexToModel(TabbedPane.getInstance().getStudentsTable().getTable().getSelectedRow()));
 	}
 	public Student getSelectedStudent(int in) {
 		return students.get(in);

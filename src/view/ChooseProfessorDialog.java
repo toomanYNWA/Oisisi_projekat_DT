@@ -48,8 +48,6 @@ public class ChooseProfessorDialog extends JDialog{
 		JList<String> list = new JList<String>(professors);
 		list.setPreferredSize(new Dimension(100,100));
 		JScrollPane listScroller = new JScrollPane(list);
-		listScroller.setViewportView(list);
-		listScroller.createVerticalScrollBar();
 		Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 100, 10);
 		listScroller.setBorder(emptyBorder);
 		
@@ -88,7 +86,6 @@ public class ChooseProfessorDialog extends JDialog{
 
 			}
 		});
-		
 		this.add(listScroller,BorderLayout.CENTER);
 		this.add(yesNo,BorderLayout.SOUTH);
 	}

@@ -1,5 +1,12 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CatDatabase {
@@ -19,13 +26,44 @@ public class CatDatabase {
     public CatDatabase() {
 
         this.col = new ArrayList<String>();
-        this.col.add("ID");
-        this.col.add("IME");
-        this.col.add("GAZDA");
-       
+        this.col.add("Id");
+        this.col.add("Ime katedre");
+        this.col.add("Sef katedre");
+        initialize();
         
 
     }
+    public void initialize() {
+		String next=null;
+		String[] column=null;
+		BufferedReader in=null;
+		try {
+			in=new BufferedReader(new InputStreamReader(new FileInputStream("resources/Cathedras.txt"),"utf-8"));
+		}catch(UnsupportedEncodingException | FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			while((next=in.readLine())!=null) {
+				if(next.equals("")) {
+					continue;
+				}
+				
+				column=next.split("\\|");
+				String cId = column[1].trim();
+				String cName = column[2].trim();
+				String chiefId = column[3].trim();
+				Professor cC = ProfessorsDatabase.getInstance().getProfById(chiefId);
+				Cathedra c = new Cathedra(cId,cName,cC);
+				cate.add(c);
+				
+			} 
+			
+			in.close();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+			
+	} 
     public int getRowCount() {
         return cate.size();
     }
@@ -48,7 +86,7 @@ public class CatDatabase {
         case 1:
             return c.getCathedraName();
         case 2:
-            return c.getProfessors();
+            return c.getCathedraChief().getName()+" "+c.getCathedraChief().getName();
        
         default:
             return null;

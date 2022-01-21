@@ -62,13 +62,6 @@ public class SubjectsDatabase {
 				}
 				
 				column=next.split("\\|");
-			    //String[] indexPassed = column[6].split("\\#");
-			    //String[] indexNotPassed = column[7].split("\\#");
-			    
-			   // List<String> l = Arrays.<String>asList(indexPassed);
-			    //List<String> list = Arrays.<String>asList(indexNotPassed);
-			   // ArrayList<String> indexP= new ArrayList<String>(l);
-			    //ArrayList<String> indexNP= new ArrayList<String>(list); 
 				
 				int sId = Integer.parseInt(column[0].trim());
 				int sY = Integer.parseInt(column[3].trim());
@@ -82,7 +75,6 @@ public class SubjectsDatabase {
 				
 				Subject subj = new Subject(sId ,column[2].trim(),s,sY,p,espb);
 				subjects.add(subj);
-				//allSubjs.add(new Subject(sId ,column[1].trim(),s,sY,p,espb, indexP, indexNP));
 				
 
 			} 

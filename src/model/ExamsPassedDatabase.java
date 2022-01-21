@@ -10,7 +10,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import controller.StudentsController;
-import view.TabbedPane;
+
+
 
 public class ExamsPassedDatabase {
 	
@@ -22,25 +23,23 @@ public class ExamsPassedDatabase {
 		}
 		return instance;		
 	}
-	
-	private ArrayList<Grade> subGr = new ArrayList<Grade>();
+	private ArrayList<Grade> subGr;
 	private ArrayList<Grade> allGrades = new ArrayList<Grade>();
 	private ArrayList<String> col;
-
 	public ExamsPassedDatabase() {
-	
+		this.subGr = new ArrayList<Grade>();
+		//initialize();
 		col = new ArrayList<String>();
 		col.add("ID");
 		col.add("IME");
 		col.add("ESPB");
 		col.add("OCENA");
 		col.add("DATUM");
-		initialize();
-		loadPassed();
-		getPassed();
 		
 	}
 	public void initialize() {
+		subGr.clear();
+		allGrades.clear();
 		String next=null;
 		String[] column=null;
 		String [] date = null;
@@ -66,9 +65,9 @@ public class ExamsPassedDatabase {
 				Subject sub = SubjectsDatabase.getInstance().getSubjectById(subjectId);
 				Grade grade = new Grade(s,sub,value,ld);
 				allGrades.add(grade);
-				
 			} 
-			
+			loadPassed();
+			getPassed();
 			in.close();
 		}catch(IOException e) {
 			e.printStackTrace();
@@ -108,7 +107,8 @@ public class ExamsPassedDatabase {
 		}
 	}
 	public ArrayList<Grade> getPassed() {
-		subGr = StudentDatabase.getInstance().getSelectedStudent().getPassed();
+		Student s = StudentDatabase.getInstance().getSelectedStudent();
+		subGr=StudentDatabase.getInstance().getSelectedStudent().getPassed();
 		return subGr;
 	}
 
@@ -119,12 +119,14 @@ public class ExamsPassedDatabase {
 					s.addPassed(g);
 			}
 		}
+	}  
+	public ArrayList<Grade> returnGrades(){
+		return allGrades;
 	}
 	
 	public void passExam(Student st,Subject s, int grade, LocalDate examDate) {
 		Grade g = new Grade(st,s,grade,examDate);
 		this.subGr.add(g);
-		st.addPassed(g);
 	}  
 	
 	public void annulGrade(int id) {
