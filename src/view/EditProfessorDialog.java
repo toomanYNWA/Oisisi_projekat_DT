@@ -557,6 +557,7 @@ public class EditProfessorDialog extends JDialog{
 			String addressReg="[a-žA-Ž ]+"; 
 			String emailReg="[a-zA-Z0-9._]+@[a-zA-Z]+[.][a-zA-Z]+[.]?[a-zA-Z]*";
 			String numbersReg="[0-9]+";
+			String phoneReg="[0-9]+[/]?[0-9]+[-]?[0-9]+";
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!nameTF.getText().trim().matches(nameSurnameReg)){
@@ -581,7 +582,7 @@ public class EditProfessorDialog extends JDialog{
 					JOptionPane.showMessageDialog(null, "Grad kancelarije nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!stateOTF.getText().trim().matches(addressReg)) {
 					JOptionPane.showMessageDialog(null, "Drzava kancelarije nije pravilno uneta!","",JOptionPane.ERROR_MESSAGE);
-				}else if(!phoneTF.getText().matches(numbersReg)) {
+				}else if(!phoneTF.getText().matches(phoneReg)) {
 					JOptionPane.showMessageDialog(null, "Telefon nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!emailTF.getText().matches(emailReg)) {
 					JOptionPane.showMessageDialog(null, "Email nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
@@ -657,25 +658,6 @@ public class EditProfessorDialog extends JDialog{
 		odustanakPotvrda.add(potvrdi);
 		odustanakPotvrda.add(odustani);
 		
-		JPanel pr = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JButton proba1 = new JButton("Proba");
-		pr.add(proba1);
-		/*proba1.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				 ChooseProfessorDialog cP = new  ChooseProfessorDialog();
-				cP.setVisible(true);
-				}
-		}); */
-		/*proba1.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				 AddSubjToProfDialog addS = new  AddSubjToProfDialog();
-				addS.setVisible(true);
-				}
-		}); */
 		
 		Box pattern = Box.createVerticalBox();
 		pattern.add(Box.createVerticalStrut(10));
@@ -690,7 +672,6 @@ public class EditProfessorDialog extends JDialog{
 		pattern.add(yearsOT);
 		pattern.add(title);
 		pattern.add(odustanakPotvrda);
-		pattern.add(pr);
 		pattern.add(Box.createGlue());
 		
 		JTabbedPane tabs= new JTabbedPane();

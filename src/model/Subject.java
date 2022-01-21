@@ -17,11 +17,19 @@ public class Subject {
 	private Professor professor;
 	private int espb;
 	private Semestar semestar;
-	private ArrayList<String> indexPassed ;
-	private ArrayList<String> indexNotPassed ;
+	private ArrayList<String> indexPassed = new ArrayList<String>();
+	private ArrayList<String> indexNotPassed = new ArrayList<String>();
 	
 	public Subject() {}
 	
+	public Subject(int subjectID, String subjectName,Semestar semestar, int subjectYear, Professor professor, int espb) {
+		this.subjectID = subjectID;
+		this.subjectName = subjectName;
+		this.semestar = semestar;
+		this.subjectYear = subjectYear;
+		this.professor = professor;
+		this.espb = espb;
+	}
 	public Subject(int subjectID, String subjectName,Semestar semestar, int subjectYear, Professor professor, int espb, ArrayList<String> studentsPassed,
 			ArrayList<String> studentsNotPassed) {
 		this.subjectID = subjectID;
@@ -120,6 +128,9 @@ public class Subject {
 
 	public ArrayList<String> getStudentsNotPassed() {
 		return indexNotPassed;
+	}
+	public void addStudentsNotPassed(String index) {
+		this.indexNotPassed.add(index);
 	}
 
 	public void setStudentsNotPassed(ArrayList<String> indexNotPassed) {

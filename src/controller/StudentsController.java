@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import model.Address;
 import model.Student;
 import model.StudentDatabase;
+import view.NotPassedSubjectsTable;
+import view.PassedSubjectsTable;
 import view.TabbedPane;
 
 public class StudentsController {

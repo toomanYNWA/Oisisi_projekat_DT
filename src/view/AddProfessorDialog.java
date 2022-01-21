@@ -551,6 +551,7 @@ public class AddProfessorDialog extends JDialog{
 			String addressReg="[a-žA-Ž ]+"; 
 			String emailReg="[a-zA-Z0-9._]+@[a-zA-Z]+[.][a-zA-Z]+[.]?[a-zA-Z]*";
 			String numbersReg="[0-9]+";
+			String phoneReg="[0-9]+[/]?[0-9]+[-]?[0-9]+";
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean exists = false;
@@ -581,7 +582,7 @@ public class AddProfessorDialog extends JDialog{
 					JOptionPane.showMessageDialog(null, "Grad kancelarije nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!stateOTF.getText().trim().matches(addressReg)) {
 					JOptionPane.showMessageDialog(null, "Drzava kancelarije nije pravilno uneta!","",JOptionPane.ERROR_MESSAGE);
-				}else if(!phoneTF.getText().matches(numbersReg)) {
+				}else if(!phoneTF.getText().matches(phoneReg)) {
 					JOptionPane.showMessageDialog(null, "Telefon nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);
 				}else if(!emailTF.getText().matches(emailReg)) {
 					JOptionPane.showMessageDialog(null, "Email nije pravilno unet!","",JOptionPane.ERROR_MESSAGE);

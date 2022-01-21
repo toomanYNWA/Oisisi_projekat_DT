@@ -118,7 +118,7 @@ public class ExamsPassedDatabase {
 		for(Grade g: subGr) {
 			if(g.getSubject().getSubjectID()==id) {
 				subGr.remove(g);
-				g.getSubject().addAnnuledExam(g.getStudentPassed().getNuIndex());
+				//g.getSubject().addAnnuledExam(g.getStudentPassed().getNuIndex());
 				g.getStudentPassed().addAnnuledExam(g);
 				break;
 			}

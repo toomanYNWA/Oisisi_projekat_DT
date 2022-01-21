@@ -4,11 +4,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import controller.StudentsController;
+import model.Professor.Title;
+import view.PassedSubjectsTable;
 import view.TabbedPane;
 
 
@@ -28,13 +31,11 @@ public class StudentDatabase {
 	
 	private ArrayList<Student> students;
 	private List<String> columns;
-	private ArrayList<Subject> notPassed;
 	private ArrayList<Student> foundStudent = new ArrayList<Student>();
 	private ArrayList<Student> allStudents;
 	private StudentDatabase() {
 		
 		this.students = new ArrayList<Student>();
-		this.notPassed = new ArrayList<Subject>();
 		this.columns = new ArrayList<String>();
 		this.columns.add("BROJ INDEKSA");
 		this.columns.add("IME");
@@ -44,58 +45,70 @@ public class StudentDatabase {
 		this.columns.add("PROSEK");
 		initstudents();
 		allStudents = students;
-		setNotPassedSubjects();
+		//setNotPassedSubjects();
 		
 	}
 	private void initstudents() {
 		this.students = new ArrayList<Student>();
-		//this. = new ArrayList<Subject>();
-		
-		String next=null;
-		String[] column=null;
-		BufferedReader in=null;
+		String next = null;
+		String [] column = null;
 		String [] date = null;
-		String [] adr=null;
+		String [] address=null;
+		String [] idSubj=null;
+		BufferedReader in = null;
+		
 		try {
-			in=new BufferedReader(new InputStreamReader(new FileInputStream("resources/Students.txt")));
-		}catch(FileNotFoundException e) {
+			in=new BufferedReader(new InputStreamReader(new FileInputStream("resources/Students.txt"),"utf-8"));
+		}catch(UnsupportedEncodingException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		try {
-			while((next=in.readLine())!=null) {
+			while((next = in.readLine()) != null) {
 				if(next.equals("")) {
 					continue;
 				}
 				
-				column=next.split("\\|[' ']*");
-			  
-			    
-			    date = column[2].split("\\.");
-			    adr=column[4].split("\\,");
-			 
+				Address a = new Address();
+				column = next.split("\\|");
+				date = column[5].split("\\.");
+				if(column[6].trim().equals("null")) {
+					a = null;
+				} else {
+					address=column[6].split("\\,"); 
+					a = new Address(address[0], address[1], address[2], address[3]); // ulica, broj, grad, drzava
+					}
+				LocalDate ld = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
 				int st = -1 ;
 				if(column[9].trim().equals("B")) {
 					st = 0;
 				} else if(column[9].trim().equals("S")) st = 1;
 				
 				int c=0 ;
-				if(column[8].trim().equals("I"))
+				if(column[4].trim().equals("1"))
 					c=1;
-				else if(column[8].trim().equals("II"))
+				else if(column[4].trim().equals("2"))
 					c=2;
-				else if(column[8].trim().equals("III"))
+				else if(column[4].trim().equals("3"))
 					c=3;
-				else if(column[8].trim().equals("IV"))
+				else if(column[4].trim().equals("4"))
 					c=4;
-				else if(column[8].trim().equals("V")) c = 5;
-				Address a = new Address(adr[0], adr[1], adr[2], adr[3]);
-				LocalDate dt = LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
-				int yoe= Integer.parseInt(column[7].trim());
-				Student stu = new Student(column[0].trim(),c,st,column[5].trim(),column[1].trim(),dt,a,column[6].trim(),yoe,column[3].trim());
-				students.add(stu);
+				int yoe= Integer.parseInt(column[10].trim());
+				Student stud = new Student(column[1].trim(),c,st,column[2].trim(), column[3].trim(),ld,a,column[8].trim(),yoe, column[7].trim());
+				//Student stu = new Student(column[0].trim(),c,st,column[5].trim(),column[1].trim(),dt,a,column[6].trim(),yoe,column[3].trim());
+				students.add(stud);
 				//			String nuIndex, int currentYear,int status, String name, String surname, LocalDate dateOfBirth, Address address,String email,int yearOfEnrollment,String phone
-//													
-				//			Tomislav|Andric |05.04.2000. |0611535796 | Pavla Stosa,3,Subotic,Srbija|ra170/2019|tooman00@gmail.com|2019|I|B
+				if(column[11].trim().equals("null")) {
+					idSubj = null;
+				} else {
+					idSubj = column[11].split("\\,");
+					for(Subject s: SubjectsDatabase.getInstance().getSubjects()) {
+					for(String temp:idSubj) {
+						if(Integer.parseInt(temp)==s.getSubjectID())
+							stud.addNotPassedSubject(s);
+					}
+					} 
+				}
+				
 			} 
 			
 			in.close();
@@ -154,7 +167,7 @@ public class StudentDatabase {
 	}
 	public void deleteStudent(int indexNu) {
 		students.remove(indexNu);
-		//remove sa mape
+		//remove sa predmeta
 		
 	}
 	public Student gback(int r) {
@@ -177,9 +190,8 @@ public class StudentDatabase {
 			
 	}
 	
-	public void setNotPassedSubjects() {
+	/*public void setNotPassedSubjects() {
 		ArrayList<Subject> allSubj = SubjectsDatabase.getInstance().getSubjects();
-		notPassed.clear();
 		for(Student s: allStudents) {
 			for(Subject subj:allSubj) {
 				ArrayList<String> nP = subj.getStudentsNotPassed();
@@ -190,7 +202,7 @@ public class StudentDatabase {
 				}
 			}
 		}
-	} 
+	} */
 	
 	public Student getStudentById(String id) {
 		for (Student s: allStudents) {

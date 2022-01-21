@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,8 +48,8 @@ public class SubjectsDatabase {
 		BufferedReader in=null;
 		
 		try {
-			in=new BufferedReader(new InputStreamReader(new FileInputStream("resources/Subjects.txt")));
-		}catch(FileNotFoundException e) {
+			in=new BufferedReader(new InputStreamReader(new FileInputStream("resources/Subjects.txt"),"utf-8"));
+		}catch(UnsupportedEncodingException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -58,26 +59,28 @@ public class SubjectsDatabase {
 				}
 				
 				column=next.split("\\|");
-			    String[] indexPassed = column[6].split("\\#");
-			    String[] indexNotPassed = column[7].split("\\#");
+			    //String[] indexPassed = column[6].split("\\#");
+			    //String[] indexNotPassed = column[7].split("\\#");
 			    
-			    List<String> l = Arrays.<String>asList(indexPassed);
-			    List<String> list = Arrays.<String>asList(indexNotPassed);
-			    ArrayList<String> indexP= new ArrayList<String>(l);
-			    ArrayList<String> indexNP= new ArrayList<String>(list); 
+			   // List<String> l = Arrays.<String>asList(indexPassed);
+			    //List<String> list = Arrays.<String>asList(indexNotPassed);
+			   // ArrayList<String> indexP= new ArrayList<String>(l);
+			    //ArrayList<String> indexNP= new ArrayList<String>(list); 
 				
 				int sId = Integer.parseInt(column[0].trim());
 				int sY = Integer.parseInt(column[3].trim());
-				int espb = Integer.parseInt(column[5].trim());
+				int espb = Integer.parseInt(column[4].trim());
 				Semestar s;
-				if(column[2].trim().equals("WINTER"))
+				if(column[6].trim().equals("ZIMSKI"))
 					s=Semestar.WINTER;
 				else
 					s=Semestar.SUMMER;
-				Professor p = ProfessorsDatabase.getInstance().getProfById(column[4].trim());
+				Professor p = ProfessorsDatabase.getInstance().getProfById(column[5].trim());
 				
-				subjects.add(new Subject(sId ,column[1].trim(),s,sY,p,espb, indexP, indexNP));
+				Subject subj = new Subject(sId ,column[2].trim(),s,sY,p,espb);
+				subjects.add(subj);
 				//allSubjs.add(new Subject(sId ,column[1].trim(),s,sY,p,espb, indexP, indexNP));
+				
 
 			} 
 			
@@ -97,6 +100,7 @@ public class SubjectsDatabase {
 	public void setPassed(ArrayList<Subject> passed) {
 		this.passed = passed;
 	}
+	
 	public int getColumnCount() {
 		return 5;
 	}

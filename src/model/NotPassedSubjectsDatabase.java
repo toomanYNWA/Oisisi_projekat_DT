@@ -17,13 +17,15 @@ public class NotPassedSubjectsDatabase {
 	private ArrayList<Subject> notPassedSubjects;
 	private List<String> columns;
 	private NotPassedSubjectsDatabase() {
+		this.notPassedSubjects = new ArrayList<Subject>();
 		this.columns = new ArrayList<String>();
 		this.columns.add("Šifra predmeta");
 		this.columns.add("Naziv predmeta");
 		this.columns.add("ESPB");
 		this.columns.add("Godina");
 		this.columns.add("Semestar");
-		notPassedSubjects = getNotPassed();
+		//setNotPassedSubjects();
+		getNotPassed();
 		getSubjects();
 	}
 	public ArrayList<Subject> getSubjects() {
@@ -32,11 +34,9 @@ public class NotPassedSubjectsDatabase {
 	}
 
 	public ArrayList<Subject> getNotPassed() {
-		return StudentDatabase.getInstance().getSelectedStudent().getNotPassed();
+		notPassedSubjects = StudentDatabase.getInstance().getSelectedStudent().getNotPassed();
+		return notPassedSubjects;
 	}
-	/*public void setNotPassed(ArrayList<Subject> notPassed) {
-		this.passed = passed;
-	} */
 	public int getColumnCount() {
 		return 5;
 	}
@@ -66,15 +66,46 @@ public class NotPassedSubjectsDatabase {
 		}
 	}
 	
+	public void loadNotPassedSubjects() {
+		ArrayList<Subject> allSubj = SubjectsDatabase.getInstance().getSubjects();
+		ArrayList<Student> allStud = StudentDatabase.getInstance().getStudents();
+		for(Subject subj: allSubj) {
+			for(Student stud:allStud) {
+				ArrayList<Subject> nP = stud.getNotPassed();
+				for(Subject temp:nP) {
+					if(temp==subj) {
+						subj.addStudentsNotPassed(stud.getNuIndex());
+					}
+				}
+			}}
+	}
+	
+	/*public void setNotPassedSubjects() {
+		ArrayList<Subject> allSubj = SubjectsDatabase.getInstance().getSubjects();
+		ArrayList<Student> allStud = StudentDatabase.getInstance().getStudents();
+		for(Student s: allStud) {
+			for(Subject subj:allSubj) {
+				ArrayList<String> nP = subj.getStudentsNotPassed();
+				for(String temp : nP) {
+					if(s.getNuIndex().equals(temp)) {
+						s.addNotPassedSubject(subj);
+					}
+				}
+			}
+		}
+	} */
+	
 	public void removePassedExam(Subject s, String indexS) {
 		notPassedSubjects.remove(s);
 		s.removePassedExam(indexS);
+		Student stud = StudentDatabase.getInstance().getStudentById(indexS);
+		stud.removeNotPassedSubject(s);
 		
 	}
 	
 	public void addAnnuledExam(int sId) {
 		for(Subject s: subjects)
-			if(s.getSubjectID()==sId)
+			if(s.getSubjectID()==sId) 
 				notPassedSubjects.add(s);
 	}
 	
