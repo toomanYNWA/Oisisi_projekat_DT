@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.swing.JButton;
 
+import view.TabbedPane;
+
 public class Student extends User{
 	
 	public enum Status {
@@ -129,6 +131,22 @@ public class Student extends User{
 	public void addAnnuledExam(Grade g) {
 		this.passed.remove(g);
 	}
+	public float calculate() {
+        int count = 0;
+        this.averageGrade = 0;
+        for(Grade oc : this.passed) {
+            this.averageGrade += oc.getValue();
+            count++;
+        }
+        this.averageGrade = this.averageGrade/count;
+        if (count != 0) {
+            return averageGrade;
+            
+        }
+        else {
+            return 0;
+        }
+    }
 	
 	@Override
 	public String toString() {

@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.Border;
 
+import controller.SubjectsController;
 import model.NotPassedSubjectsDatabase;
 import model.Professor;
 import model.ProfessorSubjectDatabase;
@@ -41,14 +42,11 @@ public class ChooseProfessorsSubjectDialogue extends JDialog{
 		Image img = kit.getImage("icons/new.png");
 		setIconImage(img);
 		
-		DefaultListModel<String> subj = new DefaultListModel<String>(); 
+
+		int selected = TabbedPane.getInstance().getTableProfessors().getSelectedRow();
+		String [] ss = SubjectsController.getInstance().findNonUsedSubjectInProfessor(selected);
 		
-		int i = 0;
-		for(Subject s : SubjectsDatabase.getInstance().getSubjects()) {
-			subj.add(i++,s.getSubjectID()+"-"+s.getSubjectName());
-			}
-		
-		JList<String> list = new JList<String>(subj);
+		JList<String> list = new JList<String>(ss);
 		list.setPreferredSize(new Dimension(100,100));
 		JScrollPane listScroller = new JScrollPane(list);
 		listScroller.setViewportView(list);
@@ -96,7 +94,7 @@ public class ChooseProfessorsSubjectDialogue extends JDialog{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//setVisible(false);
+				setVisible(false);
 				dispose();
 					 
 			}
